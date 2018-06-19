@@ -1,0 +1,64 @@
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+<script>
+	var loadingMessage = "Loading...";
+	var saleFinishedMessage = "Sale Over"
+
+	var end;
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = saleFinishedMessage;
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+		if (distance == 0 ) { 
+			document.getElementById('countdown').innerHTML = saleFinishedMessage;
+		} else {
+			document.getElementById('countdown').innerHTML = '';
+			if (days != 0) { 
+				document.getElementById('countdown').innerHTML += days + ' Days ';
+			}
+			document.getElementById('countdown').innerHTML += hours + ' Hours ';
+			document.getElementById('countdown').innerHTML += minutes + ' Minutes ';
+			document.getElementById('countdown').innerHTML += seconds + ' Seconds ';
+		}
+    }
+
+	
+	window.onload = function () {
+		document.getElementById('countdown').innerHTML = loadingMessage;
+	};
+
+	var firebase;
+	var config ={
+	  "databaseURL": "https://testproject-a20ec.firebaseio.com"
+	};
+
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    var database = firebase.database();
+  
+    var timeEnd = firebase.database().ref('time/');
+    timeEnd.on('value', function(snapshot) {
+		end = new Date(snapshot.val());
+		showRemaining();
+		timer = setInterval(showRemaining, 1000);
+	});
+</script>
+<div id="countdown"></div>
