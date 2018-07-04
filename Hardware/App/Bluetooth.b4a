@@ -1,0 +1,114 @@
+﻿Version=3.2
+IconFile=
+NumberOfModules=2
+Module2=bluetoothService
+ModuleVisible2=1
+Module1=ChatActivity
+ModuleVisible1=1
+Package=accutrack.iot.com
+DoNotOverwriteManifest=False
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="4"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~AddReceiverText(bluetoothService,~\n~<intent-filter>~\n~<action android:name="android.bluetooth.device.action.FOUND" />~\n~</intent-filter>)~\n~AddPermission(android.permission.ACCESS_COARSE_LOCATION)
+UserTypesHint=NameAndMac
+NumberOfFiles=2
+File1=1.bal
+File2=2.bal
+NumberOfLibraries=6
+Library1=core
+Library2=http
+Library3=httpserver
+Library4=httputils2
+Library5=randomaccessfile
+Library6=serial
+@EndOfDesignText@
+#Region Module Attributes
+	#FullScreen: False
+	#IncludeTitle: False
+	#ApplicationLabel: IOT Server
+	#VersionCode: 1
+	#VersionName: 
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: True
+#End Region
+
+'Activity module
+Sub Process_Globals
+	Dim admin As BluetoothAdmin
+	Dim serial1 As Serial
+	Dim foundDevices As List
+	Type NameAndMac (Name As String, Mac As String)
+	Dim connectto As String
+	Dim connected As Boolean = False
+End Sub
+
+Sub Globals
+	Dim btnSearchForDevices As Button
+	Private serverPing As CheckBox
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	If FirstTime Then	   
+		admin.Initialize("admin")
+		serial1.Initialize("serial1")
+	End If
+	Activity.LoadLayout("1")
+End Sub
+
+Sub Activity_Resume
+	btnSearchForDevices.Enabled = True
+	If admin.IsEnabled = False Then
+		If admin.Enable = False Then 
+			ToastMessageShow("Error enabling Bluetooth adapter.", True)
+		Else
+			ToastMessageShow("Enabling Bluetooth adapter...", False)
+		End If
+	End If
+End Sub
+
+Sub Admin_StateChanged (NewState As Int, OldState As Int)
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	If UserClosed = True Then
+	End If
+End Sub
+
+Sub btnSearchForDevices_Click
+
+	foundDevices.Initialize
+	If admin.StartDiscovery	= False Then 
+		ToastMessageShow("Error starting discovery process.", True)
+	Else
+		ToastMessageShow("Trying to find AccuTrack", False)
+	End If
+End Sub
+
+Sub Admin_DiscoveryFinished
+	If connected = False Then 
+		ToastMessageShow("Unable to find AccuTrack module", False)
+	End If
+End Sub
+
+Sub Admin_DeviceFound (Name As String, MacAddress As String)
+	Dim nm As NameAndMac
+	nm.Name = Name
+	nm.Mac = MacAddress
+	foundDevices.Add(nm)
+	If nm.Name.ToLowerCase.Trim.Contains("hc-06") Then
+			connectto = nm.Mac
+			serial1.connect(connectto)
+			 Dim pin As Intent
+			 pin.Initialize(pin.ACTION_EDIT,"")
+			pin.PutExtra("android.bluetooth.device.extra.PAIRING_KEY",1234)
+	End If
+End Sub
+
+Sub Serial1_Connected (Success As Boolean)
+	If Success = False Then
+		ToastMessageShow("Error connecting: " & LastException.Message, True)
+	Else
+		connected = True
+		ToastMessageShow("Connected Successfuly!",False)
+		'StartActivity(ChatActivity)
+		StartService(bluetoothService)
+	End If
+End Sub
