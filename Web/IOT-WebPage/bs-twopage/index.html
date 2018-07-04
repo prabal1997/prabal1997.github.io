@@ -55,7 +55,39 @@
                     <div class="col-md-12">
                         <h2>Welcome to our portal</h2>
                     </div>
-                </div>  
+					<div class="col-md-4" style = "width:100%">
+                        <div class="form-group" style = "display:inline-block; padding:10px;">
+                            <label>Name</label>
+                            <output/>
+                            <p id = "OutName">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Age</label>
+                            <output/>
+                            <p id = "OutAge">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Gender</label>
+                            <output/>
+                            <p id = "OutGender">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Height</label>
+                            <output/>
+                            <p id = "OutHeight">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Team</label>
+                            <output/>
+                            <p id = "OutTeam">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Weight</label>
+                            <output/>
+                            <p id = "OutWeight">NA</p>
+                        </div>
+                    </div>
+                </div>  	
                     <div class="col-md-6">
                         <h5>Ergonomical Data</h5>
                         <div class="table-responsive">
@@ -138,6 +170,13 @@
 }
 window.addEventListener("load", getData(genFunction));
 var groupdiv = document.getElementById("groupname");
+var outname = document.getElementById("OutName");
+var outage = document.getElementById("OutAge");
+var outgender = document.getElementById("OutGender");
+var outheight = document.getElementById("OutHeight");
+var outteam = document.getElementById("OutTeam");
+var outweight = document.getElementById("OutWeight");
+	
 function genFunction(data) {
     for(var i=0; i<data.length; i++) {
         fireBasedata.push({
@@ -160,9 +199,16 @@ for(var i = 0; i<teamlist.length; i++){
 	b.innerHTML += "<li><a>" + fireBasedata[i].Name + "</a></li>";
     a.innerHTML += "<i class =\"fa fa-sitemap\"></i>" + teamlist[i] + "<span id = \"arrow\" class=\"fa arrow\"></span>";
 	b.onclick = function(event){
-	if( event.srcElement.innerText == "Daniel"){
-	console.log(fireBasedata[0].Name);
+	var digit = 0;
+	if( event.srcElement.innerText != "Daniel"){
+	digit = 1;
 	}
+	outname.innerHTML = fireBasedata[digit].Name;
+	outage.innerHTML = fireBasedata[digit].Age;
+	outgender.innerHTML = fireBasedata[digit].Gender;
+	outheight.innerHTML = fireBasedata[digit].Height;
+	outteam.innerHTML = fireBasedata[digit].Team;
+	outweight.innerHTML = fireBasedata[digit].Weight;
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
