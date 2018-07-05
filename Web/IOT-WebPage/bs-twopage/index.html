@@ -40,7 +40,7 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li class="text-center user-image-back">
-                        <img src="assets/img/AccuTrackLogo.png" class="img-responsive" />
+                        <img src="assets/img/Walmatt.png" class="img-responsive" />
                     </li>
 					<li id = "groupname">
 					</li>
@@ -53,7 +53,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 id = "TitleName"></h2>
+                        <h2>Welcome to our Portal</h2>
                     </div>
 					<div class="col-md-4" style = "width:100%">
                         <div class="form-group" style = "display:inline-block; padding:10px;">
@@ -159,7 +159,6 @@ var outgender = document.getElementById("OutGender");
 var outheight = document.getElementById("OutHeight");
 var outteam = document.getElementById("OutTeam");
 var outweight = document.getElementById("OutWeight");
-var NameTitle = document.getElementById("TitleName");
 function genFunction(data) {
     for(var i=0; i<data.length; i++) {
         fireBasedata.push({
@@ -192,7 +191,6 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
-	NameTitle.innerHTML = fireBasedata[digit].Name;
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
