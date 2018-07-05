@@ -272,14 +272,45 @@ public static boolean _connected = false;
 public anywheresoftware.b4a.objects.ButtonWrapper _btnsearchfordevices = null;
 public anywheresoftware.b4a.objects.CompoundButtonWrapper.CheckBoxWrapper _serverping = null;
 public anywheresoftware.b4a.samples.httputils2.httputils2service _httputils2service = null;
-public accutrack.iot.com.bluetoothservice _bluetoothservice = null;
 public accutrack.iot.com.chatactivity _chatactivity = null;
+public accutrack.iot.com.bluetoothservice _bluetoothservice = null;
+  public Object[] GetGlobals() {
+		return new Object[] {"Activity",mostCurrent._activity,"admin",_admin,"bluetoothService",Debug.moduleToString(accutrack.iot.com.bluetoothservice.class),"btnSearchForDevices",mostCurrent._btnsearchfordevices,"ChatActivity",Debug.moduleToString(accutrack.iot.com.chatactivity.class),"connected",_connected,"connectto",_connectto,"foundDevices",_founddevices,"HttpUtils2Service",mostCurrent._httputils2service,"serial1",_serial1,"serverPing",mostCurrent._serverping};
+}
 
 public static boolean isAnyActivityVisible() {
     boolean vis = false;
 vis = vis | (main.mostCurrent != null);
 vis = vis | (chatactivity.mostCurrent != null);
 return vis;}
+
+public static void killProgram() {
+     {
+            Activity __a = null;
+            if (main.previousOne != null) {
+				__a = main.previousOne.get();
+			}
+            else {
+                BA ba = main.mostCurrent.processBA.sharedProcessBA.activityBA.get();
+                if (ba != null) __a = ba.activity;
+            }
+            if (__a != null)
+				__a.finish();}
+
+ {
+            Activity __a = null;
+            if (chatactivity.previousOne != null) {
+				__a = chatactivity.previousOne.get();
+			}
+            else {
+                BA ba = chatactivity.mostCurrent.processBA.sharedProcessBA.activityBA.get();
+                if (ba != null) __a = ba.activity;
+            }
+            if (__a != null)
+				__a.finish();}
+
+BA.applicationContext.stopService(new android.content.Intent(BA.applicationContext, bluetoothservice.class));
+}
 public static class _nameandmac{
 public boolean IsInitialized;
 public String Name;
@@ -294,113 +325,224 @@ Mac = "";
 			return BA.TypeToString(this, false);
 		}}
 public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 26;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 27;BA.debugLine="If FirstTime Then";
+		Debug.PushSubsStack("Activity_Create (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+Debug.locals.put("FirstTime", _firsttime);
+ BA.debugLineNum = 26;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+Debug.ShouldStop(33554432);
+ BA.debugLineNum = 27;BA.debugLine="If FirstTime Then";
+Debug.ShouldStop(67108864);
 if (_firsttime) { 
- //BA.debugLineNum = 28;BA.debugLine="admin.Initialize(\"admin\")";
+ BA.debugLineNum = 28;BA.debugLine="admin.Initialize(\"admin\")";
+Debug.ShouldStop(134217728);
 _admin.Initialize(processBA,"admin");
- //BA.debugLineNum = 29;BA.debugLine="serial1.Initialize(\"serial1\")";
-_serial1.Initialize("serial1");
+ BA.debugLineNum = 29;BA.debugLine="serial1.Initialize(\"serial1\")";
+Debug.ShouldStop(268435456);
+Debug.DebugWarningEngine.CheckInitialize(_serial1);_serial1.Initialize("serial1");
  };
- //BA.debugLineNum = 31;BA.debugLine="Activity.LoadLayout(\"1\")";
+ BA.debugLineNum = 31;BA.debugLine="Activity.LoadLayout(\"1\")";
+Debug.ShouldStop(1073741824);
 mostCurrent._activity.LoadLayout("1",mostCurrent.activityBA);
- //BA.debugLineNum = 32;BA.debugLine="End Sub";
+ BA.debugLineNum = 32;BA.debugLine="End Sub";
+Debug.ShouldStop(-2147483648);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 48;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 49;BA.debugLine="If UserClosed = True Then";
+		Debug.PushSubsStack("Activity_Pause (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+Debug.locals.put("UserClosed", _userclosed);
+ BA.debugLineNum = 48;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+Debug.ShouldStop(32768);
+ BA.debugLineNum = 49;BA.debugLine="If UserClosed = True Then";
+Debug.ShouldStop(65536);
 if (_userclosed==anywheresoftware.b4a.keywords.Common.True) { 
  };
- //BA.debugLineNum = 51;BA.debugLine="End Sub";
+ BA.debugLineNum = 51;BA.debugLine="End Sub";
+Debug.ShouldStop(262144);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 34;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 35;BA.debugLine="btnSearchForDevices.Enabled = True";
+		Debug.PushSubsStack("Activity_Resume (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+ BA.debugLineNum = 34;BA.debugLine="Sub Activity_Resume";
+Debug.ShouldStop(2);
+ BA.debugLineNum = 35;BA.debugLine="btnSearchForDevices.Enabled = True";
+Debug.ShouldStop(4);
 mostCurrent._btnsearchfordevices.setEnabled(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 36;BA.debugLine="If admin.IsEnabled = False Then";
+ BA.debugLineNum = 36;BA.debugLine="If admin.IsEnabled = False Then";
+Debug.ShouldStop(8);
 if (_admin.IsEnabled()==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 37;BA.debugLine="If admin.Enable = False Then";
+ BA.debugLineNum = 37;BA.debugLine="If admin.Enable = False Then";
+Debug.ShouldStop(16);
 if (_admin.Enable()==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 38;BA.debugLine="ToastMessageShow(\"Error enabling Bluetooth adapter.\", True)";
+ BA.debugLineNum = 38;BA.debugLine="ToastMessageShow(\"Error enabling Bluetooth adapter.\", True)";
+Debug.ShouldStop(32);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Error enabling Bluetooth adapter.",anywheresoftware.b4a.keywords.Common.True);
  }else {
- //BA.debugLineNum = 40;BA.debugLine="ToastMessageShow(\"Enabling Bluetooth adapter...\", False)";
+ BA.debugLineNum = 40;BA.debugLine="ToastMessageShow(\"Enabling Bluetooth adapter...\", False)";
+Debug.ShouldStop(128);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Enabling Bluetooth adapter...",anywheresoftware.b4a.keywords.Common.False);
  };
  };
- //BA.debugLineNum = 43;BA.debugLine="End Sub";
+ BA.debugLineNum = 43;BA.debugLine="End Sub";
+Debug.ShouldStop(1024);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _admin_devicefound(String _name,String _macaddress) throws Exception{
+		Debug.PushSubsStack("Admin_DeviceFound (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
 accutrack.iot.com.main._nameandmac _nm = null;
 anywheresoftware.b4a.objects.IntentWrapper _pin = null;
- //BA.debugLineNum = 69;BA.debugLine="Sub Admin_DeviceFound (Name As String, MacAddress As String)";
- //BA.debugLineNum = 70;BA.debugLine="Dim nm As NameAndMac";
-_nm = new accutrack.iot.com.main._nameandmac();
- //BA.debugLineNum = 71;BA.debugLine="nm.Name = Name";
-_nm.Name = _name;
- //BA.debugLineNum = 72;BA.debugLine="nm.Mac = MacAddress";
-_nm.Mac = _macaddress;
- //BA.debugLineNum = 73;BA.debugLine="foundDevices.Add(nm)";
+Debug.locals.put("Name", _name);
+Debug.locals.put("MacAddress", _macaddress);
+ BA.debugLineNum = 69;BA.debugLine="Sub Admin_DeviceFound (Name As String, MacAddress As String)";
+Debug.ShouldStop(16);
+ BA.debugLineNum = 70;BA.debugLine="Dim nm As NameAndMac";
+Debug.ShouldStop(32);
+_nm = new accutrack.iot.com.main._nameandmac();Debug.locals.put("nm", _nm);
+ BA.debugLineNum = 71;BA.debugLine="nm.Name = Name";
+Debug.ShouldStop(64);
+_nm.Name = _name;Debug.locals.put("nm", _nm);
+ BA.debugLineNum = 72;BA.debugLine="nm.Mac = MacAddress";
+Debug.ShouldStop(128);
+_nm.Mac = _macaddress;Debug.locals.put("nm", _nm);
+ BA.debugLineNum = 73;BA.debugLine="foundDevices.Add(nm)";
+Debug.ShouldStop(256);
 _founddevices.Add((Object)(_nm));
- //BA.debugLineNum = 74;BA.debugLine="If nm.Name.ToLowerCase.Trim.Contains(\"hc-06\") Then";
+ BA.debugLineNum = 74;BA.debugLine="If nm.Name.ToLowerCase.Trim.Contains(\"hc-06\") Then";
+Debug.ShouldStop(512);
 if (_nm.Name.toLowerCase().trim().contains("hc-06")) { 
- //BA.debugLineNum = 75;BA.debugLine="connectto = nm.Mac";
+ BA.debugLineNum = 75;BA.debugLine="connectto = nm.Mac";
+Debug.ShouldStop(1024);
 _connectto = _nm.Mac;
- //BA.debugLineNum = 76;BA.debugLine="serial1.connect(connectto)";
+ BA.debugLineNum = 76;BA.debugLine="serial1.connect(connectto)";
+Debug.ShouldStop(2048);
 _serial1.Connect(processBA,_connectto);
- //BA.debugLineNum = 77;BA.debugLine="Dim pin As Intent";
-_pin = new anywheresoftware.b4a.objects.IntentWrapper();
- //BA.debugLineNum = 78;BA.debugLine="pin.Initialize(pin.ACTION_EDIT,\"\")";
+ BA.debugLineNum = 77;BA.debugLine="Dim pin As Intent";
+Debug.ShouldStop(4096);
+_pin = new anywheresoftware.b4a.objects.IntentWrapper();Debug.locals.put("pin", _pin);
+ BA.debugLineNum = 78;BA.debugLine="pin.Initialize(pin.ACTION_EDIT,\"\")";
+Debug.ShouldStop(8192);
 _pin.Initialize(_pin.ACTION_EDIT,"");
- //BA.debugLineNum = 79;BA.debugLine="pin.PutExtra(\"android.bluetooth.device.extra.PAIRING_KEY\",1234)";
+ BA.debugLineNum = 79;BA.debugLine="pin.PutExtra(\"android.bluetooth.device.extra.PAIRING_KEY\",1234)";
+Debug.ShouldStop(16384);
 _pin.PutExtra("android.bluetooth.device.extra.PAIRING_KEY",(Object)(1234));
  };
- //BA.debugLineNum = 81;BA.debugLine="End Sub";
+ BA.debugLineNum = 81;BA.debugLine="End Sub";
+Debug.ShouldStop(65536);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _admin_discoveryfinished() throws Exception{
- //BA.debugLineNum = 63;BA.debugLine="Sub Admin_DiscoveryFinished";
- //BA.debugLineNum = 64;BA.debugLine="If connected = False Then";
+		Debug.PushSubsStack("Admin_DiscoveryFinished (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+ BA.debugLineNum = 63;BA.debugLine="Sub Admin_DiscoveryFinished";
+Debug.ShouldStop(1073741824);
+ BA.debugLineNum = 64;BA.debugLine="If connected = False Then";
+Debug.ShouldStop(-2147483648);
 if (_connected==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 65;BA.debugLine="ToastMessageShow(\"Unable to find AccuTrack module\", False)";
+ BA.debugLineNum = 65;BA.debugLine="ToastMessageShow(\"Unable to find AccuTrack module\", False)";
+Debug.ShouldStop(1);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Unable to find AccuTrack module",anywheresoftware.b4a.keywords.Common.False);
  };
- //BA.debugLineNum = 67;BA.debugLine="End Sub";
+ BA.debugLineNum = 67;BA.debugLine="End Sub";
+Debug.ShouldStop(4);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _admin_statechanged(int _newstate,int _oldstate) throws Exception{
- //BA.debugLineNum = 45;BA.debugLine="Sub Admin_StateChanged (NewState As Int, OldState As Int)";
- //BA.debugLineNum = 46;BA.debugLine="End Sub";
+		Debug.PushSubsStack("Admin_StateChanged (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+Debug.locals.put("NewState", _newstate);
+Debug.locals.put("OldState", _oldstate);
+ BA.debugLineNum = 45;BA.debugLine="Sub Admin_StateChanged (NewState As Int, OldState As Int)";
+Debug.ShouldStop(4096);
+ BA.debugLineNum = 46;BA.debugLine="End Sub";
+Debug.ShouldStop(8192);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 public static String  _btnsearchfordevices_click() throws Exception{
- //BA.debugLineNum = 53;BA.debugLine="Sub btnSearchForDevices_Click";
- //BA.debugLineNum = 55;BA.debugLine="foundDevices.Initialize";
+		Debug.PushSubsStack("btnSearchForDevices_Click (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+ BA.debugLineNum = 53;BA.debugLine="Sub btnSearchForDevices_Click";
+Debug.ShouldStop(1048576);
+ BA.debugLineNum = 55;BA.debugLine="foundDevices.Initialize";
+Debug.ShouldStop(4194304);
 _founddevices.Initialize();
- //BA.debugLineNum = 56;BA.debugLine="If admin.StartDiscovery	= False Then";
+ BA.debugLineNum = 56;BA.debugLine="If admin.StartDiscovery	= False Then";
+Debug.ShouldStop(8388608);
 if (_admin.StartDiscovery()==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 57;BA.debugLine="ToastMessageShow(\"Error starting discovery process.\", True)";
+ BA.debugLineNum = 57;BA.debugLine="ToastMessageShow(\"Error starting discovery process.\", True)";
+Debug.ShouldStop(16777216);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Error starting discovery process.",anywheresoftware.b4a.keywords.Common.True);
  }else {
- //BA.debugLineNum = 59;BA.debugLine="ToastMessageShow(\"Trying to find AccuTrack\", False)";
+ BA.debugLineNum = 59;BA.debugLine="ToastMessageShow(\"Trying to find AccuTrack\", False)";
+Debug.ShouldStop(67108864);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Trying to find AccuTrack",anywheresoftware.b4a.keywords.Common.False);
  };
- //BA.debugLineNum = 61;BA.debugLine="End Sub";
+ BA.debugLineNum = 61;BA.debugLine="End Sub";
+Debug.ShouldStop(268435456);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 
 public static void initializeProcessGlobals() {
-    
+    if (mostCurrent != null && mostCurrent.activityBA != null) {
+Debug.StartDebugging(mostCurrent.activityBA, 33795, new int[] {3, 2, 4}, "17cfc7f1-9661-41c6-9d37-74120d4a0bb3");}
+
     if (main.processGlobalsRun == false) {
 	    main.processGlobalsRun = true;
 		try {
 		        anywheresoftware.b4a.samples.httputils2.httputils2service._process_globals();
 main._process_globals();
-bluetoothservice._process_globals();
 chatactivity._process_globals();
+bluetoothservice._process_globals();
 		
         } catch (Exception e) {
 			throw new RuntimeException(e);
@@ -433,20 +575,37 @@ _connected = anywheresoftware.b4a.keywords.Common.False;
 return "";
 }
 public static String  _serial1_connected(boolean _success) throws Exception{
- //BA.debugLineNum = 83;BA.debugLine="Sub Serial1_Connected (Success As Boolean)";
- //BA.debugLineNum = 84;BA.debugLine="If Success = False Then";
+		Debug.PushSubsStack("Serial1_Connected (main) ","main",0,mostCurrent.activityBA,mostCurrent);
+try {
+Debug.locals.put("Success", _success);
+ BA.debugLineNum = 83;BA.debugLine="Sub Serial1_Connected (Success As Boolean)";
+Debug.ShouldStop(262144);
+ BA.debugLineNum = 84;BA.debugLine="If Success = False Then";
+Debug.ShouldStop(524288);
 if (_success==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 85;BA.debugLine="ToastMessageShow(\"Error connecting: \" & LastException.Message, True)";
+ BA.debugLineNum = 85;BA.debugLine="ToastMessageShow(\"Error connecting: \" & LastException.Message, True)";
+Debug.ShouldStop(1048576);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Error connecting: "+anywheresoftware.b4a.keywords.Common.LastException(mostCurrent.activityBA).getMessage(),anywheresoftware.b4a.keywords.Common.True);
  }else {
- //BA.debugLineNum = 87;BA.debugLine="connected = True";
+ BA.debugLineNum = 87;BA.debugLine="connected = True";
+Debug.ShouldStop(4194304);
 _connected = anywheresoftware.b4a.keywords.Common.True;
- //BA.debugLineNum = 88;BA.debugLine="ToastMessageShow(\"Connected Successfuly!\",False)";
+ BA.debugLineNum = 88;BA.debugLine="ToastMessageShow(\"Connected Successfuly!\",False)";
+Debug.ShouldStop(8388608);
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Connected Successfuly!",anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 90;BA.debugLine="StartService(bluetoothService)";
+ BA.debugLineNum = 90;BA.debugLine="StartService(bluetoothService)";
+Debug.ShouldStop(33554432);
 anywheresoftware.b4a.keywords.Common.StartService(mostCurrent.activityBA,(Object)(mostCurrent._bluetoothservice.getObject()));
  };
- //BA.debugLineNum = 92;BA.debugLine="End Sub";
+ BA.debugLineNum = 92;BA.debugLine="End Sub";
+Debug.ShouldStop(134217728);
 return "";
 }
+catch (Exception e) {
+			Debug.ErrorCaught(e);
+			throw e;
+		} 
+finally {
+			Debug.PopSubsStack();
+		}}
 }

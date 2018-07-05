@@ -11,16 +11,11 @@
 	    android:normalScreens="true" 
 	    android:smallScreens="true" 
 	    android:anyDensity="true"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 	<uses-permission android:name="android.permission.BLUETOOTH"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.VIBRATE"/>
-	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
 	<application
 		android:icon="@drawable/icon"
 		android:label="IOT Server">
@@ -36,6 +31,13 @@
 			</intent-filter>
 			
 		</activity>
+		<activity
+			android:windowSoftInputMode="stateHidden"
+			android:launchMode="singleTop"
+			android:name=".chatactivity"
+			android:label="IOT Server"
+			android:screenOrientation="unspecified">
+		</activity>
 		<service android:name=".bluetoothservice">
 		</service>
 		<receiver android:name=".bluetoothservice$bluetoothservice_BR">
@@ -44,13 +46,6 @@
 			<action android:name="android.bluetooth.device.action.FOUND" />
 			</intent-filter>
 		</receiver>
-		<activity
-			android:windowSoftInputMode="stateHidden"
-			android:launchMode="singleTop"
-			android:name=".chatactivity"
-			android:label="IOT Server"
-			android:screenOrientation="unspecified">
-		</activity>
 		<service android:name="anywheresoftware.b4a.samples.httputils2.httputils2service">
 		</service>
 		<receiver android:name="anywheresoftware.b4a.samples.httputils2.httputils2service$httputils2service_BR">

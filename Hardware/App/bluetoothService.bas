@@ -56,9 +56,61 @@ Sub AStream_NewData (Buffer() As Byte)
 End Sub
 
 Sub sendDataTimer_tick
-	ToastMessageShow(bSensor.Get(0), False)
+	
+	Dim aSensorString As String = ""
+	Dim bSensorString As String = ""
+	
+	If aSensor.Size > 0 Then
+		For i = 0 To aSensor.Size - 1 
+			If Not(i = aSensor.Size - 1) Then
+				aSensorString = aSensorString & aSensor.Get(i) & ", " 
+			Else
+				aSensorString = aSensorString & aSensor.Get(i)
+			End If
+		Next
+	End If
+	
+	If bSensor.Size > 0 Then
+		For i = 0 To bSensor.Size - 1 
+			If Not(i = bSensor.Size - 1) Then
+				bSensorString = bSensorString & bSensor.Get(i) & ", " 
+			Else
+				bSensorString = bSensorString & bSensor.Get(i)
+			End If
+		Next
+	End If
+	
+	Dim data As String = ""
+	data = data & "{"
+	data = data &   """startDateTime"": """ & DateTimeValue & ""","
+	data = data &   """data"": ["
+	data = data &    "{""id"": ""a"", ""sensorData"": [" & aSensorString & "],"
+	data = data &    "{""id"": ""b"", ""sensorData"": [" & bSensorString & "]]"
+	
+	' {
+	'	"startDateTime" : 2018-03-03 12:10:44, 
+	'	"data" : 
+	'		[
+	'			{"id" :"a", "sensorData" : [323.22, 232.2, 55.6]}, 
+	'			{"id" :"a", "data" : [323.22, 232.2, 55.6]}
+	'		]
+	'	}
+	
+	
+	
+	aSensor.Clear
+	bSensor.Clear
 End Sub
 
+Sub DateTimeValue As String
+	Dim now As Long
+	Dim dt As String
+	DateTime.DateFormat = "dd MMM yyyy" 
+	dt = DateTime.Date(DateTime.Now) 
+	DateTime.DateFormat = "hh:mm:ss" 
+	dt = dt & " " & DateTime.Time(now)
+	Return dt
+End Sub
 
 Sub AStream_Error
 	ToastMessageShow("Connection is broken.", True)
