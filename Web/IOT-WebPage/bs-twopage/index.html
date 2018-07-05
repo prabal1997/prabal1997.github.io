@@ -53,7 +53,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Welcome to our portal</h2>
+                        <h2 id = "TitleName"></h2>
                     </div>
 					<div class="col-md-4" style = "width:100%">
                         <div class="form-group" style = "display:inline-block; padding:10px;">
@@ -89,7 +89,7 @@
                     </div>
                 </div>  	
                     <div class="col-md-6">
-                        <h5>Ergonomical Data</h5>
+                        <h5>User Collected Data</h5>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -106,25 +106,7 @@
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr class="warning">
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr class="danger">
-                                        <td>4</td>
-                                        <td>John</td>
-                                        <td>Smith</td>
-                                        <td>@jsmith</td>
-                                    </tr>
+                                    </tr>                                    
                                 </tbody>
                             </table>
 							<footer>&copy; Developed by AccuTrack Team 2018</footer>
@@ -177,7 +159,7 @@ var outgender = document.getElementById("OutGender");
 var outheight = document.getElementById("OutHeight");
 var outteam = document.getElementById("OutTeam");
 var outweight = document.getElementById("OutWeight");
-	
+var NameTitle = document.getElementById("TitleName");
 function genFunction(data) {
     for(var i=0; i<data.length; i++) {
         fireBasedata.push({
@@ -210,6 +192,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
+	NameTitle.innerHTML = fireBasedata[digit].Name;
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
