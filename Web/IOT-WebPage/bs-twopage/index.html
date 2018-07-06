@@ -140,23 +140,23 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
-  var plotdata = Array(86400);
+  var plotdata = Array(1440);
   var xaxis= [];
   var myChart;
   var dateinput;
   var hasheddate = 0;
   var plotpoints = [];
   var digit = 0;
-  for(var i=0;i<86401;i++){
+  for(var i=0;i<1440;i+=1){
   xaxis.push(formatTime(i));
   }
   var fireBasedata = [];
   var teamlist = [];
   document.getElementById("dateInput").addEventListener("change", function() {
-	plotdata = Array(86400);
+	plotdata = Array(1440);
     dateinput = this.value;
 	dateinput = dateinput.split("-");
-	hasheddate = dateinput[0]*372 + dateinput[1]*30 + dateinput[2]*1;
+	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
     console.log(hasheddate); 
 	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
@@ -302,11 +302,11 @@ function addData(chart, label, data) {
     });
     chart.update();
 }
-function formatTime(seconds) {
+function formatTime(minutes) {
+	var hours = Math.floor( minutes / 60);          
+    var minutes = minutes % 60;
     return [
-        parseInt(seconds / 60 / 60),
-        parseInt(seconds / 60 % 60),
-        parseInt(seconds % 60)
+        hours,minutes
     ]
         .join(":")
         .replace(/\b(\d)\b/g, "0$1")
