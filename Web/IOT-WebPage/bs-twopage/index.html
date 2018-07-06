@@ -144,6 +144,7 @@
   var xaxis= [];
   var dateinput;
   var hasheddate = 0;
+  var plotpoints = [];
   var digit = 0;
   for(var i=0;i<86401;i++){
   xaxis.push(formatTime(i));
@@ -156,14 +157,12 @@
 	dateinput = dateinput.split("-");
 	hasheddate = dateinput[0]*372 + dateinput[1]*30 + dateinput[2]*1;
     console.log(hasheddate); 
-	for(var i = 0; i<86401;i++){
-	if(fireBasedata[digit].History.RightLeg[hasheddate] != undefined){
-	for (key in fireBasedata[digit].History.RightLeg[hasheddate][i]) {
+	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
+	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
 	if(key!=undefined){
-    if (fireBasedata[digit].History.RightLeg[hasheddate][i].hasOwnProperty(key)) {
-		plotdata.splice(i,0,fireBasedata[digit].History.RightLeg[hasheddate][i][key]);
+    if (fireBasedata[digit].History.RightLeg[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata.splice(key1,0,fireBasedata[digit].History.RightLeg[hasheddate][key1][key]);
     }
-	}
 	}
 	}
 	}
@@ -224,7 +223,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
-	drawchart();
+	//drawchart();
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
@@ -260,7 +259,7 @@ for(var i = 0; i<teamlist.length; i++){
 
 //BAR Chart
 function drawchart(){
-var ctx = document.getElementById("myChart").getContext('2d');;
+var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
 type: 'line',
 data: {
