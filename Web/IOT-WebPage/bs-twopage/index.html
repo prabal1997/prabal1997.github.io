@@ -140,19 +140,19 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
-  var plotdata = Array(1440);
+  var plotdata = Array(240);
   var xaxis= [];
   var myChart;
   var dateinput;
   var hasheddate = 0;
   var digit = 0;
-  for(var i=0;i<1440;i+=1){
+  for(var i=0;i<1440;i+=6){
   xaxis.push(formatTime(i));
   }
   var fireBasedata = [];
   var teamlist = [];
   document.getElementById("dateInput").addEventListener("change", function() {
-	plotdata = Array(1440);
+	plotdata = Array(240);
     dateinput = this.value;
 	dateinput = dateinput.split("-");
 	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
@@ -161,7 +161,7 @@
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
 	if(key!=undefined){
     if (fireBasedata[digit].History.RightLeg[hasheddate][key1].hasOwnProperty(key)) {
-		plotdata[key1] = fireBasedata[digit].History.RightLeg[hasheddate][key1][key];
+		plotdata[key1/6] = fireBasedata[digit].History.RightLeg[hasheddate][key1][key];
     }
 	}
 	}
@@ -283,9 +283,11 @@ options: {
             }
         }],
 		xAxes: [{
+		barPercentage: 0.9,
+		categorySpacing: 0,
 		ticks: {
         maxTicksLimit: 24,
-		barPercentage: 0.5,
+		barPercentage: 0.9,
             },
         }],
     }
