@@ -146,14 +146,19 @@
   var dateinput;
   var hasheddate = 0;
   var digit = 0;
+  document.getElementById("dateInput").valueAsDate = new Date();
   for(var i=0;i<1440;i+=1){
   xaxis.push(formatTime(i));
   }
   var fireBasedata = [];
   var teamlist = [];
-  document.getElementById("dateInput").addEventListener("change", function() {
-	plotdata = Array(1440);
-    dateinput = this.value;
+  function plotgraph(that){
+  plotdata = Array(1440);
+  if(that.value === undefined){
+    dateinput = that;	
+  }else{
+    dateinput = that.value;
+	}
 	dateinput = dateinput.split("-");
 	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
     console.log(hasheddate); 
@@ -167,8 +172,10 @@
 	}
 	}
 	myChart.destroy();
-	initchart();
-	
+	initchart(); 
+ }
+  document.getElementById("dateInput").addEventListener("change", function() {
+	plotgraph(this);  
 });
   // Initialize Firebase
   var config = {
@@ -226,6 +233,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
+	plotgraph(document.getElementById("dateInput").value);
 	//drawchart();
 	}
 	a.onclick= function(event) {
