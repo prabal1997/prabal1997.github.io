@@ -147,7 +147,6 @@
   var hasheddate = 0;
   var digit = 0;
   document.getElementById("dateInput").valueAsDate = new Date();
-  plotgraph(document.getElementById("dateInput").value);
   for(var i=0;i<1440;i+=6){
   xaxis.push(formatTime(i));
   }
@@ -237,7 +236,6 @@ for(var i = 0; i<teamlist.length; i++){
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
 	plotgraph(document.getElementById("dateInput").value);
-	//drawchart();
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
