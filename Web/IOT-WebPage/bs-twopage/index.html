@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AccuTrack Inc.</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -89,6 +91,9 @@
                         </div>
                     </div>
                 </div>
+				<div>Enter the Date you wish to view the data for
+					<input type="date" id="dateInput" placeholder="mm/dd/yyyy"></input>
+				</div>
 				<canvas id="myChart" width="100%"></canvas>				
                     <div class="col-md-6">
                         <h5>User Collected Data</h5>
@@ -135,8 +140,35 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
+  var plotdata = Array(86400);
+  var xaxis= [];
+  var dateinput;
+  var hasheddate = 0;
+  var digit = 0;
+  for(var i=0;i<86401;i++){
+  xaxis.push(formatTime(i));
+  }
   var fireBasedata = [];
   var teamlist = [];
+  document.getElementById("dateInput").addEventListener("change", function() {
+	plotdata = Array(86400);
+    dateinput = this.value;
+	dateinput = dateinput.split("-");
+	hasheddate = dateinput[0]*372 + dateinput[1]*30 + dateinput[2]*1;
+    console.log(hasheddate); 
+	for(var i = 0; i<86401;i++){
+	if(fireBasedata[digit].History.RightLeg[hasheddate] != undefined){
+	for (key in fireBasedata[digit].History.RightLeg[hasheddate][i]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.RightLeg[hasheddate][i].hasOwnProperty(key)) {
+		plotdata.splice(i,0,fireBasedata[digit].History.RightLeg[hasheddate][i][key]);
+    }
+	}
+	}
+	}
+	}
+	drawchart();
+});
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyCtJG_Ccxiaai-SflibYt8ilmSV6TnuErg",
@@ -183,7 +215,6 @@ for(var i = 0; i<teamlist.length; i++){
 	b.innerHTML += "<li><a>" + fireBasedata[i].Name + "</a></li>";
     a.innerHTML += "<i class =\"fa fa-sitemap\"></i>" + teamlist[i] + "<span id = \"arrow\" class=\"fa arrow\"></span>";
 	b.onclick = function(event){
-	var digit = 0;
 	if( event.srcElement.innerText != "Daniel"){
 	digit = 1;
 	}
@@ -193,6 +224,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
+	drawchart();
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
@@ -224,47 +256,51 @@ for(var i = 0; i<teamlist.length; i++){
 	groupdiv.appendChild(b);	
 	console.log(groupdiv.innerHTML);
 }
-
-for(var i = 0; i<fireBasedata.length; i++){
-	//groupdiv.children[1].children[0].children[0].innerHTML = fireBasedata[i].Name;
-}
 }
 
 //BAR Chart
+function drawchart(){
 var ctx = document.getElementById("myChart").getContext('2d');;
 var myChart = new Chart(ctx, {
 type: 'line',
 data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: xaxis,
     datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
+        label: 'Right Leg',
+        data: plotdata,
 		fill:false,
+		pointRadius: 1,
+		pointHoverRadius: 4,
+		showLine:false,
+		pointBorderColor:'red',
     }]
 },
 options: {
- elements: {
-            line: {
-                tension: 0, // disables bezier curves
-            }
-        },
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero:true
+                beginAtZero:true,
             }
-        }]
+        }],
+		xAxes: [{
+		ticks: {
+         beginAtZero:true,
+        maxTicksLimit: 24
+            },
+        }],
     }
 }
 });
+}
+function formatTime(seconds) {
+    return [
+        parseInt(seconds / 60 / 60),
+        parseInt(seconds / 60 % 60),
+        parseInt(seconds % 60)
+    ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1")
+}
 </script>
 </body>
 </html>
