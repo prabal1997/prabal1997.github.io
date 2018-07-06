@@ -145,7 +145,6 @@
   var myChart;
   var dateinput;
   var hasheddate = 0;
-  var plotpoints = [];
   var digit = 0;
   for(var i=0;i<1440;i+=1){
   xaxis.push(formatTime(i));
@@ -162,7 +161,7 @@
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
 	if(key!=undefined){
     if (fireBasedata[digit].History.RightLeg[hasheddate][key1].hasOwnProperty(key)) {
-		plotdata.splice(key1,0,fireBasedata[digit].History.RightLeg[hasheddate][key1][key]);
+		plotdata[key1] = fireBasedata[digit].History.RightLeg[hasheddate][key1][key];
     }
 	}
 	}
@@ -265,20 +264,18 @@ for(var i = 0; i<teamlist.length; i++){
 function initchart(){
 var ctx = document.getElementById("myChart");
 myChart = new Chart(ctx, {
-type: 'line',
+type: 'bar',
 data: {
     labels: xaxis,
     datasets: [{
         label: 'Right Leg',
+		backgroundColor: "rgb(255,0,0)",
+        borderColor: "rgba(75,192,192,1)",
         data: plotdata,
-		fill:false,
-		pointRadius: 1,
-		pointHoverRadius: 4,
-		showLine:false,
-		pointBorderColor:'red',
     }]
 },
 options: {
+	showLines: true,
     scales: {
         yAxes: [{
             ticks: {
@@ -287,20 +284,13 @@ options: {
         }],
 		xAxes: [{
 		ticks: {
-         beginAtZero:true,
-        maxTicksLimit: 24
+        maxTicksLimit: 24,
+		barPercentage: 0.5,
             },
         }],
     }
 }
 });
-}
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
 }
 function formatTime(minutes) {
 	var hours = Math.floor( minutes / 60);          
