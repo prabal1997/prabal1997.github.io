@@ -19,7 +19,7 @@ Sub Service_Create
 aSensor.Initialize
 bSensor.Initialize
 
-sendDataTimer.Initialize("sendDataTimer",10000)
+sendDataTimer.Initialize("sendDataTimer",2500)
 sendDataTimer.Enabled = True
 End Sub
 
@@ -68,8 +68,8 @@ End Sub
 
 Sub sendDataTimer_tick
 	
-	Dim aSensorString As String = "["
-	Dim bSensorString As String = "["
+	Dim aSensorString As String = ""
+	Dim bSensorString As String = ""
 	
 	If aSensor.Size > 0 Then
 		For i = 0 To aSensor.Size - 1 
@@ -80,7 +80,6 @@ Sub sendDataTimer_tick
 			End If
 		Next
 	End If
-	aSensorString = aSensorString & "]"
 	
 	If bSensor.Size > 0 Then
 		For i = 0 To bSensor.Size - 1 
@@ -91,7 +90,6 @@ Sub sendDataTimer_tick
 			End If
 		Next
 	End If
-	bSensorString = bSensorString & "]"
 	
 	Dim data As String = ""
 	data = data
@@ -113,11 +111,24 @@ Sub sendDataTimer_tick
 	'	}
 	
 	Log(data)
-	Dim stringData As String =  "{""sensorData"":""[67,1023,0,99,111,23,15]""}"
 	
-	Dim job As HttpJob
-	job.Initialize("JobName", Me)
-	job.PostString("http://40.113.192.222:5000/RealtimeUpdate/1", stringData )
+	'Dim job As HttpJob
+	'job.Initialize("JobName", Me)
+	'job.GetRequest.SetContentType("application/json")
+	'job.GetRequest.InitializePost2("http://40.113.192.222:5000/RealtimeUpdate/1", (stringData )
+	
+	  Dim Register As HttpJob
+   	  Register.Initialize("rest", Me)
+      Register.Download("http://40.113.192.222:5000/RealtimeUpdate/0/" & aSensorString)
+	
+	  Dim Register2 As HttpJob
+   	  Register2.Initialize("rest", Me)
+      Register2.Download("http://40.113.192.222:5000/RealtimeUpdate/1/" & bSensorString)
+	  
+	  
+	 ' Dim Register2 As HttpJob
+   	 ' Register.Initialize("rest", Me)
+     ' Register.Download("http://40.113.192.222:5000/RealtimeUpdate/1/" & stringData)
 	
 	
 	
@@ -133,7 +144,7 @@ Sub JobDone(job As HttpJob)
   Log(job.GetString)
   job.Release
   Else
-  Msgbox(job.ErrorMessage, "Error")
+  Log(job.ErrorMessage)
   End If
 End Sub
 
