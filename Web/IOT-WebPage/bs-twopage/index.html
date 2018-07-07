@@ -91,9 +91,17 @@
                         </div>
                     </div>
                 </div>
-				<div>Enter the Date you wish to view the data for
+				<div>Enter the Date and type of limb you wish to view the data for
 					<input type="date" id="dateInput" placeholder="mm/dd/yyyy"></input>
+					<br>
+					<select id = "limbtype">
+					  <option value="rl">Right Leg</option>
+					  <option value="ra">Right Arm</option>
+					  <option value="ll">Left Leg</option>
+					  <option value="la">Left Arm</option>
+					</select>
 				</div>
+				
 				<canvas id="myChart" width="100%"></canvas>				
                     <div class="col-md-6">
                         <h5>User Collected Data</h5>
@@ -152,17 +160,18 @@
   }
   var fireBasedata = [];
   var teamlist = [];
-  function plotgraph(that){
+  function plotgraph(){
   plotdata = Array(240);
-  if(that.value === undefined){
-    dateinput = that;	
-  }else{
-    dateinput = that.value;
-	}
-		dateinput = dateinput.split("-");
+  dateinput = document.getElementById("dateInput").value;
+	dateinput = dateinput.split("-");
+	if(dateinput != undefined){
 	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
+	}
     console.log(hasheddate); 
-	if(fireBasedata!=undefined){
+	var limbtype = document.getElementById("limbtype").value;
+	// RIGHT LEG
+	if(limbtype === "rl"){
+	if(fireBasedata[digit].History.RightLeg!=undefined){
 	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
 	if(key!=undefined){
@@ -172,12 +181,61 @@
 	}
 	}
 	}
+	}	
+	myChart.destroy();
+	}
+	// RIGHT ARM
+	if(limbtype === "ra"){
+	if(fireBasedata[digit].History.RightHand!=undefined){
+	for (key1 in fireBasedata[digit].History.RightHand[hasheddate]){
+	for (key in fireBasedata[digit].History.RightHand[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.RightHand[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.RightHand[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
+	myChart.destroy();
+	}
+	//LEFT LEG
+	if(limbtype === "ll"){
+	if(fireBasedata[digit].History.LeftLeg!=undefined){
+	for (key1 in fireBasedata[digit].History.LeftLeg[hasheddate]){
+	for (key in fireBasedata[digit].History.LeftLeg[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.LeftLeg[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.LeftLeg[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
+	myChart.destroy();
+	}
+	//LEFT ARM
+	if(limbtype === "la"){
+	if(fireBasedata[digit].History.LeftHand!=undefined){
+	for (key1 in fireBasedata[digit].History.LeftHand[hasheddate]){
+	for (key in fireBasedata[digit].History.LeftHand[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.LeftHand[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.LeftHand[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
 	myChart.destroy();
 	}
 	initchart();
 	}
   document.getElementById("dateInput").addEventListener("change", function() {
-	plotgraph(this);  
+	plotgraph();  
+});
+document.getElementById("limbtype").addEventListener("change", function() {
+	plotgraph();  
 });
   // Initialize Firebase
   var config = {
@@ -229,6 +287,9 @@ for(var i = 0; i<teamlist.length; i++){
 	if( event.srcElement.innerText != "Daniel"){
 	digit = 1;
 	}
+	else{
+	digit = 0;
+	}
 	outname.innerHTML = fireBasedata[digit].Name;
 	outage.innerHTML = fireBasedata[digit].Age;
 	outgender.innerHTML = fireBasedata[digit].Gender;
@@ -278,7 +339,7 @@ data: {
     labels: xaxis,
     datasets: [{
         label: 'Right Leg',
-		backgroundColor: "rgb(255,0,0)",
+		backgroundColor: "rgb(100,100,100)",
         borderColor: "rgba(75,192,192,1)",
         data: plotdata,
     }]
@@ -292,11 +353,11 @@ options: {
             }
         }],
 		xAxes: [{
-		barPercentage: 0.3,
+		barPercentage: 0.9,
 		categorySpacing: 0,
 		ticks: {
         maxTicksLimit: 24,
-		barPercentage: 0.3,
+		barPercentage: 0.9,
             },
         }],
     }
