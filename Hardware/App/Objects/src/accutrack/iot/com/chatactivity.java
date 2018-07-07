@@ -271,9 +271,6 @@ public anywheresoftware.b4a.objects.ButtonWrapper _btnsend = null;
 public anywheresoftware.b4a.samples.httputils2.httputils2service _httputils2service = null;
 public accutrack.iot.com.main _main = null;
 public accutrack.iot.com.bluetoothservice _bluetoothservice = null;
-  public Object[] GetGlobals() {
-		return new Object[] {"Activity",mostCurrent._activity,"AStream",_astream,"bluetoothService",Debug.moduleToString(accutrack.iot.com.bluetoothservice.class),"btnSend",mostCurrent._btnsend,"HttpUtils2Service",mostCurrent._httputils2service,"Main",Debug.moduleToString(accutrack.iot.com.main.class),"txtInput",mostCurrent._txtinput,"txtLog",mostCurrent._txtlog};
-}
 
 public static void initializeProcessGlobals() {
              try {
@@ -283,164 +280,70 @@ public static void initializeProcessGlobals() {
             }
 }
 public static String  _activity_create(boolean _firsttime) throws Exception{
-		Debug.PushSubsStack("Activity_Create (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("FirstTime", _firsttime);
- BA.debugLineNum = 17;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
-Debug.ShouldStop(65536);
- BA.debugLineNum = 18;BA.debugLine="Activity.LoadLayout(\"2\")";
-Debug.ShouldStop(131072);
+ //BA.debugLineNum = 17;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 18;BA.debugLine="Activity.LoadLayout(\"2\")";
 mostCurrent._activity.LoadLayout("2",mostCurrent.activityBA);
- BA.debugLineNum = 19;BA.debugLine="If AStream.IsInitialized = False Then";
-Debug.ShouldStop(262144);
+ //BA.debugLineNum = 19;BA.debugLine="If AStream.IsInitialized = False Then";
 if (_astream.IsInitialized()==anywheresoftware.b4a.keywords.Common.False) { 
- BA.debugLineNum = 20;BA.debugLine="AStream.InitializePrefix(Main.serial1.InputStream, True, Main.serial1.OutputStream, \"AStream\")";
-Debug.ShouldStop(524288);
+ //BA.debugLineNum = 20;BA.debugLine="AStream.InitializePrefix(Main.serial1.InputStream, True, Main.serial1.OutputStream, \"AStream\")";
 _astream.InitializePrefix(processBA,mostCurrent._main._serial1.getInputStream(),anywheresoftware.b4a.keywords.Common.True,mostCurrent._main._serial1.getOutputStream(),"AStream");
  };
- BA.debugLineNum = 22;BA.debugLine="txtLog.Width = 100%x";
-Debug.ShouldStop(2097152);
+ //BA.debugLineNum = 22;BA.debugLine="txtLog.Width = 100%x";
 mostCurrent._txtlog.setWidth(anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (100),mostCurrent.activityBA));
- BA.debugLineNum = 23;BA.debugLine="End Sub";
-Debug.ShouldStop(4194304);
+ //BA.debugLineNum = 23;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _activity_pause(boolean _userclosed) throws Exception{
-		Debug.PushSubsStack("Activity_Pause (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("UserClosed", _userclosed);
- BA.debugLineNum = 44;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
-Debug.ShouldStop(2048);
- BA.debugLineNum = 45;BA.debugLine="If UserClosed Then";
-Debug.ShouldStop(4096);
+ //BA.debugLineNum = 44;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 45;BA.debugLine="If UserClosed Then";
 if (_userclosed) { 
- BA.debugLineNum = 46;BA.debugLine="AStream.Close";
-Debug.ShouldStop(8192);
+ //BA.debugLineNum = 46;BA.debugLine="AStream.Close";
 _astream.Close();
  };
- BA.debugLineNum = 48;BA.debugLine="End Sub";
-Debug.ShouldStop(32768);
+ //BA.debugLineNum = 48;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _activity_resume() throws Exception{
-		Debug.PushSubsStack("Activity_Resume (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 40;BA.debugLine="Sub Activity_Resume";
-Debug.ShouldStop(128);
- BA.debugLineNum = 42;BA.debugLine="End Sub";
-Debug.ShouldStop(512);
+ //BA.debugLineNum = 40;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 42;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _astream_error() throws Exception{
-		Debug.PushSubsStack("AStream_Error (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 30;BA.debugLine="Sub AStream_Error";
-Debug.ShouldStop(536870912);
- BA.debugLineNum = 31;BA.debugLine="ToastMessageShow(\"Connection is broken.\", True)";
-Debug.ShouldStop(1073741824);
+ //BA.debugLineNum = 30;BA.debugLine="Sub AStream_Error";
+ //BA.debugLineNum = 31;BA.debugLine="ToastMessageShow(\"Connection is broken.\", True)";
 anywheresoftware.b4a.keywords.Common.ToastMessageShow("Connection is broken.",anywheresoftware.b4a.keywords.Common.True);
- BA.debugLineNum = 32;BA.debugLine="btnSend.Enabled = False";
-Debug.ShouldStop(-2147483648);
+ //BA.debugLineNum = 32;BA.debugLine="btnSend.Enabled = False";
 mostCurrent._btnsend.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- BA.debugLineNum = 33;BA.debugLine="txtInput.Enabled = False";
-Debug.ShouldStop(1);
+ //BA.debugLineNum = 33;BA.debugLine="txtInput.Enabled = False";
 mostCurrent._txtinput.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- BA.debugLineNum = 34;BA.debugLine="End Sub";
-Debug.ShouldStop(2);
+ //BA.debugLineNum = 34;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _astream_newdata(byte[] _buffer) throws Exception{
-		Debug.PushSubsStack("AStream_NewData (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("Buffer", _buffer);
- BA.debugLineNum = 25;BA.debugLine="Sub AStream_NewData (Buffer() As Byte)";
-Debug.ShouldStop(16777216);
- BA.debugLineNum = 28;BA.debugLine="End Sub";
-Debug.ShouldStop(134217728);
+ //BA.debugLineNum = 25;BA.debugLine="Sub AStream_NewData (Buffer() As Byte)";
+ //BA.debugLineNum = 28;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _astream_terminated() throws Exception{
-		Debug.PushSubsStack("AStream_Terminated (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 36;BA.debugLine="Sub AStream_Terminated";
-Debug.ShouldStop(8);
- BA.debugLineNum = 37;BA.debugLine="AStream_Error";
-Debug.ShouldStop(16);
+ //BA.debugLineNum = 36;BA.debugLine="Sub AStream_Terminated";
+ //BA.debugLineNum = 37;BA.debugLine="AStream_Error";
 _astream_error();
- BA.debugLineNum = 38;BA.debugLine="End Sub";
-Debug.ShouldStop(32);
+ //BA.debugLineNum = 38;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _btnsend_click() throws Exception{
-		Debug.PushSubsStack("btnSend_Click (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 53;BA.debugLine="Sub btnSend_Click";
-Debug.ShouldStop(1048576);
- BA.debugLineNum = 54;BA.debugLine="AStream.Write(txtInput.Text.GetBytes(\"UTF8\"))";
-Debug.ShouldStop(2097152);
+ //BA.debugLineNum = 53;BA.debugLine="Sub btnSend_Click";
+ //BA.debugLineNum = 54;BA.debugLine="AStream.Write(txtInput.Text.GetBytes(\"UTF8\"))";
 _astream.Write(mostCurrent._txtinput.getText().getBytes("UTF8"));
- BA.debugLineNum = 55;BA.debugLine="txtInput.SelectAll";
-Debug.ShouldStop(4194304);
+ //BA.debugLineNum = 55;BA.debugLine="txtInput.SelectAll";
 mostCurrent._txtinput.SelectAll();
- BA.debugLineNum = 56;BA.debugLine="txtInput.RequestFocus";
-Debug.ShouldStop(8388608);
+ //BA.debugLineNum = 56;BA.debugLine="txtInput.RequestFocus";
 mostCurrent._txtinput.RequestFocus();
- BA.debugLineNum = 57;BA.debugLine="LogMessage(\"Me\", txtInput.Text)";
-Debug.ShouldStop(16777216);
+ //BA.debugLineNum = 57;BA.debugLine="LogMessage(\"Me\", txtInput.Text)";
 _logmessage("Me",mostCurrent._txtinput.getText());
- BA.debugLineNum = 58;BA.debugLine="End Sub";
-Debug.ShouldStop(33554432);
+ //BA.debugLineNum = 58;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _globals() throws Exception{
  //BA.debugLineNum = 11;BA.debugLine="Sub Globals";
  //BA.debugLineNum = 12;BA.debugLine="Dim txtInput As EditText";
@@ -453,29 +356,14 @@ mostCurrent._btnsend = new anywheresoftware.b4a.objects.ButtonWrapper();
 return "";
 }
 public static String  _logmessage(String _from,String _msg) throws Exception{
-		Debug.PushSubsStack("LogMessage (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
-Debug.locals.put("From", _from);
-Debug.locals.put("Msg", _msg);
- BA.debugLineNum = 60;BA.debugLine="Sub LogMessage(From As String, Msg As String)";
-Debug.ShouldStop(134217728);
- BA.debugLineNum = 61;BA.debugLine="txtLog.Text = txtLog.Text & From & \": \" & Msg & CRLF";
-Debug.ShouldStop(268435456);
+ //BA.debugLineNum = 60;BA.debugLine="Sub LogMessage(From As String, Msg As String)";
+ //BA.debugLineNum = 61;BA.debugLine="txtLog.Text = txtLog.Text & From & \": \" & Msg & CRLF";
 mostCurrent._txtlog.setText((Object)(mostCurrent._txtlog.getText()+_from+": "+_msg+anywheresoftware.b4a.keywords.Common.CRLF));
- BA.debugLineNum = 62;BA.debugLine="txtLog.SelectionStart = txtLog.Text.Length";
-Debug.ShouldStop(536870912);
+ //BA.debugLineNum = 62;BA.debugLine="txtLog.SelectionStart = txtLog.Text.Length";
 mostCurrent._txtlog.setSelectionStart(mostCurrent._txtlog.getText().length());
- BA.debugLineNum = 63;BA.debugLine="End Sub";
-Debug.ShouldStop(1073741824);
+ //BA.debugLineNum = 63;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 public static String  _process_globals() throws Exception{
  //BA.debugLineNum = 7;BA.debugLine="Sub Process_Globals";
  //BA.debugLineNum = 8;BA.debugLine="Dim AStream As AsyncStreams";
@@ -484,23 +372,11 @@ _astream = new anywheresoftware.b4a.randomaccessfile.AsyncStreams();
 return "";
 }
 public static String  _txtinput_enterpressed() throws Exception{
-		Debug.PushSubsStack("txtInput_EnterPressed (chatactivity) ","chatactivity",1,mostCurrent.activityBA,mostCurrent);
-try {
- BA.debugLineNum = 50;BA.debugLine="Sub txtInput_EnterPressed";
-Debug.ShouldStop(131072);
- BA.debugLineNum = 51;BA.debugLine="If btnSend.Enabled = True Then btnSend_Click";
-Debug.ShouldStop(262144);
+ //BA.debugLineNum = 50;BA.debugLine="Sub txtInput_EnterPressed";
+ //BA.debugLineNum = 51;BA.debugLine="If btnSend.Enabled = True Then btnSend_Click";
 if (mostCurrent._btnsend.getEnabled()==anywheresoftware.b4a.keywords.Common.True) { 
 _btnsend_click();};
- BA.debugLineNum = 52;BA.debugLine="End Sub";
-Debug.ShouldStop(524288);
+ //BA.debugLineNum = 52;BA.debugLine="End Sub";
 return "";
 }
-catch (Exception e) {
-			Debug.ErrorCaught(e);
-			throw e;
-		} 
-finally {
-			Debug.PopSubsStack();
-		}}
 }

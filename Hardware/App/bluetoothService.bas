@@ -46,19 +46,29 @@ Sub AStream_NewData (Buffer() As Byte)
 			If Not(data.CharAt(0) = "a") AND Not(data.CharAt(0) = "b") Then 
 				data = tempString & data
 			End If
+			
+			Dim tempValue As Int
 		
 			If (data.CharAt(0) = "a") Then 
 				data = data.SubString(1)
-				If data = "" Then 
-					data = "-1"
-				End If
-				aSensor.Add(data)
+				Try
+					tempValue = data
+					If data = "" Then 
+						data = "-1"
+					End If
+					aSensor.Add(data)
+				Catch
+				End Try
 			Else If (data.CharAt(0) = "b") Then
 				data = data.SubString(1)
-				If data = "" Then 
-					data = "-1"
-				End If
-				bSensor.Add(data)
+				Try
+					tempValue = data
+					If data = "" Then 
+						data = "-1"
+					End If
+					bSensor.Add(data)
+				Catch
+				End Try
 			End If 
 			
 			tempString = ""
@@ -119,11 +129,11 @@ Sub sendDataTimer_tick
 	
 	  Dim Register As HttpJob
    	  Register.Initialize("rest", Me)
-      Register.Download("http://40.113.192.222:5000/RealtimeUpdate/0/" & aSensorString)
+      Register.Download("http://40.113.245.233:5000/RealtimeUpdate/0/" & aSensorString)
 	
 	  Dim Register2 As HttpJob
    	  Register2.Initialize("rest", Me)
-      Register2.Download("http://40.113.192.222:5000/RealtimeUpdate/1/" & bSensorString)
+      Register2.Download("http://40.113.245.233:5000/RealtimeUpdate/1/" & bSensorString)
 	  
 	  
 	 ' Dim Register2 As HttpJob
@@ -139,7 +149,7 @@ End Sub
 
 Sub JobDone(job As HttpJob)
   If job.Success Then
-  ToastMessageShow ("SuccessFully Finish !", True)
+  'ToastMessageShow ("SuccessFully Finish !", True)
   'ShowData
   Log(job.GetString)
   job.Release
