@@ -249,8 +249,8 @@ document.getElementById("limbtype").addEventListener("change", function() {
   firebase.initializeApp(config);
   function getData(callbackIN) {
     var ref = firebase.database().ref("Users");
-        ref.once('value').then(function (snapshot) {
-        callbackIN(snapshot.val())
+        ref.on('value',function (snapshot) {
+        callbackIN(snapshot.val());
     });
 }
 window.addEventListener("load", getData(genFunction));
@@ -267,6 +267,7 @@ function genFunction(data) {
         fireBasedata.push({
         Age: data[i]['Age'],
         Gender: data[i]['Gender'],
+		CurrentValue: data[i]['CurrentValue'],
 		Height:data[i]['Height'],
 		History:data[i]['History'],
 		Name:data[i]['Name'],
