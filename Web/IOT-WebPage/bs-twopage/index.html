@@ -252,6 +252,12 @@ document.getElementById("limbtype").addEventListener("change", function() {
         ref.on('value',function (snapshot) {
         callbackIN(snapshot.val());
     });
+	
+     var currentValueUpdate = firebase.database().ref('Users/1/CurrentValue/RightLeg');
+     currentValueUpdate.on('value', function(snapshot) {
+		console.log("Updated Value: ");
+		console.log(snapshot.val());
+	});
 }
 window.addEventListener("load", getData(genFunction));
 var groupdiv = document.getElementById("groupname");
