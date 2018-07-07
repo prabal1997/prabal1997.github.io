@@ -149,6 +149,7 @@
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
   var plotdata = Array(240);
+  var label = "";
   var xaxis= [];
   var myChart;
   var dateinput;
@@ -167,10 +168,11 @@
 	if(dateinput != undefined){
 	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
 	}
-    console.log(hasheddate); 
+    //console.log(hasheddate); 
 	var limbtype = document.getElementById("limbtype").value;
 	// RIGHT LEG
 	if(limbtype === "rl"){
+	label = "Right Leg";
 	if(fireBasedata[digit].History.RightLeg!=undefined){
 	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
@@ -186,6 +188,7 @@
 	}
 	// RIGHT ARM
 	if(limbtype === "ra"){
+	label = "Right Arm";
 	if(fireBasedata[digit].History.RightHand!=undefined){
 	for (key1 in fireBasedata[digit].History.RightHand[hasheddate]){
 	for (key in fireBasedata[digit].History.RightHand[hasheddate][key1]) {
@@ -201,6 +204,7 @@
 	}
 	//LEFT LEG
 	if(limbtype === "ll"){
+	label = "Left Leg";
 	if(fireBasedata[digit].History.LeftLeg!=undefined){
 	for (key1 in fireBasedata[digit].History.LeftLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.LeftLeg[hasheddate][key1]) {
@@ -216,6 +220,7 @@
 	}
 	//LEFT ARM
 	if(limbtype === "la"){
+	label = "Left Arm";
 	if(fireBasedata[digit].History.LeftHand!=undefined){
 	for (key1 in fireBasedata[digit].History.LeftHand[hasheddate]){
 	for (key in fireBasedata[digit].History.LeftHand[hasheddate][key1]) {
@@ -249,14 +254,27 @@ document.getElementById("limbtype").addEventListener("change", function() {
   firebase.initializeApp(config);
   function getData(callbackIN) {
     var ref = firebase.database().ref("Users");
-        ref.on('value',function (snapshot) {
+        ref.once('value').then(function (snapshot) {
         callbackIN(snapshot.val());
     });
 	
-     var currentValueUpdate = firebase.database().ref('Users/1/CurrentValue/RightLeg');
+     var currentValueUpdate = firebase.database().ref("Users");
      currentValueUpdate.on('value', function(snapshot) {
-		console.log("Updated Value: ");
 		console.log(snapshot.val());
+		firebasedata = [];
+		var data = snapshot.val();
+		    for(var i=0; i<data.length; i++) {
+        fireBasedata.push({
+        Age: data[i]['Age'],
+        Gender: data[i]['Gender'],
+		CurrentValue: data[i]['CurrentValue'],
+		Height:data[i]['Height'],
+		History:data[i]['History'],
+		Name:data[i]['Name'],
+		Weight:data[i]['Weight'],
+		Team: data[i]['Team']
+    });
+	}
 	});
 }
 window.addEventListener("load", getData(genFunction));
@@ -333,7 +351,7 @@ for(var i = 0; i<teamlist.length; i++){
 	}
 	groupdiv.appendChild(a);
 	groupdiv.appendChild(b);	
-	console.log(groupdiv.innerHTML);
+	//console.log(groupdiv.innerHTML);
 }
 }
 
@@ -345,7 +363,7 @@ type: 'bar',
 data: {
     labels: xaxis,
     datasets: [{
-        label: 'Right Leg',
+        label: label,
 		backgroundColor: "rgb(100,100,100)",
         borderColor: "rgba(75,192,192,1)",
         data: plotdata,
