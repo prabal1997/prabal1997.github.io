@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2><p id = "OutName" style = "color:#4b80fe">NA</p></h2>
-						<h2><p style = "color:#4b80fe">Waterloo, Ontario</p></h2>
+						<h2><p style = "color:#4b80fe;font-size:18px;">Waterloo, Ontario</p></h2>
                     </div>
 					<div class="col-md-4" style = "width:100%">                      
 						<div class="form-group" style = "display:inline-block;padding:10px;">
@@ -108,15 +108,9 @@
 				<label style = "color:#4b80fe;float:left; font-size:23px;">Activity Summary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				<table>
 					<tr>
-						<td id = "pasttrendslegend" style="margin-right:100px;">			 
-							  <img src="assets/img/graph_legend_blue.png"  height="25" />
-							  Past Trends
-						</td>
-						  <td style="padding: 5px 5px 5px 20px;"></td>
-						<td>
-							<img src="assets/img/graph_legend_rainbow.png"height="25" />
-							Recorded Ergonomic Efficiency
-						</td>
+						<td id = "pasttrendslegend" style="margin-right:100px;"><img src="assets/img/graph_legend_blue.png"  height="25" /> Past Trends</td>
+						<td style="padding: 5px 5px 5px 20px;"></td>
+						<td><img src="assets/img/graph_legend_rainbow.png"height="25"/> Recorded Ergonomic Efficiency</td>
 					</tr>
 				 </table>
 				 <br>
@@ -221,6 +215,7 @@
 	}	
 	}
 	}
+	anotherChartfnc();
 	myChart.destroy();
 	//anotherChart.destroy();
 	}
@@ -248,6 +243,7 @@
 	}
 	}
 	}
+	anotherChartfnc();
 	myChart.destroy();
 	}
 	//LEFT LEG
@@ -274,6 +270,7 @@
 	}	
 	}
 	}
+	anotherChartfnc();
 	myChart.destroy();
 	}
 	//LEFT ARM
@@ -299,6 +296,7 @@
 		anotherChart.data["datasets"][0].data.shift();
 	}
 	}
+	anotherChartfnc();
 	myChart.destroy();
 	}
 	}
@@ -356,6 +354,7 @@ var outheight = document.getElementById("OutHeight");
 var outteam = document.getElementById("OutTeam");
 var outweight = document.getElementById("OutWeight");
 initchart();
+anotherChartfnc();
 function genFunction(data) {
 fireBasedata = [];
     for(var i=0; i<data.length; i++) {
@@ -441,10 +440,10 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var anotherctx = document.getElementById("anotherChart").getContext('2d');
 var purple_orange_gradient = ctx.createLinearGradient(0, 0, 0, 600);
 purple_orange_gradient.addColorStop(0, "#11e200");
-purple_orange_gradient.addColorStop(0.1, "#11e200");
+purple_orange_gradient.addColorStop(0.15, "#11e200");
+purple_orange_gradient.addColorStop(0.30, "#e1c000");
 purple_orange_gradient.addColorStop(0.40, "#e1c000");
-purple_orange_gradient.addColorStop(0.60, "#e1c000");
-purple_orange_gradient.addColorStop(0.7, "#c00000");
+purple_orange_gradient.addColorStop(0.6, "#c00000");
 plotdata = plotdata.map(x => x * 100);
 TrendlineArray = TrendlineArray.map(x => x * 100);
 var isHidden = true;
@@ -485,7 +484,7 @@ var barChartData = {
 				  
 				    type:'line',
                     data: TrendlineArray,    
-					pointRadius: 1,					
+					pointRadius: 0,					
             }],
         };
 myChart = new Chart(ctx, {
@@ -536,6 +535,9 @@ display: false,
     }
 }
 });
+}
+function anotherChartfnc(){
+var anotherctx = document.getElementById("anotherChart").getContext('2d');
 // ANOTHER CHART
 var CurrentValue;
 var limbtype = document.getElementById("limbtype").value;
@@ -623,6 +625,7 @@ display: true,
 }
 });
 }
+
 function formatTime(minutes) {
 	var hours = Math.floor( minutes / 60);          
     var minutes = minutes % 60;
