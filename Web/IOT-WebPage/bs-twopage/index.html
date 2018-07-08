@@ -149,12 +149,24 @@
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
   var plotdata = Array(240);
-  var label = "";
+  var label = "Recorded Ergonomic Efficiency";
   var xaxis= [];
   var myChart;
   var dateinput;
   var hasheddate = 0;
   var digit = 0;
+  Chart.plugins.register({
+   beforeDraw: function(c) {
+      let ticks = c.scales['y-axis-0'].ticks;
+      let step = 100 / (ticks.length - 1);
+      let tick = 0;
+      ticks.forEach((e, i, a) => {
+         let index = a.length - 1 - i;
+         a[index] = (tick | 0) + '%';
+         tick += step;
+      });
+   }
+});
   document.getElementById("dateInput").valueAsDate = new Date();
   for(var i=0;i<1440;i+=6){
   xaxis.push(formatTime(i));
@@ -172,7 +184,6 @@
 	var limbtype = document.getElementById("limbtype").value;
 	// RIGHT LEG
 	if(limbtype === "rl"){
-	label = "Right Leg";
 	if(fireBasedata[digit].History.RightLeg!=undefined){
 	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
@@ -188,7 +199,6 @@
 	}
 	// RIGHT ARM
 	if(limbtype === "ra"){
-	label = "Right Arm";
 	if(fireBasedata[digit].History.RightHand!=undefined){
 	for (key1 in fireBasedata[digit].History.RightHand[hasheddate]){
 	for (key in fireBasedata[digit].History.RightHand[hasheddate][key1]) {
@@ -204,7 +214,6 @@
 	}
 	//LEFT LEG
 	if(limbtype === "ll"){
-	label = "Left Leg";
 	if(fireBasedata[digit].History.LeftLeg!=undefined){
 	for (key1 in fireBasedata[digit].History.LeftLeg[hasheddate]){
 	for (key in fireBasedata[digit].History.LeftLeg[hasheddate][key1]) {
@@ -220,7 +229,6 @@
 	}
 	//LEFT ARM
 	if(limbtype === "la"){
-	label = "Left Arm";
 	if(fireBasedata[digit].History.LeftHand!=undefined){
 	for (key1 in fireBasedata[digit].History.LeftHand[hasheddate]){
 	for (key in fireBasedata[digit].History.LeftHand[hasheddate][key1]) {
@@ -261,7 +269,7 @@ document.getElementById("limbtype").addEventListener("change", function() {
      var currentValueUpdate = firebase.database().ref("Users");
      currentValueUpdate.on('value', function(snapshot) {
 		console.log(snapshot.val());
-		firebasedata = [];
+		fireBasedata = [];
 		var data = snapshot.val();
 		    for(var i=0; i<data.length; i++) {
         fireBasedata.push({
@@ -275,6 +283,7 @@ document.getElementById("limbtype").addEventListener("change", function() {
 		Team: data[i]['Team']
     });
 	}
+	plotgraph();
 	});
 }
 window.addEventListener("load", getData(genFunction));
@@ -321,7 +330,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
-	plotgraph(document.getElementById("dateInput").value);
+	plotgraph();
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
@@ -357,25 +366,49 @@ for(var i = 0; i<teamlist.length; i++){
 
 //BAR Chart
 function initchart(){
-var ctx = document.getElementById("myChart");
+var ctx = document.getElementById("myChart").getContext('2d');
+var purple_orange_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+purple_orange_gradient.addColorStop(0, "#11e200");
+purple_orange_gradient.addColorStop(0.1, "#11e200");
+purple_orange_gradient.addColorStop(0.40, "#e1c000");
+purple_orange_gradient.addColorStop(0.60, "#e1c000");
+purple_orange_gradient.addColorStop(0.7, "#c00000");
+plotdata = plotdata.map(x => x * 100);
 myChart = new Chart(ctx, {
 type: 'bar',
 data: {
     labels: xaxis,
     datasets: [{
         label: label,
-		backgroundColor: "rgb(100,100,100)",
-        borderColor: "rgba(75,192,192,1)",
+		backgroundColor: purple_orange_gradient,
         data: plotdata,
     }]
 },
 options: {
+legend: {
+	labels: {
+	fillStyle:purple_orange_gradient,
+	strokeStyle:purple_orange_gradient,
+	},
+    },
 	showLines: true,
+	 hover: {
+    mode: 'nearest',
+    intersect: true
+  },
+  layout: {
+        padding: {
+            left: 15
+        }
+    },
     scales: {
         yAxes: [{
             ticks: {
                 beginAtZero:true,
-            }
+				min:0,
+				max:100,
+				fontSize: 12,
+            },
         }],
 		xAxes: [{
 		barPercentage: 0.9,
