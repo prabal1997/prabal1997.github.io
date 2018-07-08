@@ -188,7 +188,10 @@
 	TrendlineArray = fireBasedata[digit].Trendline.RightLeg.TrendData[key1].split(',');	
 	}
 	for (key1 in fireBasedata[digit].CurrentValue.RightLeg){
-	CurrentValueRL.push(fireBasedata[digit].CurrentValue.RightLeg[key1]*100);	
+	CurrentValueRL.push(fireBasedata[digit].CurrentValue.RightLeg[key1]*100);
+	if(CurrentValueRL.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}	
 	}
 	
 	myChart.destroy();
@@ -212,6 +215,9 @@
 	}
 	for (key1 in fireBasedata[digit].CurrentValue.RightHand){
 	CurrentValueRA.push(fireBasedata[digit].CurrentValue.RightHand[key1]*100);	
+	if(CurrentValueRA.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
 	}
 	myChart.destroy();
 	}
@@ -232,7 +238,10 @@
 	TrendlineArray = fireBasedata[digit].Trendline.LeftLeg.TrendData[key1].split(',');	
 	}
 	for (key1 in fireBasedata[digit].CurrentValue.LeftLeg){
-	CurrentValueLL.push(fireBasedata[digit].CurrentValue.LeftLeg[key1]*100);	
+	CurrentValueLL.push(fireBasedata[digit].CurrentValue.LeftLeg[key1]*100);
+	if(CurrentValueLL.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}	
 	}
 	myChart.destroy();
 	}
@@ -254,6 +263,9 @@
 	}
 	for (key1 in fireBasedata[digit].CurrentValue.LeftHand){
 	CurrentValueLA.push(fireBasedata[digit].CurrentValue.LeftHand[key1]*100);	
+	if(CurrentValueLA.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
 	}
 	myChart.destroy();
 	}
@@ -495,10 +507,16 @@ CurrentValue = CurrentValueLA;
 else{
 CurrentValue = CurrentValueLL;
 }
-var blank = Array(240);
-anotherChart =new Chart(anotherctx, {
-type: 'line',
-data: {
+var blank = Array(24);
+  var updateData = function(oldData){
+    var labels = oldData["labels"];
+    var dataSetA = oldData["datasets"][0]["data"];
+    labels.shift();
+    var newDataA = 11.4;
+    dataSetA.push(newDataA);
+    dataSetA.shift();
+   };
+  var anotherChartData = {
 			labels: blank,
             datasets: [{
                 label: "Realtime Ergonomic Efficiency",
@@ -512,7 +530,10 @@ data: {
                     data: CurrentValue,    
 					pointRadius: 2,					
             }],
-        },
+        };
+anotherChart =new Chart(anotherctx, {
+type: 'line',
+data: anotherChartData,
 options: {
 elements: {
                 line: {
@@ -555,9 +576,6 @@ display: true,
     }
 }
 });
-}
-function updateData(){
-console.log("hi");
 }
 function formatTime(minutes) {
 	var hours = Math.floor( minutes / 60);          
