@@ -101,6 +101,20 @@
 					<br>
 				</div>
 				<label style = "color:blue">Activity Summary</label>
+				<table>
+					<tr>
+						<td id = "pasttrendslegend" style="margin-right:100px;">			 
+							  <img src="assets/img/graph_legend_blue.png"  height="25" />
+							  Past Trends
+						</td>
+						  <td style="padding: 5px 5px 5px 20px;"></td>
+						<td>
+							<img src="assets/img/graph_legend_rainbow.png"height="25" />
+							Recorded Ergonomic Efficiency
+						</td>
+					</tr>
+				 </table>
+				 <br>
 				<canvas id="myChart" width="100%"></canvas>	
 				<div id="anotherChartDiv" style = "display:none">
 					<label style = "color:blue">Realtime Data</label>
@@ -144,6 +158,7 @@
   var dateinput;
   var hasheddate = 0;
   var digit = 0;
+  var id = -1;
   Chart.plugins.register({
    beforeDraw: function(c) {
       let ticks = c.scales['y-axis-0'].ticks;
@@ -187,13 +202,14 @@
 	for (key1 in fireBasedata[digit].Trendline.RightLeg.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.RightLeg.TrendData[key1].split(',');	
 	}
-	for (key1 in fireBasedata[digit].CurrentValue.RightLeg){
-	CurrentValueRL.push(fireBasedata[digit].CurrentValue.RightLeg[key1]*100);
+	if(id>=0){
+	for (key1 in fireBasedata[id].CurrentValue.RightLeg){
+	CurrentValueRL.push(fireBasedata[id].CurrentValue.RightLeg[key1]*100);
 	if(CurrentValueRL.length>24){
 		anotherChart.data["datasets"][0].data.shift();
 	}	
 	}
-	
+	}
 	myChart.destroy();
 	//anotherChart.destroy();
 	}
@@ -213,10 +229,12 @@
 	for (key1 in fireBasedata[digit].Trendline.RightHand.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.RightHand.TrendData[key1].split(',');	
 	}
-	for (key1 in fireBasedata[digit].CurrentValue.RightHand){
-	CurrentValueRA.push(fireBasedata[digit].CurrentValue.RightHand[key1]*100);	
+	if(id>=0){
+	for (key1 in fireBasedata[id].CurrentValue.RightHand){
+	CurrentValueRA.push(fireBasedata[id].CurrentValue.RightHand[key1]*100);	
 	if(CurrentValueRA.length>24){
 		anotherChart.data["datasets"][0].data.shift();
+	}
 	}
 	}
 	myChart.destroy();
@@ -237,11 +255,13 @@
 	for (key1 in fireBasedata[digit].Trendline.LeftLeg.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.LeftLeg.TrendData[key1].split(',');	
 	}
-	for (key1 in fireBasedata[digit].CurrentValue.LeftLeg){
-	CurrentValueLL.push(fireBasedata[digit].CurrentValue.LeftLeg[key1]*100);
+	if(id>=0){
+	for (key1 in fireBasedata[id].CurrentValue.LeftLeg){
+	CurrentValueLL.push(fireBasedata[id].CurrentValue.LeftLeg[key1]*100);
 	if(CurrentValueLL.length>24){
 		anotherChart.data["datasets"][0].data.shift();
 	}	
+	}
 	}
 	myChart.destroy();
 	}
@@ -261,13 +281,15 @@
 	for (key1 in fireBasedata[digit].Trendline.LeftHand.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.LeftHand.TrendData[key1].split(',');	
 	}
-	for (key1 in fireBasedata[digit].CurrentValue.LeftHand){
-	CurrentValueLA.push(fireBasedata[digit].CurrentValue.LeftHand[key1]*100);	
+	if(id>=0){
+	for (key1 in fireBasedata[id].CurrentValue.LeftHand){
+	CurrentValueLA.push(fireBasedata[id].CurrentValue.LeftHand[key1]*100);	
 	if(CurrentValueLA.length>24){
 		anotherChart.data["datasets"][0].data.shift();
 	}
 	}
 	myChart.destroy();
+	}
 	}
 	initchart();
 	}
@@ -348,11 +370,17 @@ for(var i = 0; i<teamlist.length; i++){
 	b.innerHTML += "<li><a>" + fireBasedata[i].Name + "</a></li>";
     a.innerHTML += "<i class =\"fa fa-sitemap\"></i>" + teamlist[i] + "<span id = \"arrow\" class=\"fa arrow\"></span>";
 	b.onclick = function(event){
+	  CurrentValueRL = [];
+      CurrentValueRA = [];
+	  CurrentValueLL = [];    
+      CurrentValueLA = [];
 	if( event.srcElement.innerText != "Daniel"){
 	digit = 1;
+	id = 1;
 	}
 	else{
 	digit = 0;
+	id = 0;
 	}
 	outname.innerHTML = fireBasedata[digit].Name;
 	outage.innerHTML = fireBasedata[digit].Age;
@@ -419,9 +447,11 @@ isHidden = false;
 }
 if(!isHidden){
 document.getElementById("anotherChartDiv").style.display="block";
+document.getElementById("pasttrendslegend").style.display="block";
 }
 else{
 document.getElementById("anotherChartDiv").style.display="none";
+document.getElementById("pasttrendslegend").style.display="none";
 }
 for(var i =0; i<TrendlineArray.length;i++){
 if(TrendlineArray[i] === 0){
@@ -511,7 +541,7 @@ var blank = Array(24);
   var updateData = function(oldData){
     var labels = oldData["labels"];
     var dataSetA = oldData["datasets"][0]["data"];
-    labels.shift();
+    //labels.shift();
     var newDataA = 11.4;
     dataSetA.push(newDataA);
     dataSetA.shift();
