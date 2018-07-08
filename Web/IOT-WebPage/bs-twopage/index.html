@@ -60,10 +60,12 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
+			<p id = "welcomescreen" style = "color:#4b80fe;font-size:20px">Please Click a User's Name from the Left Hand Side.</p></h2>
+			<div id = "inner-content" style = "display:none">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2><p id = "OutName" style = "color:blue">NA</p></h2>
-						<h2><p style = "color:blue">Waterloo, Ontario</p></h2>
+                        <h2><p id = "OutName" style = "color:#4b80fe">NA</p></h2>
+						<h2><p style = "color:#4b80fe">Waterloo, Ontario</p></h2>
                     </div>
 					<div class="col-md-4" style = "width:100%">                      
 						<div class="form-group" style = "display:inline-block;padding:10px;">
@@ -103,7 +105,7 @@
 					<br>
 				</div>
 				<br>
-				<label style = "color:blue;float:left; font-size:23px;">Activity Summary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<label style = "color:#4b80fe;float:left; font-size:23px;">Activity Summary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				<table>
 					<tr>
 						<td id = "pasttrendslegend" style="margin-right:100px;">			 
@@ -118,22 +120,25 @@
 					</tr>
 				 </table>
 				 <br>
-				<div id="myChartDiv">
+				<div id="myChartDiv" style="width: 100%; height: 400px">
 					<canvas id="myChart" width="100%"></canvas>	
 				</div>
-				<div id="anotherChartDiv" style = "display:none">
-					<label style = "color:blue">Realtime Data</label>
+				<div id="anotherChartDiv" style = "display:none;width: 100%;height: 400px">
+					<label style = "color:#4b80fe;float:left; font-size:23px;">Realtime Data</label>
 					<canvas id="anotherChart" width="100%"></canvas>		
-				</div>
-                    <div>
-                      <footer>&copy; Developed by AccuTrack Team 2018</footer>
-                    </div>        
+				</div>        
                     </div>
-                </div>            
+                </div> 
+					<div>
+                      <footer>&copy; Developed by AccuTrack Team 2018</footer>
+                    </div>				
                 </div>
+
             </div>
+			
             <!-- /. PAGE INNER  -->
         </div>
+		</div>
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
@@ -149,6 +154,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
+  document.getElementById("inner-content").style.display="none";
   var plotdata = Array(240);
   var label = "Recorded Ergonomic Efficiency";
   var xaxis= [];
@@ -379,6 +385,8 @@ for(var i = 0; i<teamlist.length; i++){
       CurrentValueRA = [];
 	  CurrentValueLL = [];    
       CurrentValueLA = [];
+	document.getElementById("welcomescreen").style.display="none";
+	document.getElementById("inner-content").style.display="block";
 	if( event.srcElement.innerText != "Daniel"){
 	digit = 1;
 	id = 1;
@@ -458,11 +466,6 @@ else{
 document.getElementById("anotherChartDiv").style.display="none";
 document.getElementById("pasttrendslegend").style.display="none";
 }
-for(var i =0; i<TrendlineArray.length;i++){
-if(TrendlineArray[i] === 0){
-TrendlineArray[i] = NaN;
-}
-}
 var barChartData = {
 			labels: xaxis,
             datasets: [{
@@ -472,22 +475,28 @@ var barChartData = {
 			backgroundColor: purple_orange_gradient,
             }, {
                 label: "Past Trends",
+				borderDash: [3,5],
 				hidden:isHidden,
-				backgroundColor:'#00bfff',
+				borderColor: "#4b80fe",
+				pointBorderColor: "#4b80fe",
+				pointHoverBorderColor: "#4b80fe",
+				backgroundColor:'#4b80fe',
 				 fill: false,
-				  showLine: false,
+				  
 				    type:'line',
                     data: TrendlineArray,    
-					pointRadius: 2,					
+					pointRadius: 1,					
             }],
         };
 myChart = new Chart(ctx, {
 type: 'bar',
 data:barChartData,
 options: {
+maintainAspectRatio: false,
 elements: {
                 line: {
-                    fill: false
+                    fill: false,
+					tension:1,
                 }
             },
 legend: {
@@ -555,10 +564,10 @@ var blank = Array(24);
 			labels: blank,
             datasets: [{
                 label: "Realtime Ergonomic Efficiency",
-				backgroundColor:'#00bfff',
-				 fillColor : "rgba(220,220,220,0.5)",
-				 strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
+				backgroundColor:"#4b80fe",
+				 fillColor : "#4b80fe",
+				 strokeColor : "#4b80fe",
+				pointColor : "#4b80fe",
 				pointStrokeColor : "#fff",
 				  showLine: true,
 				    type:'line',
@@ -570,16 +579,18 @@ anotherChart =new Chart(anotherctx, {
 type: 'line',
 data: anotherChartData,
 options: {
+maintainAspectRatio: false,
 elements: {
                 line: {
                     fill: true,
+					
                 }
             },
 legend: {
 display: true,
 	labels: {
-	fillStyle:'rgba(43, 62, 80, 1)',
-	strokeStyle:'rgba(43, 62, 80, 1)',
+	fillStyle:'#4b80fe',
+	strokeStyle:'#4b80fe',
 	},
     },
 	showLines: true,
