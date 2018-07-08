@@ -26,13 +26,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#"><img src="assets/img/AccuTrack.png" class="img-responsive" /></a>
+                    <a href="#"><img style = "height: 53px;width: 280px;" src="assets/img/AccuTrackNew.png" class="img-responsive" /></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">See Website</a></li>
-                        <li><a href="#">Open Ticket</a></li>
-                        <li><a href="#">Report Bug</a></li>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">SETTINGS</a></li>
+                        <li><a href="#">HELP</a></li>
                     </ul>
                 </div>
 
@@ -43,27 +43,29 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li class="text-center user-image-back">
-                        <img src="assets/img/Walmatt.png" class="img-responsive" />
+                        <img style = "border-color: white; background-color: white;"src="assets/img/WalmattNew.png" class="img-responsive" />
                     </li>
+					<li>
+						<form>
+							<input style = "width:100%;" type="text" placeholder="  Search User" name="search"></input>
+						</form>
+					</li>
 					<li id = "groupname">
 					</li>
                 </ul>
             </div>
 
         </nav>
+		
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Welcome to our Portal</h2>
+                        <h2><p id = "OutName" style = "color:blue">NA</p></h2>
+						<h2><p style = "color:blue">Waterloo, Ontario</p></h2>
                     </div>
-					<div class="col-md-4" style = "width:100%">
-                        <div class="form-group" style = "display:inline-block; padding:10px;">
-                            <label>Name</label>
-                            <output/>
-                            <p id = "OutName">NA</p>
-                        </div>
+					<div class="col-md-4" style = "width:100%">                      
 						<div class="form-group" style = "display:inline-block;padding:10px;">
                             <label>Age</label>
                             <output/>
@@ -91,16 +93,17 @@
                         </div>
                     </div>
                 </div>
-				<div>VIEW DATA FOR
+				<div><b>VIEW DATA FOR
 				<select id = "limbtype">
 					  <option value="rl">Right Leg</option>
 					  <option value="ra">Right Arm</option>
 					  <option value="ll">Left Leg</option>
 					  <option value="la">Left Arm</option>
-					</select> ON <input type="date" id="dateInput" placeholder="mm/dd/yyyy"></input>
+					</select> ON <input type="date" id="dateInput" style = "height:24px" placeholder="mm/dd/yyyy"></input>
 					<br>
 				</div>
-				<label style = "color:blue">Activity Summary</label>
+				<br>
+				<label style = "color:blue;float:left; font-size:23px;">Activity Summary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				<table>
 					<tr>
 						<td id = "pasttrendslegend" style="margin-right:100px;">			 
@@ -115,7 +118,9 @@
 					</tr>
 				 </table>
 				 <br>
-				<canvas id="myChart" width="100%"></canvas>	
+				<div id="myChartDiv">
+					<canvas id="myChart" width="100%"></canvas>	
+				</div>
 				<div id="anotherChartDiv" style = "display:none">
 					<label style = "color:blue">Realtime Data</label>
 					<canvas id="anotherChart" width="100%"></canvas>		
@@ -367,7 +372,7 @@ for(var i = 0; i<teamlist.length; i++){
 	b.id = "ul" + teamlist[i];
 	b.className = "nav nav-second-level collapse"; // start as collapsed
 	a.id = "a" + teamlist[i];
-	b.innerHTML += "<li><a>" + fireBasedata[i].Name + "</a></li>";
+	b.innerHTML += "<li><a><i class =\"fa fa-user\"></i>" + fireBasedata[i].Name + "</a></li>";
     a.innerHTML += "<i class =\"fa fa-sitemap\"></i>" + teamlist[i] + "<span id = \"arrow\" class=\"fa arrow\"></span>";
 	b.onclick = function(event){
 	  CurrentValueRL = [];
