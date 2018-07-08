@@ -495,10 +495,11 @@ CurrentValue = CurrentValueLA;
 else{
 CurrentValue = CurrentValueLL;
 }
+var blank = Array(240);
 anotherChart =new Chart(anotherctx, {
 type: 'line',
 data: {
-			labels: xaxis,
+			labels: blank,
             datasets: [{
                 label: "Realtime Ergonomic Efficiency",
 				backgroundColor:'#00bfff',
@@ -515,7 +516,7 @@ data: {
 options: {
 elements: {
                 line: {
-                    fill: false
+                    fill: true,
                 }
             },
 legend: {
