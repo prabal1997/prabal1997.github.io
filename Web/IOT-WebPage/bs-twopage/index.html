@@ -232,10 +232,12 @@
 	}
 	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.RightLeg){
+	if(fireBasedata[id].CurrentValue.RightLeg[key1]*100 != CurrentValueRL[CurrentValueRL.length-1]){
 	CurrentValueRL.push(fireBasedata[id].CurrentValue.RightLeg[key1]*100);
 	if(CurrentValueRL.length>24){
 		anotherChart.data["datasets"][0].data.shift();
-	}	
+	}
+	}
 	}
 	}
 	anotherChartfnc();
@@ -260,9 +262,11 @@
 	}
 	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.RightHand){
+	if(fireBasedata[id].CurrentValue.RightHand[key1]*100 != CurrentValueRA[CurrentValueRA.length-1]){
 	CurrentValueRA.push(fireBasedata[id].CurrentValue.RightHand[key1]*100);	
 	if(CurrentValueRA.length>24){
 		anotherChart.data["datasets"][0].data.shift();
+	}
 	}
 	}
 	}
@@ -287,9 +291,11 @@
 	}
 	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.LeftLeg){
+	if(fireBasedata[id].CurrentValue.LeftLeg[key1]*100 != CurrentValueLL[CurrentValueLL.length-1]){
 	CurrentValueLL.push(fireBasedata[id].CurrentValue.LeftLeg[key1]*100);
 	if(CurrentValueLL.length>24){
 		anotherChart.data["datasets"][0].data.shift();
+	}
 	}	
 	}
 	}
@@ -314,9 +320,11 @@
 	}
 	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.LeftHand){
+	if(fireBasedata[id].CurrentValue.LeftHand[key1]*100 != CurrentValueLA[CurrentValueLA.length-1]){
 	CurrentValueLA.push(fireBasedata[id].CurrentValue.LeftHand[key1]*100);	
 	if(CurrentValueLA.length>24){
 		anotherChart.data["datasets"][0].data.shift();
+	}
 	}
 	}
 	anotherChartfnc();
