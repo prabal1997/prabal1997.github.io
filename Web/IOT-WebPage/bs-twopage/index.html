@@ -182,7 +182,7 @@
   }
   var fireBasedata = [];
   var teamlist = [];
-  function plotgraph(){
+  function plotgraph(updatecurrval){
   plotdata = Array(240);
   dateinput = document.getElementById("dateInput").value;
 	dateinput = dateinput.split("-");
@@ -207,7 +207,7 @@
 	for (key1 in fireBasedata[digit].Trendline.RightLeg.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.RightLeg.TrendData[key1].split(',');	
 	}
-	if(id>=0){
+	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.RightLeg){
 	CurrentValueRL.push(fireBasedata[id].CurrentValue.RightLeg[key1]*100);
 	if(CurrentValueRL.length>24){
@@ -235,7 +235,7 @@
 	for (key1 in fireBasedata[digit].Trendline.RightHand.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.RightHand.TrendData[key1].split(',');	
 	}
-	if(id>=0){
+	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.RightHand){
 	CurrentValueRA.push(fireBasedata[id].CurrentValue.RightHand[key1]*100);	
 	if(CurrentValueRA.length>24){
@@ -262,7 +262,7 @@
 	for (key1 in fireBasedata[digit].Trendline.LeftLeg.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.LeftLeg.TrendData[key1].split(',');	
 	}
-	if(id>=0){
+	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.LeftLeg){
 	CurrentValueLL.push(fireBasedata[id].CurrentValue.LeftLeg[key1]*100);
 	if(CurrentValueLL.length>24){
@@ -289,7 +289,7 @@
 	for (key1 in fireBasedata[digit].Trendline.LeftHand.TrendData){
 	TrendlineArray = fireBasedata[digit].Trendline.LeftHand.TrendData[key1].split(',');	
 	}
-	if(id>=0){
+	if(id>=0 && updatecurrval){
 	for (key1 in fireBasedata[id].CurrentValue.LeftHand){
 	CurrentValueLA.push(fireBasedata[id].CurrentValue.LeftHand[key1]*100);	
 	if(CurrentValueLA.length>24){
@@ -303,10 +303,10 @@
 	initchart();
 	}
   document.getElementById("dateInput").addEventListener("change", function() {
-	plotgraph();  
+	plotgraph(false);  
 });
 document.getElementById("limbtype").addEventListener("change", function() {
-	plotgraph();  
+	plotgraph(false);  
 });
   // Initialize Firebase
   var config = {
@@ -342,7 +342,7 @@ document.getElementById("limbtype").addEventListener("change", function() {
 		Trendline: data[i]['TrendLine'],
     });
 	}
-	plotgraph();
+	plotgraph(true);
 	});
 }
 window.addEventListener("load", getData(genFunction));
@@ -400,7 +400,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
-	plotgraph();
+	plotgraph(true);
 	}
 	a.onclick= function(event) {
 	if( event.srcElement.innerText == "Truck Loaders"){
@@ -582,6 +582,7 @@ anotherChart =new Chart(anotherctx, {
 type: 'line',
 data: anotherChartData,
 options: {
+animation: false,
 maintainAspectRatio: false,
 elements: {
                 line: {
@@ -592,7 +593,7 @@ elements: {
 legend: {
 display: true,
 	labels: {
-	fillStyle:'#4b80fe',
+	fillStyle:'rgba(75,128,254,0.010)',
 	strokeStyle:'#4b80fe',
 	},
     },
