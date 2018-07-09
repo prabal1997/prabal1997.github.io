@@ -64,8 +64,8 @@
 			<div id = "inner-content" style = "display:none">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2><p id = "OutName" style = "color:#4b80fe">NA</p></h2>
-						<h2><p style = "color:#4b80fe;font-size:18px;">Waterloo, Ontario</p></h2>
+                        <h2><p id = "OutName" style = "color:#4b80fe;height:28px">NA</p></h2>
+						<p style = "color:#4b80fe;font-size:18px;"><b>Waterloo, Ontario</p>
                     </div>
 					<div class="col-md-4" style = "width:100%">                      
 						<div class="form-group" style = "display:inline-block;padding:10px;">
@@ -393,9 +393,9 @@ for(var i = 0; i<teamlist.length; i++){
       CurrentValueLA = [];
 	document.getElementById("welcomescreen").style.display="none";
 	document.getElementById("inner-content").style.display="block";
-	if( event.srcElement.innerText != "Daniel"){
-	digit = 1;
-	id = 1;
+	if( event.srcElement.innerText != "Weisberg, Daniel"){
+	digit = i-1;
+	id = i-1;
 	}
 	else{
 	digit = 0;
