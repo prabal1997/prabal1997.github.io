@@ -117,8 +117,15 @@
 				<div id="myChartDiv" style="width: 100%; height: 400px">
 					<canvas id="myChart" width="100%"></canvas>	
 				</div>
+				<br>
 				<div id="anotherChartDiv" style = "display:none;width: 100%;height: 400px">
-					<label style = "color:#4b80fe;float:left; font-size:23px;">Realtime Data</label>
+					<label style = "color:#4b80fe;float:left; font-size:23px;">Realtime Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<table>
+					<tr>
+						<td id = "pasttrendslegend" style="margin-right:100px;"><img src="assets/img/graph_legend_blue.png"  height="25" /> Realtime Ergonomic Efficiency</td>
+						<td style="padding: 5px 5px 5px 20px;"></td>
+					</tr>
+					</table>
 					<canvas id="anotherChart" width="100%"></canvas>		
 				</div>        
                     </div>
@@ -591,7 +598,7 @@ elements: {
                 }
             },
 legend: {
-display: true,
+display: false,
 	labels: {
 	fillStyle:'rgba(75,128,254,0.010)',
 	strokeStyle:'#4b80fe',
