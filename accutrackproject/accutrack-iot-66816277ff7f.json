@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "accutrack-iot",
+  "private_key_id": "66816277ff7f6c09a02097d0c5d010bc59a7ad0a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3CvK+JHNmTtqG\nx4LWM4MRL8c2cFKT433SfbMtpN+wqAKGTiTnxBhOImQ3M1P8zV821LUt+OHN3QCR\nPYmtm/la5StqOHI2cW+Nd/63blgz5wL9NcK5MD+KrOjnpeqWQiWDEAvc6iMzUfs1\nzOS6ePst42tF1wE9Fo8ll0K7e/uyUiWdmIAWejali72/CSHgfgVIarCrOAB/cg/O\nKFcR2tKXO8j9hnhE2C/ru9gjKB1FcNtQNED11DjLIExSmjQ6mmyx6EgZkokjv81v\nnz3g5joXrQv8Pzirz6e1gz5pfsBIKR/rrYw7vwjB2glNKxUYEEuprqioPurpha+h\nQSEiM5WfAgMBAAECggEAQaoBS/n6lhSqq1guVRZ0qfk4X4yq6xfcvuLOIQ05HAAh\nq7mj3qsHxxvqVK0qr5GjWyGyf3P92WKzfecUGX5PVW7KBNiMDIDkMl1+OKKyrKfu\neBTNrq6i1OZTxSpNviqrl1lt0AoEp7f8xR+kXErjXOJtTMglTxtlLeiWDXkcYasg\nN8eIkpGWUGyFuq7OQ9AtzRwDDCcs3S19Ixe3+OjP3RxPzjxqJ31FIYIt+V3qICeM\nHkG/1kKNt+3otbSKKkEWB3DbZYRvFixdnhdW5tvTEQhPiL/kL8aL7y0c1JnQZ3fX\nJpCPPYTG4oKTvx8dS4r+dM5TT39ZgxWO2TK2uSds3QKBgQDZhfzYaJiy1bTNqSoi\nz/1ZbXHoJIOeGuPhjvt5OeoBcXr6vXYViTtyuNqZIKcoOquNC0oRpXBoH/YtNdsB\n3Ed/gvqbOoit3f+NolRLk9cw4G1uakhYljgbGOtRgMQDGE8lpS5j7kInBJRZM0ZO\nJPW1qmDEizbg71gbQaLi9ITu6wKBgQDXa5cZg7qT9xhnoBevCq7l9GCW6k02lsU9\n3EClMYIq/zG048u3inuoYF0/V2TG9cqqXOo/xxhGTjCFyVpGmLey5UGhG3kRUrQj\nRLcydJO196jWlqW3enZ9HVSmMfn8fFCohg646O9537VT1Uj/hTpOC+08XPwYCnHw\nnWJHhb5PHQKBgQDQMYPthT8Re6WPaifgJf4wh6YMMFahDs+pZXafcqTcOMciEhBh\nUHXLuc3P3gbfZDgpyPJdrWDG6EBwySkSwMjV7ID77aw/7UjZQNM5ewjtyQA0PBl+\nYFjW5qTj30C8TZoDR/P8xWAfhCyQq5jQ1mMuOyJfO3eNFsfXXp0OaEaLfQKBgDvD\np6n2d97xIJ4vNiLj7d3yTJHR8xYAAjzFTFIISDqxjhLHWA9VpjTydyxJjLX+Hvng\nyURkcgGfU6rqT9diKyTAodKWkqIRtdRLDiA7Y3eKfBb8uIEMwq63YnKxTs+TlbUL\nbC40wauoOuBFPflV9vUMLgcfLPlmfHHq2AdLvZ6pAoGAYL+nbu9RevrXoMfxKTSY\nO/7U6dck7adPDqQF+PTuZRFXPyj+K2SCUGM+qJtlmB1g/3NLucNJ40OlIm0DRdS7\ntIARRN6ikKPrLDnUI51BPbCIoID+8/htfEa8iBcVTlhDdMw6GmR822QSvjqrwsyh\nC4Bno7UBv4rXjYyrjOtH0j8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "linux-vm-db-access@accutrack-iot.iam.gserviceaccount.com",
+  "client_id": "109656291373583510389",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/linux-vm-db-access%40accutrack-iot.iam.gserviceaccount.com"
+}
