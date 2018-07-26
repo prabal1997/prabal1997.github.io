@@ -1,0 +1,673 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AccuTrack Inc.</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#"><img style = "height: 53px;width: 280px;" src="assets/img/AccuTrackNew.png" class="img-responsive" /></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">SETTINGS</a></li>
+                        <li><a href="#">HELP</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center user-image-back">
+                        <img style = "border-color: white; background-color: white;"src="assets/img/WalmattNew.png" class="img-responsive" />
+                    </li>
+					<li>
+						<form>
+							<input style = "width:100%;" type="text" placeholder="  Search User" name="search"></input>
+						</form>
+					</li>
+					<li id = "groupname">
+					</li>
+                </ul>
+            </div>
+
+        </nav>
+		
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+			<p id = "welcomescreen" style = "color:#4b80fe;font-size:20px">Please Click a User's Name from the Left Hand Side.</p></h2>
+			<div id = "inner-content" style = "display:none">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2><p id = "OutName" style = "color:#4b80fe;height:28px">NA</p></h2>
+						<p style = "color:#4b80fe;font-size:18px;"><b>Waterloo, Ontario</p>
+                    </div>
+					<div class="col-md-4" style = "width:100%">                      
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Age</label>
+                            <output/>
+                            <p id = "OutAge">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Gender</label>
+                            <output/>
+                            <p id = "OutGender">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Height</label>
+                            <output/>
+                            <p id = "OutHeight">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Team</label>
+                            <output/>
+                            <p id = "OutTeam">NA</p>
+                        </div>
+						<div class="form-group" style = "display:inline-block;padding:10px;">
+                            <label>Weight</label>
+                            <output/>
+                            <p id = "OutWeight">NA</p>
+                        </div>
+                    </div>
+                </div>
+				<div><b>VIEW DATA FOR
+				<select id = "limbtype">
+					  <option value="rl">Right Leg</option>
+					  <option value="ra">Right Arm</option>
+					  <option value="ll">Left Leg</option>
+					  <option value="la">Left Arm</option>
+					</select> ON <input type="date" id="dateInput" style = "height:24px" placeholder="mm/dd/yyyy"></input>
+					<br>
+				</div>
+				<br>
+				<label style = "color:#4b80fe;float:left; font-size:23px;">Activity Summary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<table>
+					<tr>
+						<td id = "pasttrendslegend" style="margin-right:100px;"><img src="assets/img/graph_legend_blue.png"  height="25" /> Past Trends</td>
+						<td style="padding: 5px 5px 5px 20px;"></td>
+						<td><img src="assets/img/graph_legend_rainbow.png"height="25"/> Recorded Ergonomic Efficiency</td>
+					</tr>
+				 </table>
+				 <br>
+				<div id="myChartDiv" style="width: 100%; height: 400px">
+					<canvas id="myChart" width="100%"></canvas>	
+				</div>
+				<br>
+				<div id="anotherChartDiv" style = "display:none;width: 100%;height: 400px">
+					<label style = "color:#4b80fe;float:left; font-size:23px;">Realtime Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<table>
+					<tr>
+						<td id = "pasttrendslegend" style="margin-right:100px;"><img src="assets/img/graph_legend_blue.png"  height="25" /> Realtime Ergonomic Efficiency</td>
+						<td style="padding: 5px 5px 5px 20px;"></td>
+					</tr>
+					</table>
+					<canvas id="anotherChart" width="100%"></canvas>		
+				</div>        
+                    </div>
+                </div> 
+					<div>
+                      <footer>&copy; Developed by AccuTrack Team 2018</footer>
+                    </div>				
+                </div>
+
+            </div>
+			
+            <!-- /. PAGE INNER  -->
+        </div>
+		</div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+<script>
+  document.getElementById("inner-content").style.display="none";
+  var plotdata = Array(240);
+  var label = "Recorded Ergonomic Efficiency";
+  var xaxis= [];
+  var TrendlineArray = [];
+  var CurrentValueRL = [];
+  var CurrentValueRA = [];
+  var CurrentValueLL = [];    
+  var CurrentValueLA = [];
+
+  var myChart;
+  var anotherChart;
+  var dateinput;
+  var hasheddate = 0;
+  var digit = 0;
+  var id = -1;
+  Chart.plugins.register({
+   beforeDraw: function(c) {
+      let ticks = c.scales['y-axis-0'].ticks;
+      let step = 100 / (ticks.length - 1);
+      let tick = 0;
+      ticks.forEach((e, i, a) => {
+         let index = a.length - 1 - i;
+         a[index] = (tick | 0) + '%';
+         tick += step;
+      });
+   }
+});
+  document.getElementById("dateInput").valueAsDate = new Date();
+  
+   var hoy = new Date(),
+        d = hoy.getDate(),
+        m = hoy.getMonth()+1, 
+        y = hoy.getFullYear(),
+        data;
+
+    if(d < 10){
+        d = "0"+d;
+    };
+    if(m < 10){
+        m = "0"+m;
+    };
+
+    data = y+"-"+m+"-"+d;
+    document.getElementById("dateInput").value = data;
+  for(var i=0;i<1440;i+=6){
+  xaxis.push(formatTime(i));
+  }
+  var fireBasedata = [];
+  var teamlist = [];
+  function plotgraph(updatecurrval){
+  plotdata = Array(240);
+  dateinput = document.getElementById("dateInput").value;
+	dateinput = dateinput.split("-");
+	if(dateinput != undefined){
+	hasheddate = dateinput[0]*372 + dateinput[1]*31 + dateinput[2]*1;
+	}
+    //console.log(hasheddate); 
+	var limbtype = document.getElementById("limbtype").value;
+	// RIGHT LEG
+	if(limbtype === "rl"){
+	if(fireBasedata[digit].History.RightLeg!=undefined){
+	for (key1 in fireBasedata[digit].History.RightLeg[hasheddate]){
+	for (key in fireBasedata[digit].History.RightLeg[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.RightLeg[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.RightLeg[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}
+	for (key1 in fireBasedata[digit].Trendline.RightLeg.TrendData){
+	TrendlineArray = fireBasedata[digit].Trendline.RightLeg.TrendData[key1].split(',');	
+	}
+	if(id>=0 && updatecurrval){
+	for (key1 in fireBasedata[id].CurrentValue.RightLeg){
+	if(fireBasedata[id].CurrentValue.RightLeg[key1]*100 != CurrentValueRL[CurrentValueRL.length-1]){
+	CurrentValueRL.push(fireBasedata[id].CurrentValue.RightLeg[key1]*100);
+	if(CurrentValueRL.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
+	}
+	}
+	}
+	anotherChartfnc();
+	myChart.destroy();
+	//anotherChart.destroy();
+	}
+	// RIGHT ARM
+	if(limbtype === "ra"){
+	if(fireBasedata[digit].History.RightHand!=undefined){
+	for (key1 in fireBasedata[digit].History.RightHand[hasheddate]){
+	for (key in fireBasedata[digit].History.RightHand[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.RightHand[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.RightHand[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
+	for (key1 in fireBasedata[digit].Trendline.RightHand.TrendData){
+	TrendlineArray = fireBasedata[digit].Trendline.RightHand.TrendData[key1].split(',');	
+	}
+	if(id>=0 && updatecurrval){
+	for (key1 in fireBasedata[id].CurrentValue.RightHand){
+	if(fireBasedata[id].CurrentValue.RightHand[key1]*100 != CurrentValueRA[CurrentValueRA.length-1]){
+	CurrentValueRA.push(fireBasedata[id].CurrentValue.RightHand[key1]*100);	
+	if(CurrentValueRA.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
+	}
+	}
+	}
+	anotherChartfnc();
+	myChart.destroy();
+	}
+	//LEFT LEG
+	if(limbtype === "ll"){
+	if(fireBasedata[digit].History.LeftLeg!=undefined){
+	for (key1 in fireBasedata[digit].History.LeftLeg[hasheddate]){
+	for (key in fireBasedata[digit].History.LeftLeg[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.LeftLeg[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.LeftLeg[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
+	for (key1 in fireBasedata[digit].Trendline.LeftLeg.TrendData){
+	TrendlineArray = fireBasedata[digit].Trendline.LeftLeg.TrendData[key1].split(',');	
+	}
+	if(id>=0 && updatecurrval){
+	for (key1 in fireBasedata[id].CurrentValue.LeftLeg){
+	if(fireBasedata[id].CurrentValue.LeftLeg[key1]*100 != CurrentValueLL[CurrentValueLL.length-1]){
+	CurrentValueLL.push(fireBasedata[id].CurrentValue.LeftLeg[key1]*100);
+	if(CurrentValueLL.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
+	}	
+	}
+	}
+	anotherChartfnc();
+	myChart.destroy();
+	}
+	//LEFT ARM
+	if(limbtype === "la"){
+	if(fireBasedata[digit].History.LeftHand!=undefined){
+	for (key1 in fireBasedata[digit].History.LeftHand[hasheddate]){
+	for (key in fireBasedata[digit].History.LeftHand[hasheddate][key1]) {
+	if(key!=undefined){
+    if (fireBasedata[digit].History.LeftHand[hasheddate][key1].hasOwnProperty(key)) {
+		plotdata[key1/6] = fireBasedata[digit].History.LeftHand[hasheddate][key1][key];
+    }
+	}
+	}
+	}
+	}	
+	for (key1 in fireBasedata[digit].Trendline.LeftHand.TrendData){
+	TrendlineArray = fireBasedata[digit].Trendline.LeftHand.TrendData[key1].split(',');	
+	}
+	if(id>=0 && updatecurrval){
+	for (key1 in fireBasedata[id].CurrentValue.LeftHand){
+	if(fireBasedata[id].CurrentValue.LeftHand[key1]*100 != CurrentValueLA[CurrentValueLA.length-1]){
+	CurrentValueLA.push(fireBasedata[id].CurrentValue.LeftHand[key1]*100);	
+	if(CurrentValueLA.length>24){
+		anotherChart.data["datasets"][0].data.shift();
+	}
+	}
+	}
+	anotherChartfnc();
+	myChart.destroy();
+	}
+	}
+	initchart();
+	}
+  document.getElementById("dateInput").addEventListener("change", function() {
+	plotgraph(false);  
+});
+document.getElementById("limbtype").addEventListener("change", function() {
+	plotgraph(false);  
+});
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCtJG_Ccxiaai-SflibYt8ilmSV6TnuErg",
+    authDomain: "accutrack-iot.firebaseapp.com",
+    databaseURL: "https://accutrack-iot.firebaseio.com",
+    projectId: "accutrack-iot",
+    storageBucket: "accutrack-iot.appspot.com",
+    messagingSenderId: "790708014828"
+  };
+  firebase.initializeApp(config);
+  function getData(callbackIN) {
+    var ref = firebase.database().ref("Users");
+        ref.once('value').then(function (snapshot) {
+        callbackIN(snapshot.val());
+    });
+	
+     var currentValueUpdate = firebase.database().ref("Users");
+     currentValueUpdate.on('value', function(snapshot) {
+		console.log(snapshot.val());
+		fireBasedata = [];
+		var data = snapshot.val();
+		    for(var i=0; i<data.length; i++) {
+        fireBasedata.push({
+        Age: data[i]['Age'],
+        Gender: data[i]['Gender'],
+		CurrentValue: data[i]['CurrentValue'],
+		Height:data[i]['Height'],
+		History:data[i]['History'],
+		Name:data[i]['Name'],
+		Weight:data[i]['Weight'],
+		Team: data[i]['Team'],
+		Trendline: data[i]['TrendLine'],
+    });
+	}
+	plotgraph(true);
+	});
+}
+window.addEventListener("load", getData(genFunction));
+var groupdiv = document.getElementById("groupname");
+var outname = document.getElementById("OutName");
+var outage = document.getElementById("OutAge");
+var outgender = document.getElementById("OutGender");
+var outheight = document.getElementById("OutHeight");
+var outteam = document.getElementById("OutTeam");
+var outweight = document.getElementById("OutWeight");
+initchart();
+anotherChartfnc();
+function genFunction(data) {
+fireBasedata = [];
+    for(var i=0; i<data.length; i++) {
+        fireBasedata.push({
+        Age: data[i]['Age'],
+        Gender: data[i]['Gender'],
+		CurrentValue: data[i]['CurrentValue'],
+		Height:data[i]['Height'],
+		History:data[i]['History'],
+		Name:data[i]['Name'],
+		Weight:data[i]['Weight'],
+		Team: data[i]['Team'],
+		Trendline: data[i]['TrendLine'],
+    });
+	teamlist[i] = data[i]['Team'];
+}
+for(var i = 0; i<teamlist.length; i++){
+	var a = document.createElement("a");
+	var b = document.createElement("ul");
+	b.id = "ul" + teamlist[i];
+	b.className = "nav nav-second-level collapse"; // start as collapsed
+	a.id = "a" + teamlist[i];
+	b.innerHTML += "<li><a><i class =\"fa fa-user\"></i>" + fireBasedata[i].Name + "</a></li>";
+    a.innerHTML += "<i class =\"fa fa-sitemap\"></i>" + teamlist[i] + "<span id = \"arrow\" class=\"fa arrow\"></span>";
+	b.onclick = function(event){
+	  CurrentValueRL = [];
+      CurrentValueRA = [];
+	  CurrentValueLL = [];    
+      CurrentValueLA = [];
+	document.getElementById("welcomescreen").style.display="none";
+	document.getElementById("inner-content").style.display="block";
+	if( event.srcElement.innerText != "Weisberg, Daniel"){
+	digit = i-1;
+	id = i-1;
+	}
+	else{
+	digit = 0;
+	id = 0;
+	}
+	outname.innerHTML = fireBasedata[digit].Name;
+	outage.innerHTML = fireBasedata[digit].Age;
+	outgender.innerHTML = fireBasedata[digit].Gender;
+	outheight.innerHTML = fireBasedata[digit].Height;
+	outteam.innerHTML = fireBasedata[digit].Team;
+	outweight.innerHTML = fireBasedata[digit].Weight;
+	plotgraph(true);
+	}
+	a.onclick= function(event) {
+	if( event.srcElement.innerText == "Truck Loaders"){
+	var b = document.getElementById("ul" + "Truck Loaders");
+	var a = document.getElementById("a" + "Truck Loaders");
+	if(b.classList.contains('collapse')){
+		b.className = "nav nav-second-level"; // start as collapsed	
+		a.className = "active";
+	}
+	else{
+		b.className = "nav nav-second-level collapse"; // start as collapsed	
+		a.className = "";
+	}
+	}
+	else{
+	var b = document.getElementById("ul" + "Janitor");
+	var a = document.getElementById("a" + "Janitor");
+	if(b.classList.contains('collapse')){
+		b.className = "nav nav-second-level"; // start as collapsed	
+		a.className = "active";
+	}
+	else{
+		b.className = "nav nav-second-level collapse"; // start as collapsed	
+		a.className = "";
+	}
+	}
+	}
+	groupdiv.appendChild(a);
+	groupdiv.appendChild(b);	
+	//console.log(groupdiv.innerHTML);
+}
+}
+
+//BAR Chart
+function initchart(){
+var ctx = document.getElementById("myChart").getContext('2d');
+var anotherctx = document.getElementById("anotherChart").getContext('2d');
+var purple_orange_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+purple_orange_gradient.addColorStop(0, "#11e200");
+purple_orange_gradient.addColorStop(0.15, "#11e200");
+purple_orange_gradient.addColorStop(0.30, "#e1c000");
+purple_orange_gradient.addColorStop(0.40, "#e1c000");
+purple_orange_gradient.addColorStop(0.6, "#c00000");
+plotdata = plotdata.map(x => x * 100);
+TrendlineArray = TrendlineArray.map(x => x * 100);
+var isHidden = true;
+Date.prototype.withoutTime = function () {
+    var d = new Date(this);
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
+var d = document.getElementById("dateInput").valueAsDate
+d.setDate(d.getDate()+1);
+if(d.withoutTime().getTime() === new Date().withoutTime().getTime()){
+isHidden = false;
+}
+if(!isHidden){
+document.getElementById("anotherChartDiv").style.display="block";
+document.getElementById("pasttrendslegend").style.display="block";
+}
+else{
+document.getElementById("anotherChartDiv").style.display="none";
+document.getElementById("pasttrendslegend").style.display="none";
+}
+var barChartData = {
+			labels: xaxis,
+            datasets: [{
+			type: 'bar',
+			label: label,
+			data:plotdata,
+			backgroundColor: purple_orange_gradient,
+            }, {
+                label: "Past Trends",
+				borderDash: [3,5],
+				hidden:isHidden,
+				borderColor: "#4b80fe",
+				pointBorderColor: "#4b80fe",
+				pointHoverBorderColor: "#4b80fe",
+				backgroundColor:'#4b80fe',
+				 fill: false,
+				  
+				    type:'line',
+                    data: TrendlineArray,    
+					pointRadius: 0,					
+            }],
+        };
+myChart = new Chart(ctx, {
+type: 'bar',
+data:barChartData,
+options: {
+animation: false,
+maintainAspectRatio: false,
+elements: {
+                line: {
+                    fill: false,
+					tension:1,
+                }
+            },
+legend: {
+display: false,
+	labels: {
+	fillStyle:'rgba(43, 62, 80, 1)',
+	strokeStyle:'rgba(43, 62, 80, 1)',
+	},
+    },
+	showLines: true,
+	 hover: {
+    mode: 'nearest',
+    intersect: true
+  },
+  layout: {
+        padding: {
+            left: 15
+        }
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true,
+				min:0,
+				max:100,
+				fontSize: 12,
+            },
+        }],
+		xAxes: [{
+		barPercentage: 0.9,
+		categorySpacing: 0,
+		ticks: {
+        maxTicksLimit: 24,
+		barPercentage: 0.9,
+            },
+        }],
+    }
+}
+});
+}
+function anotherChartfnc(){
+var anotherctx = document.getElementById("anotherChart").getContext('2d');
+// ANOTHER CHART
+var CurrentValue;
+var limbtype = document.getElementById("limbtype").value;
+if(limbtype == "rl"){
+CurrentValue = CurrentValueRL;
+}
+else if(limbtype == "ra"){
+CurrentValue = CurrentValueRA;
+}
+else if(limbtype == "la"){
+CurrentValue = CurrentValueLA;
+}
+else{
+CurrentValue = CurrentValueLL;
+}
+var blank = Array(24);
+  var updateData = function(oldData){
+    var labels = oldData["labels"];
+    var dataSetA = oldData["datasets"][0]["data"];
+    //labels.shift();
+    var newDataA = 11.4;
+    dataSetA.push(newDataA);
+    dataSetA.shift();
+   };
+  var anotherChartData = {
+			labels: blank,
+            datasets: [{
+                label: "Realtime Ergonomic Efficiency",
+				backgroundColor:"#4b80fe",
+				 fillColor : "#4b80fe",
+				 strokeColor : "#4b80fe",
+				pointColor : "#4b80fe",
+				pointStrokeColor : "#fff",
+				  showLine: true,
+				    type:'line',
+                    data: CurrentValue,    
+					pointRadius: 2,					
+            }],
+        };
+anotherChart =new Chart(anotherctx, {
+type: 'line',
+data: anotherChartData,
+options: {
+animation: false,
+maintainAspectRatio: false,
+elements: {
+                line: {
+                    fill: true,
+					
+                }
+            },
+legend: {
+display: false,
+	labels: {
+	fillStyle:'rgba(75,128,254,0.010)',
+	strokeStyle:'#4b80fe',
+	},
+    },
+	showLines: true,
+	 hover: {
+    mode: 'nearest',
+    intersect: true
+  },
+  layout: {
+        padding: {
+            left: 15
+        }
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true,
+				min:0,
+				max:100,
+				fontSize: 12,
+            },
+        }],
+		xAxes: [{
+		display:false,
+		categorySpacing: 0,
+		ticks: {
+        maxTicksLimit: 24,
+            },
+        }],
+    }
+}
+});
+}
+
+function formatTime(minutes) {
+	var hours = Math.floor( minutes / 60);          
+    var minutes = minutes % 60;
+    return [
+        hours,minutes
+    ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1")
+}
+</script>
+</body>
+</html>
