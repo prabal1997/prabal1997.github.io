@@ -58,41 +58,64 @@
         </nav>
 		
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
-            <div id="page-inner">
-			<p id = "welcomescreen" style = "color:#4b80fe;font-size:20px">Please Click a User's Name from the Left Hand Side.</p></h2>
+        <div id="page-wrapper" style = "height:auto">
+            <div id="page-inner" style = "height:auto">
+			<div id = "welcomescreen">
+			<div align="center">
+				<p  style = "color:#4b80fe;font-size:20px; padding: 14px;">Please Click a User's Name from the Left Hand Side.</p></h2>
+				<iframe width="720" height="500"
+					src="https://www.youtube.com/embed/cmHhQ0jt17w">
+				</iframe>
+			</div>
+			</div>
+			
 			<div id = "inner-content" style = "display:none">
                 <div class="row">
                     <div class="col-md-12">
                         <h2><p id = "OutName" style = "color:#4b80fe;height:28px">NA</p></h2>
 						<p style = "color:#4b80fe;font-size:18px;"><b>Waterloo, Ontario</p>
                     </div>
-					<div class="col-md-4" style = "width:100%">                      
-						<div class="form-group" style = "display:inline-block;padding:10px;">
-                            <label>Age</label>
-                            <output/>
-                            <p id = "OutAge">NA</p>
-                        </div>
-						<div class="form-group" style = "display:inline-block;padding:10px;">
-                            <label>Gender</label>
-                            <output/>
-                            <p id = "OutGender">NA</p>
-                        </div>
-						<div class="form-group" style = "display:inline-block;padding:10px;">
-                            <label>Height</label>
-                            <output/>
-                            <p id = "OutHeight">NA</p>
-                        </div>
-						<div class="form-group" style = "display:inline-block;padding:10px;">
-                            <label>Team</label>
-                            <output/>
-                            <p id = "OutTeam">NA</p>
-                        </div>
-						<div class="form-group" style = "display:inline-block;padding:10px;">
-                            <label>Weight</label>
-                            <output/>
-                            <p id = "OutWeight">NA</p>
-                        </div>
+					<div class="col-md-4" style = "width:100%">        
+
+						<table style="width:100%">
+							<tr>
+								<th>
+									<div class="form-group" style = "display:inline-block;padding:10px;">
+										<label>Age</label>
+										<output/>
+										<p id = "OutAge">NA</p>
+									</div>
+									<div class="form-group" style = "display:inline-block;padding:10px;">
+										<label>Gender</label>
+										<output/>
+										<p id = "OutGender">NA</p>
+									</div>
+									<div class="form-group" style = "display:inline-block;padding:10px;">
+										<label>Height</label>
+										<output/>
+										<p id = "OutHeight">NA</p>
+									</div>
+									<div class="form-group" style = "display:inline-block;padding:10px;">
+										<label>Team</label>
+										<output/>
+										<p id = "OutTeam">NA</p>
+									</div>
+									<div class="form-group" style = "display:inline-block;padding:10px;">
+										<label>Weight</label>
+										<output/>
+										<p id = "OutWeight">NA</p>
+									</div>
+								</th>
+								<th>
+									<div class="form-group" style = "display:inline-block; border-radius: 5px; border: 2px solid #4b80fe; text-align: center;  width: 140px; height: 70px; ">
+										<div style="vertical-align: middle;">
+										<p style="color: #4b80fe; font-size:15px;">RSI Risk</p>
+										<p style="color: #4b80fe; font-size:23px;" id = "OutRSI">NA</p>
+										</div>
+									</div>
+								</th>
+							</tr>
+						</table>		
                     </div>
                 </div>
 				<div><b>VIEW DATA FOR
@@ -118,6 +141,9 @@
 					<canvas id="myChart" width="100%"></canvas>	
 				</div>
 				<br>
+				
+				
+				
 				<div id="anotherChartDiv" style = "display:none;width: 100%;height: 400px">
 					<label style = "color:#4b80fe;float:left; font-size:23px;">Realtime Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<table>
@@ -127,8 +153,12 @@
 					</tr>
 					</table>
 					<canvas id="anotherChart" width="100%"></canvas>		
-				</div>        
-                    </div>
+				</div>    
+
+				<div id = "anotherChartDivText">
+					<label style = "color:#4b80fe;float:left; font-size:23px;">Select todays date in order to view realtime data</label>
+				</div>
+				</div>
                 </div> 
 					<div>
                       <footer>&copy; Developed by AccuTrack Team 2018</footer>
@@ -368,6 +398,7 @@ document.getElementById("limbtype").addEventListener("change", function() {
 		Height:data[i]['Height'],
 		History:data[i]['History'],
 		Name:data[i]['Name'],
+		RSIRisk:data[i]['RSIRisk'],
 		Weight:data[i]['Weight'],
 		Team: data[i]['Team'],
 		Trendline: data[i]['TrendLine'],
@@ -384,6 +415,7 @@ var outgender = document.getElementById("OutGender");
 var outheight = document.getElementById("OutHeight");
 var outteam = document.getElementById("OutTeam");
 var outweight = document.getElementById("OutWeight");
+var outrsi = document.getElementById("OutRSI");
 initchart();
 anotherChartfnc();
 function genFunction(data) {
@@ -398,6 +430,7 @@ fireBasedata = [];
 		Name:data[i]['Name'],
 		Weight:data[i]['Weight'],
 		Team: data[i]['Team'],
+		RSIRisk: data[i]['RSIRisk'],
 		Trendline: data[i]['TrendLine'],
     });
 	teamlist[i] = data[i]['Team'];
@@ -431,6 +464,7 @@ for(var i = 0; i<teamlist.length; i++){
 	outheight.innerHTML = fireBasedata[digit].Height;
 	outteam.innerHTML = fireBasedata[digit].Team;
 	outweight.innerHTML = fireBasedata[digit].Weight;
+	outrsi.innerHTML = fireBasedata[digit].RSIRisk;
 	plotgraph(true);
 	}
 	a.onclick= function(event) {
@@ -491,10 +525,13 @@ isHidden = false;
 if(!isHidden){
 document.getElementById("anotherChartDiv").style.display="block";
 document.getElementById("pasttrendslegend").style.display="block";
+document.getElementById("anotherChartDivText").style.display="none";
+
 }
 else{
 document.getElementById("anotherChartDiv").style.display="none";
 document.getElementById("pasttrendslegend").style.display="none";
+document.getElementById("anotherChartDivText").style.display="block";
 }
 var barChartData = {
 			labels: xaxis,
