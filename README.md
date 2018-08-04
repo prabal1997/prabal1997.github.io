@@ -6,7 +6,7 @@ AccuTrack Project Website
 ## What it does
 
 ## How I built it
-
+This project was primarily built into 3 major phases. 
 ## Challenges I ran into
 
 ## Accomplishments that I'm proud of
