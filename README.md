@@ -60,9 +60,14 @@ development while the back-end developer learnt a lot about front-end web develo
 
 <p align="center"> <img src="Process Photos/IMG_20180531_181814_1.jpg" width=500 /> </p>
 
-## What's next for test
+## What's Next
 
-FILL THIS DAN AND JOSHI
+We have some really big ideas for taking AccuTrack to the next level! We are planning on continuing to work with our University (University of Waterloo) and Carl Haas, 
+the head of Civil and Environmental Engineering at the University, to test our sensors in the real environment. If we receive prize money from this competition, we are 
+planning on using it to create a high fidelity prototype of AccuTrack and continuing in our research of methods to prevent Repetitive Strain Injury for the tens of 
+millions Canadians and Americans affected by it.
+
+
 
 <!--
 
