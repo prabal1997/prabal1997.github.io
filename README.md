@@ -67,6 +67,9 @@ the head of Civil and Environmental Engineering at the University, to test our s
 planning on using it to create a high fidelity prototype of AccuTrack and continuing in our research of methods to prevent Repetitive Strain Injury for the tens of 
 millions Canadians and Americans affected by it.
 
+## Video
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/LA7QMD3WG2g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ## Process Pictures
 
