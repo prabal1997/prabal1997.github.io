@@ -55,7 +55,7 @@ There was a lot that we learnt from this project. Firstly, we all learnt how to 
 complete the tasks by the main deadline. Since we are all university students, our resources and overall budget for producing expensive hardware 
 were very limited. Hence, we had to make the best use of the amount of money we could afford to spend in order to make working hardware that would give 
 us accurate results. We also learnt extensively about several new Microsoft technologies such as Azure Functions etc. These technologies made our tasks
-much easier since they removed much of the hassle involved in setting up custom servers. Furthermore, we all learnt a little bit about one antoher's area of expertise. For example, the front end developer learnt a lot about hardware
+much easier since they removed much of the hassle involved in setting up custom servers. Furthermore, we all learnt a little bit about one another's area of expertise. For example, the front end developer learnt a lot about hardware
 development while the back-end developer learnt a lot about front-end web development too. Overall, we think that this project was certainly a great experience and was a great learning opportunity for us.
 
 <p align="center"> <img src="Process Photos/IMG_20180531_181814_1.jpg" width=500 /> </p>
