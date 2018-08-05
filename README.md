@@ -15,18 +15,18 @@ In 2017 alone, there were over 23,000 Americans that filed for lost time claims 
 
 ## What is AccuTrack?
 
-AccuTrack track the ergonomical activity of blue-collar employees. This could include tracking the movement of their arms and legs using IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
+AccuTrack tracks the ergonomical activity of blue-collar employees. This could include tracking the movement of their arms and legs using custom IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
 
 <p align="center"> <img src="Process Photos/arm_sensor.png" width=500 /> </p>
 
-AccuTrack uses real-time signal processing and machine learning techniques to filter, process, and analyze the user's motion data. Additionally, AccuTrack provides a web portal that translates the received data into meaningful, interpretable information that the employers can access to assess and reduce the risk of their employees developing strain injuries, which could significantly reduce the costs associated with lost productivity and employee health claims.
+AccuTrack uses real-time signal processing and machine learning techniques to filter, process, and analyze the user's motion data. Additionally, AccuTrack provides a web portal that translates the received data into meaningful, interpretable information that the employers can access to assess and reduce the risk of their employees developing strain injuries, which could significantly reduce the costs associated with lost productivity and employee health claims. The web portal is currently live at [(https://accutrack.me)](https://accutrack.me/).
 
 <p align="center"> <img src="Process Photos/dashboard_example.PNG" width=800 /> </p>
 
 ## How we built AccuTrack
 AccuTrack can be largely divided into three major, related components:
 
-**Hardware:** We developed custom wireless flex sensors using tinfoil, pencil-shaded paper to prepare working prototypes on a small budget. This sped up the testing process allowed us to collect real-data for the purposes of developing our data-analysis tools. These sensors are attached to the arms or legs of the user to track their movement as they perform their required tasks.  
+**Hardware:** Each part of the sensor was created with cost in mind. We developed custom wireless flex sensors using tinfoil, pencil-shaded paper to prepare working prototypes on a small budget. This sped up the testing process allowed us to collect real-data for the purposes of developing our data-analysis tools. These sensors are attached to the arms or legs of the user to track their movement as they perform their required tasks.  
 
 **Data Processing:** AccuTrack uses Azure functions to process incoming motion data in real-time. This required us to develop custom signal-processing and machine-learning algorithms that could efficiently filter, compress, store and analyze large amounts of incoming sensor-data for rapid execution on Azure functions platform. We also used some predictive tools to identify trends in employee efficiency over time.
 
@@ -66,6 +66,32 @@ We have some really big ideas for taking AccuTrack to the next level! We are pla
 the head of Civil and Environmental Engineering at the University, to test our sensors in the real environment. If we receive prize money from this competition, we are 
 planning on using it to create a high fidelity prototype of AccuTrack and continuing in our research of methods to prevent Repetitive Strain Injury for the tens of 
 millions Canadians and Americans affected by it.
+
+
+## Process Pictures
+
+
+
+**Soldering all of the components within each sensor together (Arduino Pro Mini, Voltage Regulator, Wireless Communication Chips)**
+<p align="center"> <img src="Process Photos/IMG_20180702_225352.jpg" width=500 /> </p>
+
+**Creating the semi-resistive layer of the flex sensors**
+<p align="center"> <img src="Process Photos/IMG_20180624_223313.jpg" width=500 /> </p>
+
+**Testing Custom Flex Sensor**
+<p align="center"> <img src="Process Photos/IMG_20180621_222907.jpg" width=500 /> </p>
+
+**Getting Microsoft IOT to work with sensors**
+<p align="center"> <img src="Process Photos/IMG_20180621_221741.jpg" width=500 /> </p>
+
+**Back-end and Front-end specialists working together**
+<p align="center"> <img src="Process Photos/IMG_20180626_193356.jpg" width=500 /> </p>
+
+**Signal analysis finally works!**
+<p align="center"> <img src="Process Photos/IMG_20180707_143646.jpg" width=500 /> </p>
+
+**Testing the sensor on the knee**
+<p align="center"> <img src="Process Photos/IMG_20180718_180856.jpg" width=500 /> </p>
 
 
 
