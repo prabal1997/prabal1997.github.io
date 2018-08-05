@@ -8,8 +8,14 @@ AccuTrack Project Website
 ## How I built it
 This project was primarily built in three major phases.
 ## Challenges I ran into
+One of the main challenges that we ran into was how to make the wireless sensors inexpensive so that we can produce many of them on 
+a small budget. We ended up creating our own flex sensor using tinfoil as conductive layers and pencilled in paper as the semi-resistive layer. For 
+the case we used sharpeners that collected the shavings where we removed the actual sharpener part and put in our electronics. We also used lipo 
+batteries from an RC plane for power in order to make our sensors rechargeable. Everything was controlled by an inexpensive Arduino Pro Mini.
 
 ## Accomplishments that I'm proud of
+We are really proud of developing the hardware for our project. We think that it proves that the entire Accutrack system is something that 
+actually works as we were able to show exactly how we envisioned it. 
 
 ## What I learned
 There was a lot that we learnt from this project. Firstly, we all learnt how to work as a team and co-ordinate with one another to 
