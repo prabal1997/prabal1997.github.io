@@ -1,29 +1,50 @@
-# prabal1997.github.io
+<!-- # AccuTrack
 AccuTrack Project Website
+-->
+
+<p align="center">
+        <img src="logo.png"/>
+</p>
+
 
 ## Inspiration
 
-## What it does
+AccuTrack allows blue-collar workers to track and improve their working posture without disrupting their workflow. Industries such as warehouses and construction require strenuous physical effort to get the job done. Many workers in the blue-collar industry, such as in distribution warehouses, often need to carry heavy packages and items. Repetitive motion over a large period of time causes great amount of strain and damage to the body, which often ends up putting workers out of commission and companies on the line for medical compensation.
 
-## How I built it
-This project was primarily built in three major phases.
-## Challenges I ran into
-One of the main challenges that we ran into was how to make the wireless sensors inexpensive so that we can produce many of them on 
-a small budget. We ended up creating our own flex sensor using tinfoil as conductive layers and pencilled in paper as the semi-resistive layer. For 
-the case we used sharpeners that collected the shavings where we removed the actual sharpener part and put in our electronics. We also used lipo 
-batteries from an RC plane for power in order to make our sensors rechargeable. Everything was controlled by an inexpensive Arduino Pro Mini. 
+In 2017 alone, there were over 23,000 Americans that filed for lost time claims due to injury EACH DAY, most of which are located in sectors that move around heavy items. In total, US  companies have paid over **$192 Billion** for  workplace related injuries last year alone [(source)](https://www.epi.org/publication/workplace-injuries-illnesses-cost-250-billion/). These strain injuries account for 43% of all lost time caused by injuries on the job, and poor body posture is one of the leading factors for strain injuries [(source)](https://www.labour.gov.on.ca/english/hs/pubs/ergonomics/is_ergonomics.php).
 
-On the front end side of the website, one of the challenges we ran into was figuring out how to display so much of data on a single screen 
-without crashing the website from data overload. This included the real time data, the trendline and the recorded ergonmic efficiency of the person.
-A lot of repetitive iterations were required in order to come up with a decent looking website which enhances user experience of the interface.
-Another challenge was that we had to poll the frequency at which data was displayed on the website, especially on the realtime graph so that we don't
+## What AccuTrack does
+
+
+AccuTrack track the ergonomical activity of blue-collar employees. This could include tracking the movement of their arms and legs using IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
+
+AccuTrack uses real-time signal processing and machine learning techniques to filter, process, and analyze the user's motion data. Additionally, AccuTrack provides a web portal that translates the received data into meaningful, interpretable information that the employers can access to assess and reduce the risk of their employees developing strain injuries, which could significantly reduce the costs associated with lost productivity and employee health claims.
+
+## How we built AccuTrack
+AccuTrack can be largely divided into three major, related components:
+
+**Hardware:** We developed custom wireless flex sensors using tinfoil, pencil-shaded paper to prepare working prototypes on a small budget. This sped up the testing process allowed us to collect real-data for the purposes of developing our data-analysis tools. These sensors are attached to the arms or legs of the user to track their movement as they perform their required tasks.  
+
+**Data Processing:** AccuTrack uses Azure functions to process incoming motion data in real-time. This required us to develop custom signal-processing and machine-learning algorithms that could efficiently filter, compress, store and analyze large amounts of incoming sensor-data for rapid execution on Azure functions platform. We also used some predictive tools to identify trends in employee efficiency over time.
+
+**Front End:** AccuTrack provides a [web-portal](https://accutrack.me) at [accutrack.me](https://accutrack.me) that allows employers to see analytics corresponding to the posture of employees using AccuTrack devices. The web-portal allows employers to gain insights extracted from employee data, such as trends in employee efficiency over time, quality of employee posture, and potential health hazards the employees might face.
+
+## Challenges we ran into
+
+Developing working prototype of hardware sensors on a small budget was a major challenge for us. We ended up creating our own flex sensor using tinfoil as conductive layers and pencil-shaded paper as the semi-resistive layer. For the case we used sharpeners that collected the shavings where we removed the actual sharpener part and put in our electronics. We also used LiPo batteries from an RC plane for power in order to make our sensors rechargeable. Everything was controlled by an inexpensive Arduino Pro Mini. 
+
+<p align="center"> <img src="Process Photos/IMG_20180702_231906.jpg" width=500 /> </p>
+
+<!--
+Moreover, displaying large amounts of data on a single screen without excessive resource consumption was also a major problem. This included displaying the real-time data, the trendline and the historical ergonomic efficiency of each employee.
+Multiple iterations were required in order to come up with a website design that provides a good user experience. Another challenge was that we had to poll the frequency at which data was displayed on the website, especially on the realtime graph so that we don't
 utilize high amount of CPU.
+-->
 
-## Accomplishments that I'm proud of
-We are really proud of developing the hardware for our project. We think that it proves that the entire Accutrack system is something that 
-actually works as we were able to show exactly how we envisioned it. 
+## Accomplishments that we are proud of
+We are really proud of developing the hardware for our project. We think that it proves that the entire AccuTrack system is something that actually works as we were able to show exactly how we envisioned it. 
 
-## What I learned
+## What we learned
 There was a lot that we learnt from this project. Firstly, we all learnt how to work as a team and co-ordinate with one another to 
 complete the tasks by the main deadline. Since we are all university students, our resources and overall budget for producing expensive hardware 
 were very limited. Hence, we had to make the best use of the amount of money we could afford to spend in order to make working hardware that would give 
@@ -34,10 +55,14 @@ For example, the front end developer learnt a lot about hardware
 development while the back-end developer learnt a lot about front-end web development too. Overall, we think that this project was certainly a great experience
 and there was a lot that we learnt from it.
 
+<p align="center"> <img src="Process Photos/IMG_20180531_181814_1.jpg" width=500 /> </p>
+
 ## What's next for test
 
 Format your description with Markdown. Here are some tips:
 
+
+<!--
 ## Headline
 **bold**
 _ italics _
@@ -51,3 +76,4 @@ require 'redcarpet'
 markdown = Redcarpet.new("Hello World!")
 puts markdown.to_html
 ```
+-->
