@@ -68,8 +68,7 @@ planning on using it to create a high fidelity prototype of AccuTrack and contin
 millions Canadians and Americans affected by it.
 
 ## Video
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/LA7QMD3WG2g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
+[https://www.youtube.com/watch?v=LA7QMD3WG2g](https://www.youtube.com/watch?v=LA7QMD3WG2g)
 
 ## Process Pictures
 
