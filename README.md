@@ -15,7 +15,7 @@ In 2017 alone, there were over 23,000 Americans that filed for lost time claims 
 
 ## What is AccuTrack?
 
-AccuTrack tracks the ergonomical activity of blue-collar employees. This could include tracking the movement of their arms and legs using custom IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
+AccuTrack tracks the ergonomical activity of blue-collar employees. This includes tracking the movement of their arms and legs using custom IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
 
 <p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/arm_sensor.png" width=500 /> </p>
 
@@ -26,7 +26,7 @@ AccuTrack uses real-time signal processing and machine learning techniques to fi
 ## How we built AccuTrack
 AccuTrack can be largely divided into three major, related components:
 
-**Hardware:** Each part of the sensor was created with cost in mind. We developed custom wireless flex sensors using tinfoil, pencil-shaded paper to prepare working prototypes on a small budget. This sped up the testing process allowed us to collect real-data for the purposes of developing our data-analysis tools. These sensors are attached to the arms or legs of the user to track their movement as they perform their required tasks.  
+**Hardware:** Each part of the sensor was created with cost in mind. We developed custom wireless flex sensors using tinfoil, and pencil-shaded paper to prepare working prototypes on a small budget. This sped up the testing process and allowed us to collect real data for the purpose of developing our data-analysis tools. These sensors are attached to the arms or legs of the user to track their movement as they perform their required tasks.  
 
 **Data Processing:** AccuTrack uses Azure functions to process incoming motion data in real-time. This required us to develop custom signal-processing and machine-learning algorithms that could efficiently filter, compress, store and analyze large amounts of incoming sensor-data for rapid execution on Azure functions platform. We also used some predictive tools to identify trends in employee efficiency over time.
 
@@ -38,23 +38,17 @@ Developing working prototype of hardware sensors on a small budget was a major c
 
 <p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180702_231906.jpg" width=500 /> </p>
 
-Another major challenge for us was to process the large amount of incoming real-time data. Not only did we have to process and display incoming data in real-time, but that data had to be compressed, analyzed, stored at the same time too. Moreover, the trends in employee efficiency had to be updated along with the incoming data, which further constrained resource availability. We had to develop custom data compression and noise filtering algorithms for improved performance so as to minimize the delay between data-generation and data-availability on the AccuTrack web-portal.
-
-<!--
-Moreover, displaying large amounts of data on a single screen without excessive resource consumption was also a major problem. This included displaying the real-time data, the trendline and the historical ergonomic efficiency of each employee.
-Multiple iterations were required in order to come up with a website design that provides a good user experience. Another challenge was that we had to poll the frequency at which data was displayed on the website, especially on the realtime graph so that we don't
-utilize high amount of CPU.
--->
+Another major challenge for us was to process the large amount of incoming real-time data. Not only did we have to process and display incoming data in real-time, but that data had to be compressed, analyzed, stored at the same time too. Moreover, the trends in employee efficiency had to be updated along with the incoming data, which further constrained resource availability. We had to develop custom data compression and noise filtering algorithms for improved performance so as to minimize the delay between data-generation and data-availability on the AccuTrack web-portal. We initially designed our data-processing algorithms using Azure notebooks for Python, and then later wrote real-time implementations for Azure functions. Azure functions are  the bridge between the hardware data and the databse - as they are used for filtering, compressing, and analysing the sensor data before storing it in the databse for later access via the AccuTrack web-portal.
 
 ## Accomplishments
 
 We are really proud of developing the hardware for our project. We believe that it completes the entire AccuTrack ecosystem by allowing us to use real data to study and understand patterns in human ergonomic efficiency. Availability of real data allowed us to model human ergonomics in a more quantitative manner. We believe AccuTrack ecosystems is largely complete and is a reasonably good representation of how we envisioned it.
 
 ## Lessons Learnt
-There was a lot that we learnt from this project. Firstly, we all learnt how to work as a team and co-ordinate with one another to 
+There was a lot that we learnt from this project. Firstly, we all learnt how to work as a team and co-ordinate with one another to
 complete the tasks by the main deadline. Since we are all university students, our resources and overall budget for producing expensive hardware 
 were very limited. Hence, we had to make the best use of the amount of money we could afford to spend in order to make working hardware that would give 
-us accurate results. We also learnt extensively about several new Microsoft technologies such as Azure Functions etc. These technologies made our tasks
+us accurate results. We also learnt extensively about several new Microsoft technologies such as Azure Functions, Azure webapps, Azure notebooks etc. These technologies made our tasks
 much easier since they removed much of the hassle involved in setting up custom servers. Furthermore, we all learnt a little bit about one another's area of expertise. For example, the front end developer learnt a lot about hardware
 development while the back-end developer learnt a lot about front-end web development too. Overall, we think that this project was certainly a great experience and was a great learning opportunity for us.
 
@@ -71,7 +65,6 @@ millions Canadians and Americans affected by it.
 [https://www.youtube.com/watch?v=LA7QMD3WG2g](https://www.youtube.com/watch?v=LA7QMD3WG2g)
 
 ## Process Pictures
-
 
 
 **Soldering all of the components within each sensor together (Arduino Pro Mini, Voltage Regulator, Wireless Communication Chips)**
@@ -94,24 +87,3 @@ millions Canadians and Americans affected by it.
 
 **Testing the sensor on the knee**
 <p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180718_180856.jpg" width=500 /> </p>
-
-
-
-<!--
-
-Format your description with Markdown. Here are some tips:
-
-## Headline
-**bold**
-_ italics _
-[link](http://foo.bar)
-![Alt text](/path/to/img.jpg)
-        
-Get fancy with syntax highlighting:
-
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
--->
