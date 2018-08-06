@@ -3,7 +3,7 @@ AccuTrack Project Website
 -->
 
 <p align="center">
-        <img src="logo.png"/>
+        <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/logo.png"/>
 </p>
 
 
@@ -17,11 +17,11 @@ In 2017 alone, there were over 23,000 Americans that filed for lost time claims 
 
 AccuTrack tracks the ergonomical activity of blue-collar employees. This could include tracking the movement of their arms and legs using custom IoT sensors, and transmitting the collected data wirelessly to the cloud for analysis using existing industry standards.
 
-<p align="center"> <img src="Process Photos/arm_sensor.png" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/arm_sensor.png" width=500 /> </p>
 
 AccuTrack uses real-time signal processing and machine learning techniques to filter, process, and analyze the user's motion data. Additionally, AccuTrack provides a web portal that translates the received data into meaningful, interpretable information that the employers can access to assess and reduce the risk of their employees developing strain injuries, which could significantly reduce the costs associated with lost productivity and employee health claims. The web portal is currently live at [(https://accutrack.me)](https://accutrack.me/).
 
-<p align="center"> <img src="Process Photos/dashboard_example.PNG" width=800 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/dashboard_example.PNG" width=800 /> </p>
 
 ## How we built AccuTrack
 AccuTrack can be largely divided into three major, related components:
@@ -36,7 +36,7 @@ AccuTrack can be largely divided into three major, related components:
 
 Developing working prototype of hardware sensors on a small budget was a major challenge for us. We ended up creating our own flex sensor using tinfoil as conductive layers and pencil-shaded paper as the semi-resistive layer. For the case we used sharpeners that collected the shavings where we removed the actual sharpener part and put in our electronics. We also used LiPo batteries from an RC plane for power in order to make our sensors rechargeable. Everything was controlled by an inexpensive Arduino Pro Mini. 
 
-<p align="center"> <img src="Process Photos/IMG_20180702_231906.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180702_231906.jpg" width=500 /> </p>
 
 Another major challenge for us was to process the large amount of incoming real-time data. Not only did we have to process and display incoming data in real-time, but that data had to be compressed, analyzed, stored at the same time too. Moreover, the trends in employee efficiency had to be updated along with the incoming data, which further constrained resource availability. We had to develop custom data compression and noise filtering algorithms for improved performance so as to minimize the delay between data-generation and data-availability on the AccuTrack web-portal.
 
@@ -58,7 +58,7 @@ us accurate results. We also learnt extensively about several new Microsoft tech
 much easier since they removed much of the hassle involved in setting up custom servers. Furthermore, we all learnt a little bit about one another's area of expertise. For example, the front end developer learnt a lot about hardware
 development while the back-end developer learnt a lot about front-end web development too. Overall, we think that this project was certainly a great experience and was a great learning opportunity for us.
 
-<p align="center"> <img src="Process Photos/IMG_20180531_181814_1.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180531_181814_1.jpg" width=500 /> </p>
 
 ## What's Next
 
@@ -75,25 +75,25 @@ millions Canadians and Americans affected by it.
 
 
 **Soldering all of the components within each sensor together (Arduino Pro Mini, Voltage Regulator, Wireless Communication Chips)**
-<p align="center"> <img src="Process Photos/IMG_20180702_225352.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180702_225352.jpg" width=500 /> </p>
 
 **Creating the semi-resistive layer of the flex sensors**
-<p align="center"> <img src="Process Photos/IMG_20180624_223313.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180624_223313.jpg" width=500 /> </p>
 
 **Testing Custom Flex Sensor**
-<p align="center"> <img src="Process Photos/IMG_20180621_222907.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180621_222907.jpg" width=500 /> </p>
 
 **Getting Microsoft IOT to work with sensors**
-<p align="center"> <img src="Process Photos/IMG_20180621_221741.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180621_221741.jpg" width=500 /> </p>
 
 **Back-end and Front-end specialists working together**
-<p align="center"> <img src="Process Photos/IMG_20180626_193356.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180626_193356.jpg" width=500 /> </p>
 
 **Signal analysis finally works!**
-<p align="center"> <img src="Process Photos/IMG_20180707_143646.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180707_143646.jpg" width=500 /> </p>
 
 **Testing the sensor on the knee**
-<p align="center"> <img src="Process Photos/IMG_20180718_180856.jpg" width=500 /> </p>
+<p align="center"> <img src="https://github.com/prabal1997/prabal1997.github.io/blob/master/Process%20Photos/IMG_20180718_180856.jpg" width=500 /> </p>
 
 
 
