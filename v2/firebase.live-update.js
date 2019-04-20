@@ -1,9 +1,11 @@
 // Live updates registration from firebase
 // Live Value Sensors
 var aSensor = [];
-var aSensorDivider = 1;
+var aSensorDivider = 1.5;
+var aSensorLabel = " Right Arm";
 var bSensor = [];
 var bSensorDivider = 2.5;
+var bSensorLabel = " Left Leg";
 
 // Initialize Firebase
 var config = {
@@ -50,35 +52,66 @@ function sensorUpdate(data) {
 (function($) {  
 	(function() {
 		if( $('#flotDashRealTime').get(0) ) {
-			var data = [],
+			var aSensorData = [],
+				bSensorData = [],
 				totalPoints = 50;
 
-			function getRandomData() {
+			function getSensorData() {
+				if (aSensorData.length > 0) 
+					aSensorData = aSensorData.slice(1);
 
-				if (data.length > 0)
-					data = data.slice(1);
+				if (bSensorData.length > 0)
+					bSensorData = bSensorData.slice(1);
 
-				// Do a random walk
-				while (data.length < totalPoints) {
 
+				// Add new data
+				while (aSensorData.length < totalPoints) { 
+					if (aSensor.length > 0) { 
+						aSensorData.push(aSensor.shift() / aSensorDivider);
+					} else { 
+						aSensorData.push(0); //push 0 default value if no sensor data left
+					}
+				}
+
+				while (bSensorData.length < totalPoints) {
 					if (bSensor.length > 0) { 
-						data.push(bSensor.shift() / bSensorDivider);
+						bSensorData.push(bSensor.shift() / bSensorDivider);
 					} else {
-						data.push(0);
+						bSensorData.push(0); //push 0 default value if no sensor data left
 					}
 				}
 
 				// Zip the generated y values with the x values
-				var res = [];
-				for (var i = 0; i < data.length; ++i) {
-					res.push([i, data[i]])
+				var aSensorFormattedData = [],
+					bSensorFormattedData = [];
+
+				for (var i = 0; i < aSensorData.length; ++i) { 
+					aSensorFormattedData.push([i, aSensorData[i]])
+				}	
+
+				for (var i = 0; i < bSensorData.length; ++i) {
+					bSensorFormattedData.push([i, bSensorData[i]])
 				}
 
-				return res;
+				plotStructure =  [
+					{
+						data: aSensorFormattedData,
+						label: aSensorLabel,
+						color: "#734ba9"
+					},
+					{
+						data: bSensorFormattedData,
+						label: bSensorLabel,
+						color: "#2baab1"
+					}
+				];
+
+				return plotStructure;
 			}
 
-			var flotDashRealTime = $.plot('#flotDashRealTime', [getRandomData()], {
+			var flotDashRealTime = $.plot('#flotDashRealTime', getSensorData(), {
 				colors: ['#8CC9E8'],
+				label: "asdf",
 				series: {
 					lines: {
 						show: true,
@@ -115,7 +148,7 @@ function sensorUpdate(data) {
 
 			function update() {
 
-				flotDashRealTime.setData([getRandomData()]);
+				flotDashRealTime.setData(getSensorData());
 
 				// Since the axes don't change, we don't need to call plot.setupGrid()
 				flotDashRealTime.draw();
