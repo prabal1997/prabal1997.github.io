@@ -869,12 +869,7 @@ window.theme = {};
 										'</div>',
 
 										'<div class="row">',
-											'<div class="col-xs-6">',
-												'<p class="mt-xs mb-none">',
-													'<a href="#">Not John Doe?</a>',
-												'</p>',
-											'</div>',
-											'<div class="col-xs-6 text-right">',
+											'<div class="text-center">',
 												'<button type="submit" class="btn btn-primary">Unlock</button>',
 											'</div>',
 										'</div>',
