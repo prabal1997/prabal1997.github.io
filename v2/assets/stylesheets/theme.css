@@ -4258,6 +4258,15 @@ html.dark .text-muted {
 	color: #734BA9 !important;
 }
 
+
+.text-active { 
+	color: #2BAAB1 !important; 
+}
+
+.text-inactive { 
+	color: #E36159 !important;
+}
+
 .text-success {
 	color: #47a447 !important;
 }
