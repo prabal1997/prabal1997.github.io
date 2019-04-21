@@ -4,14 +4,20 @@ var aSensor = [];
 var aSensorTempValuesGraph1 = [];
 var aSensorTempValuesGraph2 = [];
 var aSensorPostureAnalyzer = [];
-var aSensorDivider = 1.5;
-var aSensorLabel = " Right Arm";
+var aSensorWatchDogTimer = 0;
+var aSensorConnected = false;
+var aSensorDivider = 2.5;
+var aSensorLabel = " Left Leg";
 var bSensor = [];
 var bSensorTempValuesGraph1 = [];
 var bSensorTempValuesGraph2 = [];
 var bSensorPostureAnalyzer = [];
-var bSensorDivider = 2.5;
-var bSensorLabel = " Left Leg";
+var bSensorWatchDogTimer = 0;
+var bSensorConnected = false;
+var bSensorDivider = 1.5;
+var bSensorLabel = " Right Arm";
+
+var oldValuesReceived = false;
 
 // Initialize Firebase
 var config = {
@@ -30,24 +36,25 @@ var config = {
 		// Current sensor data 
 		var sensorData = snapshot.val();
 		if (sensorData != null){
-			if (sensorData["aSensor"] != null) { 
-				aSensor = sensorData["aSensor"].split(",");
-				//create shallow to be used and modified by graphs
-				aSensorTempValuesGraph1 = aSensor.slice(0); 
-				aSensorTempValuesGraph2 = aSensor.slice(0); 
-				aSensorPostureAnalyzer = aSensor.slice(0);
-			}
-			if (sensorData["bSensor"] != null) { 
-				bSensor = sensorData["bSensor"].split(",");
-				//create shallow to be used and modified by graphs
-				bSensorTempValuesGraph1 = bSensor.slice(0); 
-				bSensorTempValuesGraph2 = bSensor.slice(0); 
-				bSensorPostureAnalyzer = bSensor.slice(0);
+			if (oldValuesReceived == false) { 
+				oldValuesReceived = true;
+			} else {
+				if (sensorData["bSensor"] != null) { 
+					aSensor = sensorData["bSensor"].split(",");
+					//create shallow to be used and modified by graphs
+					aSensorTempValuesGraph1 = aSensor.slice(0); 
+					aSensorTempValuesGraph2 = aSensor.slice(0); 
+					aSensorPostureAnalyzer = aSensor.slice(0);
+				}
+				if (sensorData["aSensor"] != null) { 
+					bSensor = sensorData["aSensor"].split(",");
+					//create shallow to be used and modified by graphs
+					bSensorTempValuesGraph1 = bSensor.slice(0); 
+					bSensorTempValuesGraph2 = bSensor.slice(0); 
+					bSensorPostureAnalyzer = bSensor.slice(0);
+				}
 			}
 		}
-
-		console.log("ASensor: " + aSensor);
-		console.log("BSensor: " + bSensor);
 	});
 }
 
@@ -64,7 +71,6 @@ function sensorUpdate(data) {
 
 // live update graphs
 (function($) { 
-	
 	
 	// live update of sensor angles
 	(function() {
@@ -305,5 +311,88 @@ function sensorUpdate(data) {
 	}
 
 	updatePostureImage();
+
+
+	// watchdog timer will determine when a sensor has been disconnected because there are no new data received
+	function updateWatchDogTimer() {
+		// update the watchdog timers
+		if (aSensorTempValuesGraph1.length == 0) { 
+			aSensorWatchDogTimer -= 1;
+
+			// show the notification
+			if (aSensorConnected == true & aSensorWatchDogTimer <= 0) { 
+				new PNotify({
+					title: 'Prabals Left Leg',
+					text: 'Prabals left leg sensor is disconnected. You will no longer receive live updates.',
+					type: 'warning'
+				});
+				aSensorConnected = false;
+			}
+		} else {
+			aSensorWatchDogTimer = 5;
+
+			if (aSensorConnected == false) { 
+				new PNotify({
+					title: 'Prabals Left Leg',
+					text: 'Prabals left leg sensor is connected. You will start receiving live updates.',
+					type: 'success'
+				});
+				aSensorConnected = true;
+			}
+		}
+
+		if (bSensorTempValuesGraph1.length == 0) { 
+			bSensorWatchDogTimer -= 1;
+
+			
+			// show the notification
+			if (bSensorConnected == true & bSensorWatchDogTimer <= 0) { 
+				new PNotify({
+					title: 'Prabals Right Arm',
+					text: 'Prabals right arm sensor is disconnected. You will no longer receive live updates.',
+					type: 'warning'
+				});
+				bSensorConnected = false;
+			}
+		} else {
+			
+
+			bSensorWatchDogTimer = 5;
+
+			if (bSensorConnected == false) { 
+				new PNotify({
+					title: 'Prabals Right Arm',
+					text: 'Prabals right arm sensor is connected. You will start receiving live updates.',
+					type: 'success'
+				});
+				bSensorConnected = true;
+			}
+		}
+
+		// update the ui to show the status of the sensor
+		if (bSensorConnected == false) { 
+			document.getElementById('right-arm-color1').className = "summary-icon bg-secondary";
+			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-secondary";
+			document.getElementById('right-arm-status').innerHTML = "Inactive";
+		} else {
+			document.getElementById('right-arm-color1').className = "summary-icon bg-tertiary";
+			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-tertiary";
+			document.getElementById('right-arm-status').innerHTML = "Active";
+		}
+
+		if (aSensorConnected == false) { 
+			document.getElementById('left-leg-color1').className = "summary-icon bg-secondary";
+			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-secondary";
+			document.getElementById('left-leg-status').innerHTML = "Inactive";
+		} else { 
+			document.getElementById('left-leg-color1').className = "summary-icon bg-tertiary";
+			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-tertiary";
+			document.getElementById('left-leg-status').innerHTML = "Active";
+		}
+
+		setTimeout(updateWatchDogTimer, ($('html').hasClass( 'mobile-device' ) ? 1000 : 500) );
+	}
+
+	updateWatchDogTimer();
 
 }).apply(this, [jQuery]);
