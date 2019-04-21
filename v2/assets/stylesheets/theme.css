@@ -9767,6 +9767,10 @@ html.dark .panel-group .panel-accordion .form-control {
 	height: 184px;
 }
 
+.chart.chart-sm-md {
+	height: 260px;
+}
+
 .chart.chart-md {
 	height: 350px;
 }
