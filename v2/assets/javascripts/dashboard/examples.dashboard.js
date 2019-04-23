@@ -257,7 +257,7 @@ Theme Version: 	1.6.0
 			},
 			yaxis: {
 				min: 0,
-				max: 200,
+				max: 100,
 				color: 'rgba(0,0,0,0.1)'
 			},
 			xaxis: {
@@ -265,7 +265,7 @@ Theme Version: 	1.6.0
 			},
 			tooltip: true,
 			tooltipOpts: {
-				content: '%s: Value of %x is %y',
+				content: '%s  %x days ago </br> for %y% of the time',
 				shifts: {
 					x: -60,
 					y: 25

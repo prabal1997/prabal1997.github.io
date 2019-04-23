@@ -469,8 +469,9 @@
 															<ul class="widget-todo-list">
 																<li>
 																	<div class="checkbox-custom checkbox-default">
-																		<input type="checkbox" checked="" id="todoListItem1" class="todo-check">
-																		<label class="todo-label" for="todoListItem1"><span>Work with forklift (or the tasks are how to help the worker, ex: improve kneeling posture of the worker.</span></label>
+																		<!-- add  checked="" attribute for it to be checked-->
+																		<input type="checkbox" id="todoListItem1" class="todo-check">
+																		<label class="todo-label" for="todoListItem1"><span>Work with forklift</span></label>
 																	</div> 
 																	<div class="todo-actions">
 																		<a class="todo-remove" href="#">
@@ -481,7 +482,7 @@
 																<li>
 																	<div class="checkbox-custom checkbox-default">
 																		<input type="checkbox" id="todoListItem2" class="todo-check">
-																		<label class="todo-label" for="todoListItem2"><span>suck sum dick</span></label>
+																		<label class="todo-label" for="todoListItem2"><span>Work with team of 3-4</span></label>
 																	</div>
 																	<div class="todo-actions">
 																		<a class="todo-remove" href="#">
@@ -946,7 +947,8 @@
 									</div>
 					
 									<h2 class="panel-title">Historic Activity </h2>
-									<p class="panel-subtitle">Shows how active the worker has been for the past 10 days (TODO: make these add to 100 for each day?? not sure what we wanna show here :((())))</p>
+									<!--(TODO: make these add to 100 for each day?? not sure what we wanna show here :((())))-->
+									<p class="panel-subtitle">Shows how active the worker has been for the past 5 days </p>
 								</header>
 								<div class="panel-body">
 					
@@ -955,51 +957,33 @@
 					
 										var flotDashBasicData = [{
 											data: [
-												[0, 170],
-												[1, 169],
-												[2, 173],
-												[3, 188],
-												[4, 147],
-												[5, 113],
-												[6, 128],
-												[7, 169],
-												[8, 173],
-												[9, 128],
-												[10, 128]
+												[0, 19],
+												[1, 42],
+												[2, 31],
+												[3, 20],
+												[4, 47]
 											],
 											label: "Break/Relaxing",
 											color: "#CCCCCC"
 										}, {
 											data: [
-												[0, 115],
-												[1, 124],
-												[2, 114],
-												[3, 121],
-												[4, 115],
-												[5, 83],
-												[6, 102],
-												[7, 148],
-												[8, 147],
-												[9, 103],
-												[10, 113]
+												[0, 51],
+												[1, 43],
+												[2, 52],
+												[3, 61],
+												[4, 14]
 											],
-											label: "Very Physically Active",
+											label: "Moderately Active",
 											color: "#2baab1"
 										}, {
 											data: [
-												[0, 70],
-												[1, 69],
-												[2, 73],
-												[3, 88],
-												[4, 47],
-												[5, 13],
-												[6, 28],
-												[7, 69],
-												[8, 73],
-												[9, 28],
-												[10, 28]
+												[0, 30],
+												[1, 15],
+												[2, 17],
+												[3, 19],
+												[4, 39]
 											],
-											label: "Moderately Active",
+											label: "Very Physically Active",
 											color: "#734ba9"
 										}];
 					
@@ -1044,7 +1028,7 @@
 											<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 										</div>
 										<h2 class="panel-title">Posture Analyzer</h2>
-										<p class="panel-subtitle">Analyzes and predicts the workers current posture to determine how to improve it - hard coded if statements in js lol</p>
+										<p class="panel-subtitle">Analyzes and predicts the workers current posture to determine how to improve it</p>
 									</header>
 									<div class="panel-body">
 						
@@ -1055,7 +1039,7 @@
 													<img id="livePostureImage" src="assets/images/poses/unknown.png" width="280px" height="400px">
 												</td>
 												<td>
-													Some kind of bs analytics table here idk? 
+													Prabal - Some kind of  analytics table here? 
 												</td>
 											</tr>
 										</table>
@@ -1068,7 +1052,7 @@
 
 					</div>
 
-
+<!--
 					<div class="row">
 						<div class="col-xl-3 col-lg-6">
 							<section class="panel panel-transparent">
@@ -1235,6 +1219,7 @@
 						</div>
 						
 					</div>
+				-->
 					<!-- end: page -->
 				</section>
 			</div>
