@@ -20,9 +20,13 @@ var bSensorLabel = " Right Arm";
 
 var oldValuesReceived = false;
 
-// set constants
+// set constants for smoothening
 const currWeightActivity = 0.1
-const currWeightSensor = 0.33
+const currWeightSensor = 0.9
+
+// set constants for posture analyzer
+const aMoveThresh = 50
+const bMoveThresh = 50
 
 // Initialize Firebase
 var config = {
@@ -197,6 +201,7 @@ function sensorUpdate(data) {
 
 	// live update of activity/fatigue rating
 	(function() {
+		document.getElementById("livePostureImage").src="assets/images/poses/squat.png"
 		if( $('#activityDashRealTime').get(0) ) {
 			var aSensorData = [],
 				bSensorData = [],
@@ -213,23 +218,70 @@ function sensorUpdate(data) {
 				if (bSensorData.length > 0)
 					bSensorData = bSensorData.slice(1);
 
-				// Add new data, smoothen it
+				// Add new data, smoothen it, calculate mean
+				var aTotalMean = 0.0;
+				var aCounter = 0;
 				while (aSensorData.length < totalPoints) { 
+					// calculate new samples
 					var new_val = 0;
 					if (aSensorTempValuesGraph1.length > 0) { 
 						new_val = aSensorTempValuesGraph1.shift() / aSensorDivider;
 					}
 					aSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * aSmoothVal;
 					aSensorData.push(aSmoothVal);
+
+					// update mean (using raw, normalized value)
+					if (new_val != 0) {
+						aTotalMean += new_val;
+						aCounter += 1;
+					}
+				}
+				if (aCounter > 0) {
+					aTotalMean = aTotalMean / aCounter;
 				}
 
+				var bTotalMean = 0.0;
+				var bCounter = 0;
 				while (bSensorData.length < totalPoints) {
+					// calculate new samples
 					var new_val = 0;
 					if (bSensorTempValuesGraph1.length > 0) { 
 						new_val = bSensorTempValuesGraph1.shift() / bSensorDivider;
 					}
 					bSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * bSmoothVal;
 					bSensorData.push(bSmoothVal)
+
+					// update mean (using raw, normalized value)
+					if (new_val != 0) {
+						bTotalMean += new_val;
+						bCounter += 1;
+					}
+				}
+				if (bCounter > 0) {
+					bTotalMean = bTotalMean / bCounter;
+				}
+
+				// use mean of activity levels to determine posture
+				if ( (aTotalMean > aMoveThresh) && (bTotalMean > bMoveThresh) ) {
+					// squatting, arms open
+					document.getElementById("livePostureImage").src="assets/images/poses/poseab.png";
+				}
+				else if ( (aTotalMean > aMoveThresh) && (bTotalMean < bMoveThresh) ) {
+					// squatting, arms closed
+					document.getElementById("livePostureImage").src="assets/images/poses/posea_.png";
+				}
+				else if ( (aTotalMean < aMoveThresh) && (bTotalMean > bMoveThresh) ) {
+					// standing, arms open
+					document.getElementById("livePostureImage").src="assets/images/poses/pose_b.png";
+				}
+				else {
+					// standing, arms closed
+					document.getElementById("livePostureImage").src="assets/images/poses/pose__.png";
+
+					// check if the sensors are stopped
+					if ( (aTotalMean == 0) && (bTotalMean == 0) ) {
+						document.getElementById("livePostureImage").src="assets/images/poses/unknown.png";
+					}
 				}
 
 				// Zip the generated y values with the x values
@@ -309,50 +361,6 @@ function sensorUpdate(data) {
 			updateLiveSensorDash();
 		}
 	})();
-
-
-
-	// update the posture image - will make this more legit a bit later.
-	function updatePostureImage() {
-
-		document.getElementById("livePostureImage").src="assets/images/poses/squat.png"
-		/*
-		if (aSensorPostureAnalyzer.length > 0) { 
-			document.getElementById("livePostureImage").src="assets/images/poses/squat.png";
-			aSensorPostureAnalyzer.shift();
-		} else {
-			document.getElementById("livePostureImage").src="assets/images/poses/unknown.png";
-		}
-		*/
-
-		/*
-		// calculate the 'mean' value of sensor valuer
-		var aSensorMean = 0.0
-		var bSensorMean = 0.0
-
-		// NOTE: assuming that length of 'aSensorPostureAnalyzer', 'bSensorPostureAnalyser' is identical
-		for (var index = 0; index < aSensorPostureAnalyzer.length; index++) {
-			aSensorMean += aSensorPostureAnalyzer[index]
-			bSensorMean += bSensorPostureAnalyzer[index] 
-		}
-		aSensorMean /= aSensorPostureAnalyzer
-		bSensorMean /= bSensorPostureAnalyzer
-
-		// set required threshold to define 'Level-0', 'Level-1', and 'Level-2' properly
-		var aMode = 0
-		var bMode = 0
-		*/
-
-
-
-
-
-
-		setTimeout(updatePostureImage, ($('html').hasClass( 'mobile-device' ) ? 1000 : 250) );
-	}
-
-	updatePostureImage();
-
 
 	// watchdog timer will determine when a sensor has been disconnected because there are no new data received
 	function updateWatchDogTimer() {
