@@ -9,6 +9,7 @@ var aSensorConnected = false;
 var aSensorDivider = 2.5;
 var aSensorLabel = " Left Leg";
 var bSensor = [];
+
 var bSensorTempValuesGraph1 = [];
 var bSensorTempValuesGraph2 = [];
 var bSensorPostureAnalyzer = [];
@@ -18,6 +19,10 @@ var bSensorDivider = 1.5;
 var bSensorLabel = " Right Arm";
 
 var oldValuesReceived = false;
+
+// set constants
+const currWeightActivity = 0.1
+const currWeightSensor = 0.33
 
 // Initialize Firebase
 var config = {
@@ -79,6 +84,10 @@ function sensorUpdate(data) {
 				bSensorData = [],
 				totalPoints = 50;
 
+			// NOTE: this values are already normalized to b/w 0 and 100
+			var aSmoothVal = 0,
+				bSmoothVal = 0;
+
 			function getSensorData() {
 				if (aSensorData.length > 0) 
 					aSensorData = aSensorData.slice(1);
@@ -86,22 +95,23 @@ function sensorUpdate(data) {
 				if (bSensorData.length > 0)
 					bSensorData = bSensorData.slice(1);
 
-
-				// Add new data
+				// Add new data, smoothen it
 				while (aSensorData.length < totalPoints) { 
+					var new_val = 0;
 					if (aSensorTempValuesGraph1.length > 0) { 
-						aSensorData.push(aSensorTempValuesGraph1.shift() / aSensorDivider);
-					} else { 
-						aSensorData.push(0); //push 0 default value if no sensor data left
+						new_val = aSensorTempValuesGraph1.shift() / aSensorDivider;
 					}
+					aSmoothVal = currWeightSensor * new_val + (1 - currWeightSensor) * aSmoothVal;
+					aSensorData.push(aSmoothVal);
 				}
 
 				while (bSensorData.length < totalPoints) {
+					var new_val = 0;
 					if (bSensorTempValuesGraph1.length > 0) { 
-						bSensorData.push(bSensorTempValuesGraph1.shift() / bSensorDivider);
-					} else {
-						bSensorData.push(0); //push 0 default value if no sensor data left
+						new_val = bSensorTempValuesGraph1.shift() / bSensorDivider;
 					}
+					bSmoothVal = currWeightSensor * new_val + (1 - currWeightSensor) * bSmoothVal;
+					bSensorData.push(bSmoothVal)
 				}
 
 				// Zip the generated y values with the x values
@@ -192,6 +202,10 @@ function sensorUpdate(data) {
 				bSensorData = [],
 				totalPoints = 50;
 
+			// NOTE: this values are already normalized to b/w 0 and 100
+			var aSmoothVal = 0,
+				bSmoothVal = 0;
+
 			function getSensorData() {
 				if (aSensorData.length > 0) 
 					aSensorData = aSensorData.slice(1);
@@ -199,22 +213,23 @@ function sensorUpdate(data) {
 				if (bSensorData.length > 0)
 					bSensorData = bSensorData.slice(1);
 
-
-				// Add new data
+				// Add new data, smoothen it
 				while (aSensorData.length < totalPoints) { 
-					if (aSensorTempValuesGraph2.length > 0) { 
-						aSensorData.push(aSensorTempValuesGraph2.shift() / aSensorDivider);
-					} else { 
-						aSensorData.push(0); //push 0 default value if no sensor data left
+					var new_val = 0;
+					if (aSensorTempValuesGraph1.length > 0) { 
+						new_val = aSensorTempValuesGraph1.shift() / aSensorDivider;
 					}
+					aSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * aSmoothVal;
+					aSensorData.push(aSmoothVal);
 				}
 
 				while (bSensorData.length < totalPoints) {
-					if (bSensorTempValuesGraph2.length > 0) { 
-						bSensorData.push(bSensorTempValuesGraph2.shift() / bSensorDivider);
-					} else {
-						bSensorData.push(0); //push 0 default value if no sensor data left
+					var new_val = 0;
+					if (bSensorTempValuesGraph1.length > 0) { 
+						new_val = bSensorTempValuesGraph1.shift() / bSensorDivider;
 					}
+					bSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * bSmoothVal;
+					bSensorData.push(bSmoothVal)
 				}
 
 				// Zip the generated y values with the x values
@@ -300,12 +315,38 @@ function sensorUpdate(data) {
 	// update the posture image - will make this more legit a bit later.
 	function updatePostureImage() {
 
+		document.getElementById("livePostureImage").src="assets/images/poses/squat.png"
+		/*
 		if (aSensorPostureAnalyzer.length > 0) { 
 			document.getElementById("livePostureImage").src="assets/images/poses/squat.png";
 			aSensorPostureAnalyzer.shift();
 		} else {
 			document.getElementById("livePostureImage").src="assets/images/poses/unknown.png";
 		}
+		*/
+
+		/*
+		// calculate the 'mean' value of sensor valuer
+		var aSensorMean = 0.0
+		var bSensorMean = 0.0
+
+		// NOTE: assuming that length of 'aSensorPostureAnalyzer', 'bSensorPostureAnalyser' is identical
+		for (var index = 0; index < aSensorPostureAnalyzer.length; index++) {
+			aSensorMean += aSensorPostureAnalyzer[index]
+			bSensorMean += bSensorPostureAnalyzer[index] 
+		}
+		aSensorMean /= aSensorPostureAnalyzer
+		bSensorMean /= bSensorPostureAnalyzer
+
+		// set required threshold to define 'Level-0', 'Level-1', and 'Level-2' properly
+		var aMode = 0
+		var bMode = 0
+		*/
+
+
+
+
+
 
 		setTimeout(updatePostureImage, ($('html').hasClass( 'mobile-device' ) ? 1000 : 250) );
 	}
