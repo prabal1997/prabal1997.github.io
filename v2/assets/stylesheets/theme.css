@@ -16564,6 +16564,7 @@ html.boxed:not(.sidebar-left-collapsed) .custom-pos .abs-bottom-left {
 	position: relative;
 	background-color: #FFF;
 }
+
 .section-full-width-bg-light:before {
 	content: '';
 	display: block;
