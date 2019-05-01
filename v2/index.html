@@ -46,7 +46,7 @@
 			<header class="header">
                     <div class="logo-container">
                         <a href="http://preview.oklerthemes.com/porto-admin/" class="logo">
-                            <img src="assets/images/logo.png" width="205" height="35" alt="Porto Admin" />
+                            <img src="assets/images/logo.png" width="75" height="35" alt="Porto Admin" />
                         </a>
                         <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
                             <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -55,9 +55,7 @@
                 
                     <!-- start: search & user box -->
                     <div class="header-right">
-				
-						<!--
-
+                
                         <form action="https://accutrack.me/v2/pages-search-results.html" class="search nav-form">
                             <div class="input-group input-search">
                                 <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
@@ -196,8 +194,8 @@
                                                     <div class="image">
                                                         <i class="fa fa-thumbs-down bg-danger"></i>
                                                     </div>
-                                                    <span class="title">Overworked</span>
-                                                    <span class="message">Prabal Gupta has been overworking for a while.</span>
+                                                    <span class="title">Server is Down!</span>
+                                                    <span class="message">Just now</span>
                                                 </a>
                                             </li>
                                             <li>
@@ -229,7 +227,7 @@
                                 </div>
                             </li>
                         </ul>
-					-->
+                
                         <span class="separator"></span>
                 
                         <div id="userbox" class="userbox">
@@ -262,7 +260,7 @@
                 </header>
 			<!-- end: header -->
 
-			<div class="inner-wrapper">
+			<div class="inner-wrapper-home">
 				<!-- start: sidebar -->
                 <aside id="sidebar-left" class="sidebar-left">
 				
@@ -283,6 +281,12 @@
                                             <a href="index.html">
                                                 <i class="fa fa-home" aria-hidden="true"></i>
                                                 <span>Home</span>
+                                            </a>
+										</li>
+										<li>
+                                            <a href="overview.html">
+                                                <i class="el el-cloud" aria-hidden="true"></i>
+                                                <span>Company Overview</span>
                                             </a>
                                         </li>
                                         <li class="nav-parent nav-active">
@@ -410,7 +414,7 @@
 
 				<section role="main" class="content-body pb-none">
 					<header class="page-header">
-						<h2>Accutrack Home</h2>
+						<h2><b>Accutrack Home</b></h2>
 					
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
@@ -426,7 +430,15 @@
 						</div>
 					</header>
 
+
+
+					<section class="call-to-action call-to-action-primary call-to-action-top mb-xlg">
+						<iframe src="offline-firstpage/colorlib.com/shapely/index.html" frameborder="0" width="100%" height="100%" style="padding-top: 2px"></iframe>
+					</section>
+				
 					<!-- start: page -->
+					<!-- 
+
 					<section class="call-to-action call-to-action-primary call-to-action-top mb-xlg">
 						<div class="container container-with-sidebar">
 							<div class="row">
@@ -454,10 +466,9 @@
 							<div class="row center">
 								<div class="col-md-12 mb-xlg">
 									<h2 class="text-dark mb-xs text-weight-light mt-xlg">Your Company's <strong>Metrics</strong></h2>
-									<p class="lead">View information for your entire workforce<span class="alternative-font text-xlg"></span></p>
-					<!--
+									<p class="lead">Layouts ready to be used. <span class="alternative-font text-xlg">...all layouts included!</span></p>
+					
 									<a class="btn btn-3d btn-xlg mt-md mb-xlg" href="layouts-default.html" style="background-color: #383f48; border-color: #383f48 #383f48 #22262b; color: #fff;">VIEW MAIN LAYOUT <i class="ml-md fa fa-long-arrow-right"></i></a>
-					-->
 								</div>
 							</div>
 							<div class="row">
@@ -467,10 +478,10 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-default.html">
-													<img src="assets/images/risk/prabal.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-default.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Prabal Gupta</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Default</h5>
 										</div>
 									</div>
 					
@@ -478,10 +489,10 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-dark-header.html">
-													<img src="assets/images/risk/john.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-dark-header.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">John Selderman</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Dark Header</h5>
 										</div>
 									</div>
 					
@@ -489,10 +500,10 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-dark.html">
-													<img src="assets/images/risk/bill.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-dark.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Bill Gates</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Dark</h5>
 										</div>
 									</div>
 					
@@ -500,10 +511,10 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-boxed.html">
-													<img src="assets/images/risk/Lindsay.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-boxed-static-header.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Lindsay Rodriguez</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Boxed with Static Header</h5>
 										</div>
 									</div>
 					
@@ -511,10 +522,10 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-boxed-fixed-header.html">
-													<img src="assets/images/risk/simba.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-boxed-fixed-header.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Simba The Lion</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Boxed with Fixed Header</h5>
 										</div>
 									</div>
 					
@@ -522,14 +533,13 @@
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
 												<a class="thumb-image" href="layouts-header-menu.html">
-													<img src="assets/images/risk/johnathan.png" class="img-responsive" alt="">
+													<img src="assets/images/previews/preview-horizontal-menu-pills.jpg" class="img-responsive" alt="">
 												</a>
 											</div>
-											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Johnathan Belzo</h5>
+											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Horizontal Menu - Pills</h5>
 										</div>
 									</div>
 					
-									<!--
 									<div class="isotope-item col-sm-6 col-md-4">
 										<div class="thumbnail bg-none b-none mb-xlg">
 											<div class="thumb-preview shadow-style-1">
@@ -595,13 +605,12 @@
 											<h5 class="pt-xs mg-title text-weight-semibold text-dark center text-uppercase">Square Borders</h5>
 										</div>
 									</div>
-								-->
+									
 								</ul>
 							</div>
 						</div>
 					</section>
 					
-					<!--
 					<section class="section custom-padding">
 						<div class="container container-with-sidebar">
 							<div class="row">

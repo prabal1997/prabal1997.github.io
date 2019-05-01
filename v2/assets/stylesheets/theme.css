@@ -53,11 +53,23 @@ a:active {
 /* Layout Base - Inner Wrapper */
 .inner-wrapper {
 	display: table;
-	min-height: 100vh;
+	min-height: 100%;
 	padding-top: 60px;
 	table-layout: fixed;
 	overflow: hidden;
 	width: 100%;
+	height:100%; /*TODO: change back to 100%*/
+}
+
+.inner-wrapper-home {
+	display: table;
+	min-height: 100%;
+	padding-top: 60px;
+	table-layout: fixed;
+	overflow: hidden;
+	width: 100%;
+	height:100%; /*TODO: change back to 100%*/
+	position: absolute;
 }
 
 /* Layout Base - Content Body */
@@ -66,6 +78,7 @@ a:active {
 	padding: 40px;
 	position: relative;
 	vertical-align: top;
+	height:100%;
 }
 
 .content-body > .row + .row {
@@ -4469,7 +4482,7 @@ html.dark .text-muted {
 }
 
 .mb-xlg {
-	margin-bottom: 30px !important;
+	margin-bottom: 0px !important;
 }
 
 /* spacement left	*/
@@ -5934,9 +5947,10 @@ html.dark .inner-toolbar > ul > li {
 }
 
 .call-to-action.call-to-action-top {
-	margin: -40px;
+	margin: 0px -40px 0px -40px;
 	border-radius: 0;
-	padding: 40px 25px;
+	padding: 0px 0px;
+	height:100%;
 }
 
 @media (max-width: 767px) {
@@ -16564,6 +16578,7 @@ html.boxed:not(.sidebar-left-collapsed) .custom-pos .abs-bottom-left {
 	position: relative;
 	background-color: #FFF;
 }
+
 .section-full-width-bg-light:before {
 	content: '';
 	display: block;
