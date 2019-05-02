@@ -6,7 +6,7 @@ var aSensorTempValuesGraph2 = [];
 var aSensorPostureAnalyzer = [];
 var aSensorWatchDogTimer = 0;
 var aSensorConnected = false;
-var aSensorDivider = 2.5;
+var aSensorDivider = 1.5; // from 2.5
 var aSensorLabel = " Left Leg";
 var bSensor = [];
 
@@ -15,7 +15,7 @@ var bSensorTempValuesGraph2 = [];
 var bSensorPostureAnalyzer = [];
 var bSensorWatchDogTimer = 0;
 var bSensorConnected = false;
-var bSensorDivider = 1.5;
+var bSensorDivider = 0.90; // from 1.5
 var bSensorLabel = " Right Arm";
 
 var oldValuesReceived = false;
@@ -25,8 +25,8 @@ const currWeightActivity = 0.1
 const currWeightSensor = 0.9
 
 // set constants for posture analyzer
-const aMoveThresh = 50
-const bMoveThresh = 50
+const aMoveThresh = 45
+const bMoveThresh = 45
 
 // Initialize Firebase
 var config = {
