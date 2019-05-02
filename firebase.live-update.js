@@ -201,8 +201,9 @@ function sensorUpdate(data) {
 
 	// live update of activity/fatigue rating
 	(function() {
-		document.getElementById("livePostureImage").src="assets/images/poses/squat.png"
-		if( $('#activityDashRealTime').get(0) ) {
+		if (document.getElementById("livePostureImage") != null) {
+			document.getElementById("livePostureImage").src="assets/images/poses/squat.png"
+			if( $('#activityDashRealTime').get(0) ) {
 			var aSensorData = [],
 				bSensorData = [],
 				totalPoints = 50;
@@ -359,6 +360,7 @@ function sensorUpdate(data) {
 			}
 
 			updateLiveSensorDash();
+			}
 		}
 	})();
 
@@ -420,25 +422,37 @@ function sensorUpdate(data) {
 
 		// update the ui to show the status of the sensor
 		if (bSensorConnected == false) { 
-			document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-secondary";
-			document.getElementById('right-arm-color1').className = "summary-icon bg-secondary";
+			if (document.getElementById('right-arm-color1-a') != null) {
+				document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-secondary";
+			} else {
+				document.getElementById('right-arm-color1').className = "summary-icon bg-secondary";
+			}
 			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-secondary";
 			document.getElementById('right-arm-status').innerHTML = "Inactive";
 		} else {
-			document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-tertiary";
-			document.getElementById('right-arm-color1').className = "summary-icon bg-tertiary";
+			if (document.getElementById('right-arm-color1-a') != null) {
+				document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-tertiary";
+			} else {
+				document.getElementById('right-arm-color1').className = "summary-icon bg-tertiary";
+			}
 			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-tertiary";
 			document.getElementById('right-arm-status').innerHTML = "Active";
 		}
 
 		if (aSensorConnected == false) { 
-			document.getElementById('left-leg-color1-a').className = "summary-icon-2 bg-secondary";
-			document.getElementById('left-leg-color1').className = "summary-icon bg-secondary";
+			if (document.getElementById('left-leg-color1-a') != null) {
+				document.getElementById('left-leg-color1-a').className = "summary-icon-2 bg-secondary";
+			} else {
+				document.getElementById('left-leg-color1').className = "summary-icon bg-secondary";
+			}
 			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-secondary";
 			document.getElementById('left-leg-status').innerHTML = "Inactive";
 		} else { 
+			if (document.getElementById('left-leg-color1-a') != null) {
 			document.getElementById('left-leg-color1-a').className = "summary-icon-2 bg-tertiary";
-			document.getElementById('left-leg-color1').className = "summary-icon bg-tertiary";
+			} else {
+				document.getElementById('left-leg-color1').className = "summary-icon bg-tertiary";
+			}
 			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-tertiary";
 			document.getElementById('left-leg-status').innerHTML = "Active";
 		}
