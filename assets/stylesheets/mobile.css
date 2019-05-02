@@ -7434,7 +7434,8 @@ html.ie11 .scroll-to-top {
 	font-weight: 400;
 	line-height: 20px;
 	padding: 0;
-	text-transform: none;
+    text-transform: none;
+    text-align: center;
 }
 
 .panel-subtitle {
@@ -7445,7 +7446,7 @@ html.ie11 .scroll-to-top {
 	padding: 0;
 }
 
-.panel-body {
+.panel-body2 {
 	background: #fdfdfd;
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -13671,7 +13672,7 @@ ul.simple-bullet-list li.orange:before {
 }
 
 .widget-summary .summary {
-	min-height: 65px;
+	min-height: 15px;
 	word-break: break-all;
 }
 

@@ -420,20 +420,24 @@ function sensorUpdate(data) {
 
 		// update the ui to show the status of the sensor
 		if (bSensorConnected == false) { 
+			document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-secondary";
 			document.getElementById('right-arm-color1').className = "summary-icon bg-secondary";
 			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-secondary";
 			document.getElementById('right-arm-status').innerHTML = "Inactive";
 		} else {
+			document.getElementById('right-arm-color1-a').className = "summary-icon-2 bg-tertiary";
 			document.getElementById('right-arm-color1').className = "summary-icon bg-tertiary";
 			document.getElementById('right-arm-color2').className = "panel panel-featured-left panel-featured-tertiary";
 			document.getElementById('right-arm-status').innerHTML = "Active";
 		}
 
 		if (aSensorConnected == false) { 
+			document.getElementById('left-leg-color1-a').className = "summary-icon-2 bg-secondary";
 			document.getElementById('left-leg-color1').className = "summary-icon bg-secondary";
 			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-secondary";
 			document.getElementById('left-leg-status').innerHTML = "Inactive";
 		} else { 
+			document.getElementById('left-leg-color1-a').className = "summary-icon-2 bg-tertiary";
 			document.getElementById('left-leg-color1').className = "summary-icon bg-tertiary";
 			document.getElementById('left-leg-color2').className = "panel panel-featured-left panel-featured-tertiary";
 			document.getElementById('left-leg-status').innerHTML = "Active";
