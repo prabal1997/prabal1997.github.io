@@ -105,8 +105,7 @@ function sensorUpdate(data) {
 					if (aSensorTempValuesGraph1.length > 0) { 
 						new_val = aSensorTempValuesGraph1.shift() / aSensorDivider;
 					}
-					aSmoothVal = currWeightSensor * new_val + (1 - currWeightSensor) * aSmoothVal;
-					aSensorData.push(aSmoothVal);
+					aSensorData.push(new_val);
 				}
 
 				while (bSensorData.length < totalPoints) {
@@ -114,8 +113,7 @@ function sensorUpdate(data) {
 					if (bSensorTempValuesGraph1.length > 0) { 
 						new_val = bSensorTempValuesGraph1.shift() / bSensorDivider;
 					}
-					bSmoothVal = currWeightSensor * new_val + (1 - currWeightSensor) * bSmoothVal;
-					bSensorData.push(bSmoothVal)
+					bSensorData.push(new_val)
 				}
 
 				// Zip the generated y values with the x values
@@ -225,8 +223,8 @@ function sensorUpdate(data) {
 				while (aSensorData.length < totalPoints) { 
 					// calculate new samples
 					var new_val = 0;
-					if (aSensorTempValuesGraph1.length > 0) { 
-						new_val = aSensorTempValuesGraph1.shift() / aSensorDivider;
+					if (aSensorPostureAnalyzer.length > 0) { 
+						new_val = aSensorPostureAnalyzer.shift() / aSensorDivider;
 					}
 					aSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * aSmoothVal;
 					aSensorData.push(aSmoothVal);
@@ -246,8 +244,8 @@ function sensorUpdate(data) {
 				while (bSensorData.length < totalPoints) {
 					// calculate new samples
 					var new_val = 0;
-					if (bSensorTempValuesGraph1.length > 0) { 
-						new_val = bSensorTempValuesGraph1.shift() / bSensorDivider;
+					if (bSensorPostureAnalyzer.length > 0) { 
+						new_val = bSensorPostureAnalyzer.shift() / bSensorDivider;
 					}
 					bSmoothVal = currWeightActivity * new_val + (1 - currWeightActivity) * bSmoothVal;
 					bSensorData.push(bSmoothVal)
