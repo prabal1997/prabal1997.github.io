@@ -6,7 +6,7 @@ var aSensorTempValuesGraph2 = [];
 var aSensorPostureAnalyzer = [];
 var aSensorWatchDogTimer = 0;
 var aSensorConnected = false;
-var aSensorDivider = 2; // from 2.5, 1.5, 2
+var aSensorDivider = 2.75; // from 2.5, 1.5, 2
 var aSensorLabel = " Left Leg";
 var aSensorEventCount = 40;
 var aLastIterValue = 0; // check if sensor 'a' was active during last iteration
@@ -35,7 +35,7 @@ const currWeightActivity = 0.3
 const currWeightSensor = 0.9
 
 // set constants for posture analyzer
-const aMoveThresh = 45
+const aMoveThresh = 55
 const bMoveThresh = 45
 
 const aLowThreshCount = 35
