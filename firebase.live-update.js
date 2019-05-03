@@ -8,8 +8,11 @@ var aSensorWatchDogTimer = 0;
 var aSensorConnected = false;
 var aSensorDivider = 1.5; // from 2.5
 var aSensorLabel = " Left Leg";
-var bSensor = [];
+var aSensorEventCount = 40;
+var aLastIterValue = 0; // check if sensor 'a' was active during last iteration
+var aPercent = 0.0;
 
+var bSensor = [];
 var bSensorTempValuesGraph1 = [];
 var bSensorTempValuesGraph2 = [];
 var bSensorPostureAnalyzer = [];
@@ -17,16 +20,29 @@ var bSensorWatchDogTimer = 0;
 var bSensorConnected = false;
 var bSensorDivider = 0.90; // from 1.5
 var bSensorLabel = " Right Arm";
+var bSensorEventCount = 10;
+var bLastIterValue = 0; // check if sensor 'b' was active during last iteration
+var bPercent = 0.0;
+
+// variables to measure % time spent 'relaxing'
+var relaxationValue = 50;
+var sampleCount = 100;
 
 var oldValuesReceived = false;
 
 // set constants for smoothening
-const currWeightActivity = 0.1
+const currWeightActivity = 0.3
 const currWeightSensor = 0.9
 
 // set constants for posture analyzer
 const aMoveThresh = 45
 const bMoveThresh = 45
+
+const aLowThreshCount = 35
+const aMedThreshCount = 55
+
+const bLowThreshCount = 35
+const bMedThreshCount = 55
 
 // Initialize Firebase
 var config = {
@@ -76,11 +92,9 @@ function sensorUpdate(data) {
 }
 
 
-
-
 // live update graphs
 (function($) { 
-	
+
 	// live update of sensor angles
 	(function() {
 		if( $('#sensorValuesDashRealTime').get(0) ) {
@@ -261,25 +275,171 @@ function sensorUpdate(data) {
 				}
 
 				// use mean of activity levels to determine posture
+				// NOTE: 'b' is right-arm, 'a' is left-leg
+
+				// aLowThreshCount aMedThreshCount
+				// aSensorEventCount 
+				// class="label label-success" label-danger label-warning
+				// innerHTML
+				// bLastIterValue
 				if ( (aTotalMean > aMoveThresh) && (bTotalMean > bMoveThresh) ) {
 					// squatting, arms open
 					document.getElementById("livePostureImage").src="assets/images/poses/poseab.png";
+
+					// update squat count
+					if (document.getElementById("aSensorValue") != null) {
+						// check if the state changed
+						/*
+						if (aLastIterValue == 0) {
+							aLastIterValue = 1
+							aSensorEventCount = aSensorEventCount + 1
+						}
+						*/
+						aSensorEventCount = aSensorEventCount + 1
+					}
+
+					// update arm-open count
+					if (document.getElementById("bSensorValue") != null) {
+						// check if the state changed
+						/*
+						if (bLastIterValue == 0) {
+							bLastIterValue = 1
+							bSensorEventCount = bSensorEventCount + 1
+						}*/
+
+						bSensorEventCount = bSensorEventCount + 1
+					}
 				}
 				else if ( (aTotalMean > aMoveThresh) && (bTotalMean < bMoveThresh) ) {
 					// squatting, arms closed
 					document.getElementById("livePostureImage").src="assets/images/poses/posea_.png";
+
+					// update squat count
+					if (document.getElementById("aSensorValue") != null) {
+						// check if the state changed
+						
+						/*
+						if (aLastIterValue == 0) {
+							aLastIterValue = 1
+							aSensorEventCount = aSensorEventCount + 1
+						}*/
+
+						aSensorEventCount = aSensorEventCount + 1
+					}
+
+					// indicate that no arm-opening happened
+					bLastIterValue = 0
 				}
 				else if ( (aTotalMean < aMoveThresh) && (bTotalMean > bMoveThresh) ) {
 					// standing, arms open
 					document.getElementById("livePostureImage").src="assets/images/poses/pose_b.png";
+
+					// indicate that no squat happened
+					aLastIterValue = 0
+
+					// update arm-open count
+					if (document.getElementById("bSensorValue") != null) {
+						// check if the state changed
+						/*
+						if (bLastIterValue == 0) {
+							bLastIterValue = 1
+							bSensorEventCount = bSensorEventCount + 1
+						}
+						*/
+
+						bSensorEventCount = bSensorEventCount + 1
+					}
 				}
 				else {
+					// indicate that no squat happened
+					aLastIterValue = 0
+
+					// indicate that no arm-extension happened
+					bLastIterValue = 0
+
 					// standing, arms closed
 					document.getElementById("livePostureImage").src="assets/images/poses/pose__.png";
 
 					// check if the sensors are stopped
 					if ( (aTotalMean == 0) && (bTotalMean == 0) ) {
 						document.getElementById("livePostureImage").src="assets/images/poses/unknown.png";
+					}
+					else {
+						relaxationValue = relaxationValue + 1
+					}
+				}
+				
+				// only count the sample if the sensor(s) were active
+				if ( (aTotalMean != 0) || (bTotalMean != 0) ) {
+					sampleCount = sampleCount + 1
+				}
+
+				// update the value in the table
+				if (document.getElementById("RelaxationValue") != null) {
+					var temp_val = (100 * (relaxationValue / sampleCount))
+					if (sampleCount == 0) {
+						temp_val = 0
+					}
+					
+					// if the 'relaxation time' is more than 100%, max it out at 100%
+					if (temp_val > 100) {
+						temp_val = 100
+					}
+					document.getElementById("RelaxationValue").innerHTML = temp_val.toFixed(1) + "%"
+				}
+				// update the value in the table
+				if (document.getElementById("aSensorValue") != null) {
+					var temp_val = (100 * (aSensorEventCount / sampleCount))
+					if (sampleCount == 0) {
+						temp_val = 0
+					}
+					
+					// if the 'relaxation time' is more than 100%, max it out at 100%
+					if (temp_val > 100) {
+						temp_val = 100
+					}
+
+					aPercent = temp_val
+					document.getElementById("aSensorValue").innerHTML = temp_val.toFixed(1) + "%"
+				}
+				// update the value in the table
+				if (document.getElementById("bSensorValue") != null) {
+					var temp_val = (100 * (bSensorEventCount / sampleCount))
+					if (sampleCount == 0) {
+						temp_val = 0
+					}
+					
+					// if the 'relaxation time' is more than 100%, max it out at 100%
+					if (temp_val > 100) {
+						temp_val = 100
+					}
+
+					bPercent = temp_val
+					document.getElementById("bSensorValue").innerHTML = temp_val.toFixed(1) + "%"
+				}
+
+				// update 'color' of the frequency labels
+				if (document.getElementById("aSensorValue") != null) {
+					if (aPercent <= aLowThreshCount) {
+						document.getElementById("aSensorValue").className = "label label-success"						
+					}
+					else if ( (aPercent > aLowThreshCount) && (aPercent <= aMedThreshCount) ) {
+						document.getElementById("aSensorValue").className = "label label-warning"
+					}
+					else if (aPercent > aMedThreshCount) {
+						document.getElementById("aSensorValue").className = "label label-danger"
+					}
+				}
+
+				if (document.getElementById("bSensorValue") != null) {
+					if (bPercent <= bLowThreshCount) {
+						document.getElementById("bSensorValue").className = "label label-success"						
+					}
+					else if ( (bPercent > bLowThreshCount) && (bPercent <= bMedThreshCount) ) {
+						document.getElementById("bSensorValue").className = "label label-warning"
+					}
+					else if (bPercent > bMedThreshCount) {
+						document.getElementById("bSensorValue").className = "label label-danger"
 					}
 				}
 

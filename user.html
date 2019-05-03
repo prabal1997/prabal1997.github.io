@@ -846,8 +846,8 @@
 								<div class="panel-body">
 
 
-								<div class="col-lg-4 text-center">
-										<h2 class="panel-title mt-md">Overal RSI RISK</h2>
+									<div class="col-lg-4 text-center">
+										<h2 class="panel-title mt-md">Overall RSI RISK</h2>
 										<div class="liquid-meter-wrapper liquid-meter-sm mt-lg">
 											<div class="liquid-meter">
 												<meter min="0" max="100" value="35" id="meterSales"></meter>
@@ -1009,7 +1009,7 @@
 										<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
 									</div>
 									<h2 class="panel-title">Live Activity</h2>
-									<p class="panel-subtitle">Shows how active this worker is at the current time (Prabal, how we do this? Should we do st.deviation to show how much the angle values change over a period of time? Lemme know, I can update)</p>
+									<p class="panel-subtitle">Shows how active this worker is at the current time.</p>
 								</header>
 								<div class="panel-body">
 					
@@ -1037,20 +1037,53 @@
 										<p class="panel-subtitle">Analyzes and predicts the workers current posture to determine how to improve it</p>
 									</header>
 									<div class="panel-body">
-						
-										<!-- image of current posture -->
 										<table>
-											<tr>
-												<td>
-													<img id="livePostureImage" src="assets/images/poses/unknown.png" width="280px" height="400px">
-												</td>
-												<td>
-													<!-- Prabal - Some kind of  analytics table here? -->
-												</td>
-											</tr>
-										</table>
-										
-						
+										<tr>
+										<div class="col-lg-4 text-center">
+											<!-- image of current posture -->
+											<table align="center">
+												<tr>
+													<td>
+														<img id="livePostureImage" src="assets/images/poses/unknown.png" width="280px" height="400px">
+													</td>
+													<td>
+														<!-- Prabal - Some kind of  analytics table here? -->
+													</td>
+												</tr>
+											</table>
+										</div>
+									</tr>	
+
+										<tr>
+										<div class="table-responsive">
+											<table class="table table-striped mb-none">
+												<thead>
+													<tr>
+														<th>Posture Detected</th>
+														<th>Time Spent</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Extended Arms</td>
+														<td><span class="label label-success" id="bSensorValue">0.0%</span></td>			
+													</tr>
+													<tr>
+														<td>Squatting</td>
+														<!-- label-warning is another alternative -->
+														<td><span class="label label-success" id="aSensorValue">0.0%</span></td>						
+													</tr>
+													<tr>
+														<td> Relaxed </td>
+														<!-- label-warning is another alternative -->
+														<td><span class="label label-default" id="RelaxationValue">0.0%</span></td>						
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</tr>
+									</table>
+
 									</div>
 								</section>
 							</div>
